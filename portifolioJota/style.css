@@ -129,11 +129,13 @@ body ::selection {
 
 .hero { height: 100vh; background-color: var(--color-surface-container-lowest); overflow: hidden; }
 .code-bg {
-  inset: 0; opacity: 0.1; pointer-events: none; user-select: none;
+  inset: 0; opacity: 0.15; pointer-events: none; user-select: none;
   mask-image: linear-gradient(to bottom, transparent, black, transparent);
   -webkit-mask-image: linear-gradient(to bottom, transparent, black, transparent);
+  display: flex; gap: 2rem; overflow: hidden;
 }
 .code-bg pre {
+  flex: 1;
   font-family: var(--font-mono); color: var(--color-secondary);
   font-size: 0.875rem; line-height: 1.625; padding: 2.5rem; margin: 0;
   height: 100%; overflow: hidden; box-sizing: border-box;
@@ -273,6 +275,7 @@ body ::selection {
 .tech-item:hover .tech-icon.css { fill: #3b82f6; }
 .tech-item:hover .tech-icon.tw { fill: #38bdf8; }
 .tech-item:hover .tech-icon.gh { fill: #ffffff; }
+.tech-item:hover .tech-icon.python { fill: #3776ab; }
 .tech-name { font-family: var(--font-label); font-size: 0.75rem; font-weight: 700; color: #737373; margin-top: 1rem; transition: 0.3s; }
 .tech-item:hover .tech-name { color: #ffffff; }
 

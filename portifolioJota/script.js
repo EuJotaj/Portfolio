@@ -124,9 +124,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 6. Efeito de Digitação Contínua no Fundo (Typewriter Effect)
-    const codeBg = document.querySelector('.code-bg pre');
-    if (codeBg) {
-        const codeText = `function processDataStream(buffer) {
+    const codeCols = document.querySelectorAll('.code-bg .code-col');
+    if (codeCols.length > 0) {
+        const baseCode = `function processDataStream(buffer) {
   let offset = 0;
   const metrics = { throughput: 0, latency: 0 };
   
@@ -180,26 +180,32 @@ export const initSystemServices = async () => {
   console.log('System telemetry:', results);
 };
 `;
-        
-        codeBg.textContent = '';
-        let i = 0;
-        
-        function typeCode() {
-            codeBg.textContent += codeText.charAt(i);
-            i++;
+        codeCols.forEach((col, index) => {
+            col.textContent = '';
+            // Cada coluna começa em um ponto diferente do texto, para não serem idênticas
+            let i = index * Math.floor(baseCode.length / 3);
             
-            if (i >= codeText.length) {
-                codeBg.textContent += '\n\n';
-                i = 0;
+            // Cada coluna digita em uma velocidade base ligeiramente diferente
+            const baseSpeed = Math.random() * 20 + 5; 
+            
+            function typePulse() {
+                col.textContent += baseCode.charAt(i);
+                i++;
+                
+                if (i >= baseCode.length) {
+                    col.textContent += '\n\n';
+                    i = 0;
+                }
+                
+                // Mantém sempre scrollado para baixo
+                col.scrollTop = col.scrollHeight;
+                
+                // Varia a velocidade a cada frame ligeiramente, em torno da velocidade base da coluna
+                setTimeout(typePulse, baseSpeed + Math.random() * 15);
             }
             
-            // Mantém sempre scrollado para baixo
-            codeBg.scrollTop = codeBg.scrollHeight;
-            
-            // Velocidade pseudo-aleatória de digitação
-            setTimeout(typeCode, Math.random() * 30 + 10);
-        }
-        
-        typeCode();
+            // Delay inicial diferente para cada coluna (0s a 1.5s) para completa assincronia
+            setTimeout(typePulse, Math.random() * 1500);
+        });
     }
 });
