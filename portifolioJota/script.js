@@ -116,6 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Clique simulado
         card.addEventListener('click', () => {
+            if (card.tagName.toLowerCase() === 'a') return; // Se já é um link, não mostra o alert
             const projectName = card.querySelector('h3').innerText;
             alert(`Acessando o projeto: ${projectName}! Em uma versão final, isso abriria o link do projeto.`);
         });
