@@ -39,14 +39,68 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Botão de Email na Navbar
-    const navButtons = document.querySelectorAll('nav button');
-    if (navButtons.length >= 1) {
-        const mailBtn = navButtons[0];
-
+    const mailBtn = document.querySelector('.nav-btn');
+    if (mailBtn) {
         mailBtn.addEventListener('click', () => {
             document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' });
         });
     }
+    
+    // 2.1 Menu Mobile Toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const mobileClose = document.querySelector('.mobile-close');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+    
+    function openMobileMenu() {
+        mobileMenu.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        if (menuToggle) menuToggle.querySelector('span').textContent = 'close';
+    }
+    
+    function closeMobileMenu() {
+        mobileMenu.classList.add('hidden');
+        document.body.style.overflow = '';
+        if (menuToggle) menuToggle.querySelector('span').textContent = 'menu';
+    }
+    
+    if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', () => {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            if (isHidden) {
+                openMobileMenu();
+            } else {
+                closeMobileMenu();
+            }
+        });
+    }
+    
+    if (mobileClose) {
+        mobileClose.addEventListener('click', closeMobileMenu);
+    }
+    
+    // Fechar menu ao clicar fora
+    if (mobileMenu) {
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target === mobileMenu) {
+                closeMobileMenu();
+            }
+        });
+    }
+    
+    // Fechar menu ao redimensionar para desktop
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 768 && mobileMenu && !mobileMenu.classList.contains('hidden')) {
+            closeMobileMenu();
+        }
+    });
+    
+    // Fechar menu ao clicar em um link
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            closeMobileMenu();
+        });
+    });
 
     // 3. Animação de Entrada (Fade-in) ao rolar a página
     const observerOptions = {
