@@ -171,6 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Clique simulado
         card.addEventListener('click', () => {
             if (card.tagName.toLowerCase() === 'a') return; // Se já é um link, não mostra o alert
+            if (card.classList.contains('project-card-modal')) return; // Modal cuida do próprio clique
             const projectName = card.querySelector('h3').innerText;
             alert(`Acessando o projeto: ${projectName}! Em uma versão final, isso abriria o link do projeto.`);
         });
@@ -262,4 +263,47 @@ export const initSystemServices = async () => {
             setTimeout(typePulse, Math.random() * 1500);
         });
     }
+
+    // 7. Modal de Projeto
+    const projectModal    = document.getElementById('project-modal');
+    const modalIframe     = document.getElementById('project-modal-iframe');
+    const modalClose      = document.getElementById('project-modal-close');
+    const modalGithub     = document.getElementById('project-modal-github');
+    const modalName       = document.getElementById('project-modal-name');
+    const modalCards      = document.querySelectorAll('.project-card-modal');
+
+    function openProjectModal(src, name, github) {
+        modalName.textContent = name;
+        modalGithub.href = github || '#';
+        modalIframe.src = src;
+        projectModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeProjectModal() {
+        projectModal.classList.add('hidden');
+        document.body.style.overflow = '';
+        // Limpa o iframe para parar o jogo ao fechar
+        setTimeout(() => { modalIframe.src = ''; }, 300);
+    }
+
+    modalCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const src    = card.dataset.modalSrc;
+            const name   = card.dataset.modalName;
+            const github = card.dataset.modalGithub;
+            openProjectModal(src, name, github);
+        });
+    });
+
+    if (modalClose) {
+        modalClose.addEventListener('click', closeProjectModal);
+    }
+
+    // Fechar com Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !projectModal.classList.contains('hidden')) {
+            closeProjectModal();
+        }
+    });
 });
