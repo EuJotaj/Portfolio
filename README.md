@@ -41,6 +41,3 @@ Vamos conversar sobre oportunidades e evolução em arquitetura web?
 - **LinkedIn:** [Janildo Júnior (Jota)](https://www.linkedin.com/in/janildocfariasjunior/)
 - **GitHub:** [@EuJotaj](https://github.com/EuJotaj)
 - **E-mail:** [jjcalluete@gmail.com](mailto:jjcalluete@gmail.com?subject=Contato%20via%20Portf%C3%B3lio&body=Ol%C3%A1%2C%20Janildo!)
-
----
-*Feito com rigor e dedicação cirúrgica à abstração do CSS ⚡*
