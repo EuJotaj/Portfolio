@@ -25,11 +25,11 @@ Como não existem empacotadores, *bundlers* (como Webpack/Vite) ou compiladores,
 
 1. Faça o clone deste diretório:
    ```bash
-   git clone https://github.com/EuJotaj/SEU-REPOSITORIO.git
+   git clone https://github.com/EuJotaj/Portfolio.git
    ```
 2. Abra seu diretório:
    ```bash
-   cd SEU-REPOSITORIO
+   cd Portfolio
    ```
 3. Você pode simplesmente dar um clique-duplo no arquivo `portifolio.html` em qualquer navegador. 
    *(Opcional: Para uma experiência de desenvolvedor, abra a pasta no VS Code e rode um **Live Server** para ver atualizações ao vivo).*
