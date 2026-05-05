@@ -264,46 +264,253 @@ export const initSystemServices = async () => {
         });
     }
 
-    // 7. Modal de Projeto
-    const projectModal    = document.getElementById('project-modal');
-    const modalIframe     = document.getElementById('project-modal-iframe');
-    const modalClose      = document.getElementById('project-modal-close');
-    const modalGithub     = document.getElementById('project-modal-github');
-    const modalName       = document.getElementById('project-modal-name');
-    const modalCards      = document.querySelectorAll('.project-card-modal');
+    // 7. Projetos expansíveis (4 visíveis por padrão)
+    const projectsExpandBtn = document.getElementById('projects-expand-btn');
+    const extraProjects = document.querySelectorAll('.project-extra');
+    let projectsExpanded = false;
 
-    function openProjectModal(src, name, github) {
-        modalName.textContent = name;
-        modalGithub.href = github || '#';
-        modalIframe.src = src;
+    if (projectsExpandBtn) {
+        if (extraProjects.length === 0) {
+            projectsExpandBtn.classList.add('hidden');
+        } else {
+            projectsExpandBtn.addEventListener('click', () => {
+                projectsExpanded = !projectsExpanded;
+
+                extraProjects.forEach(card => {
+                    if (projectsExpanded) {
+                        card.classList.remove('hidden');
+                        requestAnimationFrame(() => {
+                            card.classList.add('is-visible');
+                        });
+                        return;
+                    }
+
+                    card.classList.remove('is-visible');
+                    setTimeout(() => {
+                        if (!projectsExpanded) {
+                            card.classList.add('hidden');
+                        }
+                    }, 280);
+                });
+
+                projectsExpandBtn.classList.toggle('is-expanded', projectsExpanded);
+                projectsExpandBtn.setAttribute('aria-expanded', String(projectsExpanded));
+                projectsExpandBtn.innerHTML = projectsExpanded
+                    ? 'Ver menos projetos <span class="material-symbols-outlined">expand_less</span>'
+                    : 'Ver mais projetos <span class="material-symbols-outlined">expand_more</span>';
+            });
+        }
+    }
+
+    // 8. Modal universal de projetos
+    const projectModal = document.getElementById('project-modal');
+    const modalBackdrop = document.querySelector('.project-modal-backdrop');
+    const modalClose = document.getElementById('project-modal-close');
+    const modalGithub = document.getElementById('project-modal-github');
+    const modalWeb = document.getElementById('project-modal-web');
+    const modalName = document.getElementById('project-modal-name');
+    const modalDescription = document.getElementById('project-modal-description');
+    const modalGallery = document.getElementById('project-modal-gallery');
+    const modalPlayable = document.getElementById('project-modal-playable');
+    const modalPlayableIframe = document.getElementById('project-modal-playable-iframe');
+    const playableIdle = document.getElementById('project-playable-idle');
+    const playableStartBtn = document.getElementById('project-playable-start');
+    const playableStopBtn = document.getElementById('project-playable-stop');
+    const playableOpenBtn = document.getElementById('project-playable-open');
+    const modalCards = document.querySelectorAll('.project-card-modal');
+    let currentPlayableUrl = '';
+    let currentProjectWebUrl = '';
+
+    function setGithubButton(githubLink, isPrivateRepo) {
+        if (!modalGithub) return;
+
+        if (isPrivateRepo === 'true') {
+            modalGithub.href = '#';
+            modalGithub.classList.add('is-disabled');
+            modalGithub.innerHTML = `
+                <svg class="modal-github-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                </svg>
+                Repositório Privado
+            `;
+            return;
+        }
+
+        if (githubLink) {
+            modalGithub.href = githubLink;
+            modalGithub.classList.remove('is-disabled');
+            modalGithub.innerHTML = `
+                <svg class="modal-github-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                </svg>
+                Ver no GitHub
+            `;
+            return;
+        }
+
+        modalGithub.href = '#';
+        modalGithub.classList.add('is-disabled');
+        modalGithub.innerHTML = `
+            <svg class="modal-github-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+            </svg>
+            GitHub Indisponível
+        `;
+    }
+
+    function setWebButton(webLink) {
+        if (!modalWeb) return;
+
+        const normalizedLink = (webLink || '').trim();
+        if (normalizedLink) {
+            const finalLink = /^https?:\/\//i.test(normalizedLink)
+                ? normalizedLink
+                : `https://${normalizedLink}`;
+            currentProjectWebUrl = finalLink;
+            modalWeb.href = finalLink;
+            modalWeb.classList.remove('hidden');
+        } else {
+            currentProjectWebUrl = '';
+            modalWeb.href = '#';
+            modalWeb.classList.add('hidden');
+        }
+    }
+
+    function renderGallery(imagesRaw, projectName) {
+        if (!modalGallery) return;
+        modalGallery.innerHTML = '';
+
+        const images = (imagesRaw || '')
+            .split(',')
+            .map((item) => item.trim())
+            .filter(Boolean);
+
+        if (images.length === 0) {
+            modalGallery.innerHTML = '<p class="timeline-desc">Sem imagens disponíveis para este projeto.</p>';
+            return;
+        }
+
+        images.forEach((imageSrc, index) => {
+            const item = document.createElement('figure');
+            item.className = 'project-modal-image-wrap';
+
+            const img = document.createElement('img');
+            img.className = 'project-modal-image';
+            img.src = imageSrc;
+            img.alt = `${projectName} - imagem ${index + 1}`;
+
+            item.appendChild(img);
+            modalGallery.appendChild(item);
+        });
+    }
+
+    function setPlayableProject(playableUrl) {
+        if (!modalPlayable || !modalPlayableIframe) return;
+
+        if (playableUrl) {
+            modalPlayable.classList.remove('hidden');
+            currentPlayableUrl = playableUrl;
+            modalPlayableIframe.src = '';
+            modalPlayableIframe.classList.add('hidden');
+            if (playableIdle) playableIdle.classList.remove('hidden');
+            if (playableOpenBtn) playableOpenBtn.href = new URL(playableUrl, window.location.href).href;
+            if (playableStartBtn) {
+                playableStartBtn.classList.remove('hidden');
+                playableStartBtn.classList.add('is-prominent');
+            }
+            if (playableStopBtn) playableStopBtn.classList.add('hidden');
+        } else {
+            modalPlayable.classList.add('hidden');
+            modalPlayableIframe.src = '';
+            modalPlayableIframe.classList.add('hidden');
+            if (playableIdle) playableIdle.classList.add('hidden');
+            currentPlayableUrl = '';
+        }
+    }
+
+    function openProjectModal(card) {
+        if (!projectModal) return;
+
+        const projectName = card.dataset.projectName || 'Projeto';
+        const projectDescription = card.dataset.projectDescription || 'Sem descrição disponível.';
+        const projectGithub = card.dataset.projectGithub || '';
+        const projectWeb = card.dataset.projectWeb || '';
+        const projectImages = card.dataset.projectImages || '';
+        const isPrivateRepo = card.dataset.projectGithubPrivate || 'false';
+        const projectPlayableUrl = card.dataset.projectPlayableUrl || '';
+
+        if (modalName) modalName.textContent = projectName;
+        if (modalDescription) modalDescription.textContent = projectDescription;
+
+        setGithubButton(projectGithub, isPrivateRepo);
+        setWebButton(projectWeb);
+        setPlayableProject(projectPlayableUrl);
+        renderGallery(projectImages, projectName);
+
         projectModal.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
     }
 
+    function startPlayableProject() {
+        if (!modalPlayableIframe || !currentPlayableUrl) return;
+        modalPlayableIframe.src = currentPlayableUrl;
+        modalPlayableIframe.classList.remove('hidden');
+        if (playableIdle) playableIdle.classList.add('hidden');
+        if (playableStartBtn) {
+            playableStartBtn.classList.add('hidden');
+            playableStartBtn.classList.remove('is-prominent');
+        }
+        if (playableStopBtn) playableStopBtn.classList.remove('hidden');
+    }
+
+    function stopPlayableProject() {
+        if (!modalPlayableIframe) return;
+        modalPlayableIframe.src = '';
+        modalPlayableIframe.classList.add('hidden');
+        if (playableIdle && currentPlayableUrl) playableIdle.classList.remove('hidden');
+        if (playableStartBtn && currentPlayableUrl) {
+            playableStartBtn.classList.remove('hidden');
+            playableStartBtn.classList.add('is-prominent');
+        }
+        if (playableStopBtn) playableStopBtn.classList.add('hidden');
+    }
+
     function closeProjectModal() {
+        if (!projectModal) return;
         projectModal.classList.add('hidden');
         document.body.style.overflow = '';
-        // Limpa o iframe para parar o jogo ao fechar
-        setTimeout(() => { modalIframe.src = ''; }, 300);
+        stopPlayableProject();
     }
 
     modalCards.forEach(card => {
         card.addEventListener('click', () => {
-            const src    = card.dataset.modalSrc;
-            const name   = card.dataset.modalName;
-            const github = card.dataset.modalGithub;
-            openProjectModal(src, name, github);
+            openProjectModal(card);
         });
     });
 
-    if (modalClose) {
-        modalClose.addEventListener('click', closeProjectModal);
+    if (modalClose) modalClose.addEventListener('click', closeProjectModal);
+    if (modalBackdrop) modalBackdrop.addEventListener('click', closeProjectModal);
+    if (playableStartBtn) playableStartBtn.addEventListener('click', startPlayableProject);
+    if (playableStopBtn) playableStopBtn.addEventListener('click', stopPlayableProject);
+    if (modalWeb) {
+        modalWeb.addEventListener('click', (event) => {
+            if (!currentProjectWebUrl) return;
+            event.preventDefault();
+            window.open(currentProjectWebUrl, '_blank', 'noopener,noreferrer');
+        });
+    }
+    if (playableOpenBtn) {
+        playableOpenBtn.addEventListener('click', (event) => {
+            if (!currentPlayableUrl) return;
+            event.preventDefault();
+            window.open(new URL(currentPlayableUrl, window.location.href).href, '_blank', 'noopener,noreferrer');
+        });
     }
 
-    // Fechar com Escape
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && !projectModal.classList.contains('hidden')) {
+        if (e.key === 'Escape' && projectModal && !projectModal.classList.contains('hidden')) {
             closeProjectModal();
         }
     });
 });
+

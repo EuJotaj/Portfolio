@@ -86,6 +86,7 @@
             <div class="flex gap-4">
                 <button id="view-projects-btn" class="btn btn-primary">Ver Projetos</button>
                 <button id="contact-me-btn" class="btn btn-outline">Falar Comigo</button>
+                <a id="view-cv-btn" class="btn btn-outline" href="CVJota.pdf" download>Ver CV</a>
             </div>
         </div>
         <div id="scroll-down-btn" class="absolute scroll-down cursor-pointer">
@@ -143,7 +144,15 @@
             </div>
             <div class="grid grid-cols-2 gap-8 projects-grid">
                 <!-- Project 1 -->
-                <a href="https://github.com/EuJotaj/FinControl" target="_blank" rel="noopener noreferrer" class="glass-card flex" style="text-decoration: none;">
+                <article
+                    class="glass-card flex project-card-modal"
+                    data-project-name="FinControl"
+                    data-project-description="Plataforma de visualização e controle de dados financeiros desenvolvida com Angular e Java, focada em organização de informações, leitura rápida de métricas e gestão eficiente."
+                    data-project-github="https://github.com/EuJotaj/FinControl"
+                    data-project-web=""
+                    data-project-images="img/FinControl.webp"
+                    data-project-github-private="false"
+                >
                     <div class="project-img-box w-full">
                         <img alt="FinControl Preview" class="project-img object-cover" src="img/FinControl.webp"/>
                         <div class="project-gradient"></div>
@@ -156,9 +165,18 @@
                             <p class="timeline-desc line-clamp-2">Plataforma de visualização e controle de dados financeiros desenvolvida com Angular.</p>
                         </div>
                     </div>
-                </a>
+                </article>
+
                 <!-- Project 2 -->
-                <a href="https://github.com/EuJotaj/SeaKalm" target="_blank" rel="noopener noreferrer" class="glass-card flex" style="text-decoration: none;">
+                <article
+                    class="glass-card flex project-card-modal"
+                    data-project-name="SeaKalm"
+                    data-project-description="Plataforma de histórias infantis para apoiar crianças com necessidades especiais e dificuldade de concentração, com experiência visual acolhedora e fluxo de uso simplificado."
+                    data-project-github="https://github.com/EuJotaj/SeaKalm"
+                    data-project-web=""
+                    data-project-images="img/SeaKalm.webp"
+                    data-project-github-private="false"
+                >
                     <div class="project-img-box w-full">
                         <img alt="SeaKalm Preview" class="project-img object-cover" src="img/SeaKalm.webp"/>
                         <div class="project-gradient"></div>
@@ -171,9 +189,18 @@
                             <p class="timeline-desc line-clamp-2">Plataforma de historias infantis para Crianças com necessidades especiais, dificuldades de se acalmar e de se concentrar.</p>
                         </div>
                     </div>
-                </a>
+                </article>
+
                 <!-- Project 3 -->
-                <a href="https://github.com/EuJotaj/Sonorus" target="_blank" rel="noopener noreferrer" class="glass-card flex" style="text-decoration: none;">
+                <article
+                    class="glass-card flex project-card-modal"
+                    data-project-name="Sonorus"
+                    data-project-description="Gerador de áudio Text to Speech com múltiplas vozes e idiomas, com foco em produtividade e automação de conteúdo sem restrição prática de caracteres."
+                    data-project-github="https://github.com/EuJotaj/Sonorus"
+                    data-project-web=""
+                    data-project-images="img/Sonorus.webp"
+                    data-project-github-private="false"
+                >
                     <div class="project-img-box w-full">
                         <img alt="Sonorus Preview" class="project-img object-cover" src="img/Sonorus.webp"/>
                         <div class="project-gradient"></div>
@@ -186,13 +213,19 @@
                             <p class="timeline-desc line-clamp-2">Gerador de áudio Text to Speech, com várias opções de vozes em varias linguas, sem limite de caracteres.</p>
                         </div>
                     </div>
-                </a>
+                </article>
+
                 <!-- Project 4 -->
-                <div class="glass-card flex project-card-modal"
-                     data-modal-src="pages/jogo/mario.html"
-                     data-modal-name="Mario Jump"
-                     data-modal-github="https://github.com/EuJotaj/MarioJump"
-                     style="cursor:pointer; text-decoration: none;">
+                <article
+                    class="glass-card flex project-card-modal"
+                    data-project-name="Mario Jump"
+                    data-project-description="Projeto acadêmico inspirado no jogo offline do navegador, recriado com o personagem Mario para praticar lógica de colisão, animações e manipulação de eventos com JavaScript."
+                    data-project-github="https://github.com/EuJotaj/MarioJump"
+                    data-project-web=""
+                    data-project-images="img/Mario.webp"
+                    data-project-github-private="false"
+                    data-project-playable-url="pages/jogo/mario.html"
+                >
                     <div class="project-img-box w-full">
                         <img alt="Mario Jump Preview" class="project-img object-cover" src="img/Mario.webp"/>
                         <div class="project-gradient"></div>
@@ -205,7 +238,37 @@
                             <p class="timeline-desc line-clamp-2">Projeto acadêmico que replica o famoso "jogo do dinossauro" quando o navegador está sem internet, mas com o personagem Mario.</p>
                         </div>
                     </div>
-                </div>
+                </article>
+
+                <!-- Project 5 (hidden initially) -->
+                <article
+                    class="glass-card flex project-card-modal project-extra hidden"
+                    data-project-name="OmSys"
+                    data-project-description="Sistema corporativo interno da Ômega Comércio Exterior para operação logística e gestão de processos. Por se tratar de produto privado, o repositório GitHub é restrito. A versão institucional está disponível para visualização no site oficial."
+                    data-project-github=""
+                    data-project-web="https://omegacomercioexterior.com"
+                    data-project-images="img/OmSys.png"
+                    data-project-github-private="true"
+                >
+                    <div class="project-img-box w-full">
+                        <img alt="OmSys Preview" class="project-img object-cover" src="img/OmSys.png"/>
+                        <div class="project-gradient"></div>
+                        <div class="project-content">
+                            <div class="flex gap-2 mb-3">
+                                <span class="badge-primary uppercase">Html</span>
+                                <span class="badge-secondary uppercase">JavaScript (jquery)</span>
+                            </div>
+                            <h3 class="project-title text-white font-bold">OmSys</h3>
+                            <p class="timeline-desc line-clamp-2">Sistema corporativo da Ômega Comércio Exterior com repositório privado e site institucional disponível.</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="projects-expand-wrap">
+                <button id="projects-expand-btn" class="projects-expand-btn" type="button" aria-expanded="false">
+                    Ver mais projetos
+                    <span class="material-symbols-outlined">expand_more</span>
+                </button>
             </div>
         </div>
     </section>
@@ -336,21 +399,25 @@
 </footer>
 
 <!-- Project Modal -->
-<div id="project-modal" class="project-modal hidden" role="dialog" aria-modal="true" aria-label="Visualizar Projeto">
+<div id="project-modal" class="project-modal hidden" role="dialog" aria-modal="true" aria-label="Detalhes do Projeto">
     <div class="project-modal-backdrop"></div>
     <div class="project-modal-container">
         <div class="project-modal-header">
             <div class="project-modal-title">
                 <span class="material-symbols-outlined">sports_esports</span>
-                <span id="project-modal-name">Mario Jump</span>
+                <span id="project-modal-name">Projeto</span>
             </div>
             <div class="project-modal-actions">
-                <a id="project-modal-github" href="https://github.com/EuJotaj/MarioJump" target="_blank" class="modal-btn modal-btn-github">
-    <svg class="modal-github-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
-    </svg>
-    Ver no GitHub
-</a>
+                <a id="project-modal-github" href="#" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-github">
+                    <svg class="modal-github-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                    </svg>
+                    Ver no GitHub
+                </a>
+                <a id="project-modal-web" href="#" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-web hidden">
+                    <span class="material-symbols-outlined">language</span>
+                    Visualizar na Web
+                </a>
                 <button id="project-modal-close" class="modal-btn modal-btn-close" aria-label="Fechar projeto">
                     <span class="material-symbols-outlined">close</span>
                     Voltar ao Portfólio
@@ -358,7 +425,30 @@
             </div>
         </div>
         <div class="project-modal-body">
-            <iframe id="project-modal-iframe" src="" title="Projeto Mario Jump" allowfullscreen></iframe>
+            <section id="project-modal-playable" class="project-modal-playable hidden">
+                <h4 class="project-modal-section-title">Executar projeto</h4>
+                <div class="project-playable-menu">
+                    <button id="project-playable-start" type="button" class="modal-btn modal-btn-play">
+                        <span class="material-symbols-outlined">play_arrow</span>
+                        Executar
+                    </button>
+                    <button id="project-playable-stop" type="button" class="modal-btn modal-btn-stop hidden">
+                        <span class="material-symbols-outlined">stop</span>
+                        Encerrar
+                    </button>
+                    <a id="project-playable-open" href="#" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-web">
+                        <span class="material-symbols-outlined">open_in_new</span>
+                        Abrir em nova aba
+                    </a>
+                </div>
+                <div id="project-playable-idle" class="project-playable-idle">
+                    <span class="material-symbols-outlined">stadia_controller</span>
+                    O projeto fica pronto para iniciar quando você clicar em <strong>Executar</strong>.
+                </div>
+                <iframe id="project-modal-playable-iframe" class="hidden" title="Projeto executável" loading="lazy"></iframe>
+            </section>
+            <p id="project-modal-description" class="project-modal-description"></p>
+            <div id="project-modal-gallery" class="project-modal-gallery"></div>
         </div>
     </div>
 </div>
