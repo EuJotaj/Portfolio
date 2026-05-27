@@ -1,0 +1,9 @@
+.aplicativo {
+  position: relative;
+  min-height: 100vh;
+}
+
+.aplicativo main {
+  position: relative;
+  z-index: 1;
+}

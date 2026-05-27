@@ -1,0 +1,28 @@
+.secao {
+  position: relative;
+  z-index: 1;
+  padding: var(--space-3xl) var(--gutter);
+}
+
+.larguraTotal .container {
+  max-width: 100%;
+  padding: 0;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .secao {
+    padding: var(--space-2xl) var(--gutter);
+  }
+}
+
+@media (max-width: 480px) {
+  .secao {
+    padding: clamp(2.5rem, 10vw, 4rem) var(--gutter);
+  }
+}

@@ -1,0 +1,1 @@
+export { TextoDividido } from './TextoDividido'

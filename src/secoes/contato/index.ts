@@ -1,0 +1,1 @@
+export { SecaoContato } from './SecaoContato'

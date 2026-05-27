@@ -1,0 +1,112 @@
+.cabecalho {
+  margin-bottom: var(--space-2xl);
+}
+
+.tituloDividido .caractere {
+  color: var(--color-text);
+}
+
+.tituloDividido .linha:first-child .caractere {
+  color: var(--color-accent);
+}
+
+.gradeHabilidades {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-lg);
+  margin-bottom: var(--space-2xl);
+}
+
+.cartaoHabilidade {
+  padding: var(--space-md);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-base);
+  min-width: 0;
+}
+
+.cartaoHabilidade:hover {
+  border-color: var(--color-accent-dim);
+}
+
+.cabecalhoHabilidade {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.nomeHabilidade {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nivelHabilidade {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.barraHabilidade {
+  height: 3px;
+  background: var(--color-border);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: var(--space-xs);
+}
+
+.preenchimentoHabilidade {
+  height: 100%;
+  background: var(--color-accent);
+  border-radius: 2px;
+}
+
+.categoriaHabilidade {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+}
+
+.techFaixaAnimada {
+  overflow: hidden;
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-lg);
+}
+
+.trilhaTech {
+  display: flex;
+  gap: var(--space-xl);
+  animation: scrollTech 40s linear infinite;
+  width: max-content;
+}
+
+.itemTech {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 4vw, 3.5rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+  white-space: nowrap;
+}
+
+@keyframes scrollTech {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@media (max-width: 600px) {
+  .gradeHabilidades {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+}

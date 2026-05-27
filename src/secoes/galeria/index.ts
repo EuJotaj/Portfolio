@@ -1,0 +1,1 @@
+export { SecaoGaleria } from './SecaoGaleria'

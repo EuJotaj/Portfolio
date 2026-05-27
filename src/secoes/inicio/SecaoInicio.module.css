@@ -1,0 +1,219 @@
+.inicio {
+  position: relative;
+  z-index: 1;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding-top: var(--header-height);
+}
+
+.inicioInterno {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: clamp(1.5rem, 4vh, 3rem);
+  padding: clamp(1rem, 3vh, 2rem) var(--gutter) clamp(0.75rem, 2vh, 1.5rem);
+  width: 100%;
+}
+
+.logoInicio {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: default;
+  width: fit-content;
+  max-width: min(96vw, 860px);
+  margin-bottom: clamp(0.5rem, 1.5vh, 1rem);
+  overflow: visible;
+}
+
+.logoInicio::after {
+  content: '';
+  position: absolute;
+  inset: 8% 2%;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 72% 58% at 50% 50%,
+    var(--color-accent-glow) 0%,
+    rgba(208, 188, 255, 0.14) 42%,
+    transparent 72%
+  );
+  filter: blur(20px);
+  opacity: 0;
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.logoInicio.ativo::after {
+  opacity: 0.8;
+}
+
+.imagemLogo {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: min(96vw, 860px);
+  max-width: clamp(380px, 88vw, 860px);
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+  user-select: none;
+  -webkit-user-drag: none;
+  transform: scale(1);
+  transform-origin: center center;
+  transition:
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.logoInicio.ativo .imagemLogo {
+  transform: scale(1.06);
+  filter:
+    drop-shadow(0 0 14px rgba(160, 120, 255, 0.5))
+    drop-shadow(0 0 32px rgba(208, 188, 255, 0.26));
+}
+
+.anelBolha {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 3;
+  border: 1.5px solid rgba(208, 188, 255, 0.52);
+  background:
+    radial-gradient(
+      circle at 30% 24%,
+      rgba(255, 255, 255, 0.24) 0%,
+      rgba(255, 255, 255, 0.1) 32%,
+      rgba(208, 188, 255, 0.08) 58%,
+      rgba(208, 188, 255, 0.04) 78%
+    );
+  box-shadow:
+    inset 0 0 22px rgba(255, 255, 255, 0.2),
+    inset 0 0 10px rgba(208, 188, 255, 0.14),
+    0 0 26px rgba(208, 188, 255, 0.22);
+}
+
+.conteudo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.75rem, 2vh, 1.25rem);
+  width: 100%;
+  max-width: 640px;
+  position: relative;
+  z-index: 2;
+}
+
+.titulo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 9vw, 4.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--color-text);
+  hyphens: none;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.linhaTitulo {
+  display: block;
+  white-space: nowrap;
+}
+
+.subtitulo {
+  font-size: clamp(0.9375rem, 2vw, 1.25rem);
+  color: var(--color-secondary);
+  line-height: 1.5;
+}
+
+.acoes {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  justify-content: center;
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 520px;
+}
+
+.envoltorioFaixa {
+  flex-shrink: 0;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.dicaScroll {
+  position: absolute;
+  bottom: calc(var(--space-xl) + 52px);
+  right: var(--gutter);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  z-index: 2;
+}
+
+.dicaScroll span {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+  writing-mode: vertical-rl;
+}
+
+.linhaScroll {
+  width: 1px;
+  height: 40px;
+  background: var(--color-accent);
+  transform-origin: top;
+}
+
+@media (min-width: 768px) {
+  .dicaScroll {
+    display: flex;
+  }
+}
+
+@media (max-height: 700px) {
+  .inicioInterno {
+    gap: clamp(0.75rem, 2vh, 1.25rem);
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .imagemLogo {
+    max-width: clamp(400px, 50vh, 600px);
+  }
+
+  .titulo {
+    font-size: clamp(1.875rem, 7vh, 3rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .imagemLogo,
+  .logoInicio::after,
+  .anelBolha {
+    transition: none;
+  }
+}

@@ -1,0 +1,1 @@
+export { SecaoVitrine } from './SecaoVitrine'

@@ -1,0 +1,1 @@
+export { CartaoImagem } from './CartaoImagem'

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script src="./js/script.js" defer></script>
+
+    <title>Mario Jump</title>
+</head>
+<body>
+
+    <div class="quadro-jogo">
+        <div class="pontuacao">0</div>
+        <img src="./images/clouds.png" class="nuvens" alt="Nuvens">
+        <img src="./images/pipe.png" class="cano" alt="Obstáculo Cano">
+        <img src="./images/mario.gif" class="mario" alt="Mario">
+        <img src="./images/background.jpg" class="fundo" alt="fundo">
+        <div class="chao-container">
+            <div class="chao-segmento chao-1"></div>
+            <div class="chao-segmento chao-2"></div>
+            <div class="chao-segmento chao-3"></div>
+            <div class="chao-segmento chao-1"></div>
+        </div>
+        
+        <div class="menu-game-over escondido">
+            <div class="menu-conteudo">
+                <h1>GAME OVER</h1>
+                <p>Pontuação Final: <span id="pontuacao-final">0</span></p>
+                <button onclick="reiniciarJogo()">REINICIAR</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

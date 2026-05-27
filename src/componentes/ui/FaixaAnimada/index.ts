@@ -1,0 +1,1 @@
+export { FaixaAnimada } from './FaixaAnimada'

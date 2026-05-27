@@ -1,0 +1,1 @@
+export { SeletorIdioma } from './SeletorIdioma'

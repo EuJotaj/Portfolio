@@ -1,0 +1,89 @@
+.faixaSuperior {
+  position: relative;
+  z-index: 1;
+  margin-top: var(--space-xl);
+}
+
+.cabecalho {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-xl);
+  align-items: end;
+  margin-bottom: var(--space-xl);
+}
+
+.tituloDividido .caractere {
+  color: var(--color-text);
+}
+
+.tituloDividido .linha:first-child .caractere {
+  color: var(--color-accent);
+}
+
+.descCabecalho {
+  font-size: clamp(0.9375rem, 1.6vw, 1rem);
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  max-width: 400px;
+  justify-self: end;
+}
+
+.filtros {
+  display: flex;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-xl);
+  flex-wrap: wrap;
+}
+
+.botaoFiltro {
+  padding: clamp(0.5rem, 1.5vw, 0.625rem) clamp(0.875rem, 2.5vw, 1.25rem);
+  font-size: clamp(0.6875rem, 1.4vw, 0.75rem);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-base);
+  white-space: nowrap;
+}
+
+.botaoFiltro:hover {
+  border-color: var(--color-accent-strong);
+  color: var(--color-text);
+}
+
+.botaoFiltro.ativo {
+  background: var(--color-accent-strong);
+  border-color: var(--color-accent-strong);
+  color: #0e0e0e;
+}
+
+.grade {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-md);
+}
+
+@media (max-width: 1100px) {
+  .grade {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .cabecalho {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .descCabecalho {
+    justify-self: start;
+  }
+}
+
+@media (max-width: 520px) {
+  .grade {
+    grid-template-columns: 1fr;
+  }
+}

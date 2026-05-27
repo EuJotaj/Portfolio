@@ -1,0 +1,1 @@
+export { SecaoInicio } from './SecaoInicio'

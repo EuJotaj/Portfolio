@@ -1,0 +1,1 @@
+export { ModalProjeto } from './ModalProjeto'

@@ -1,0 +1,186 @@
+.grade {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-2xl);
+  align-items: start;
+  margin-bottom: var(--space-2xl);
+}
+
+.tituloDividido .caractere {
+  color: var(--color-text);
+  font-size: clamp(1.5rem, 6vw, 4.5rem);
+}
+
+.tituloDividido .linha:first-child .caractere {
+  color: var(--color-accent);
+}
+
+.blocoTexto {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  min-width: 0;
+}
+
+.descricao {
+  font-size: clamp(0.9375rem, 1.6vw, 1.125rem);
+  color: var(--color-text-muted);
+  line-height: 1.8;
+  max-width: 520px;
+}
+
+.descricao :global(.highlight),
+.descricao strong {
+  color: var(--color-accent);
+}
+
+.citacao {
+  font-family: var(--font-label);
+  font-size: clamp(1rem, 1.8vw, 1.375rem);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  border-left: 3px solid var(--color-accent-strong);
+  padding-left: var(--space-md);
+}
+
+.etiquetas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.etiqueta {
+  font-family: var(--font-label);
+  font-size: clamp(0.75rem, 1.3vw, 0.8125rem);
+  letter-spacing: 0.04em;
+  color: var(--color-secondary);
+  padding: 0.4rem 0.875rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-secondary-dim);
+}
+
+.colunaDireita {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  min-width: 0;
+}
+
+.blocoImagem {
+  position: relative;
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.linhaTempo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  padding-left: var(--space-md);
+  border-left: 2px solid var(--color-border);
+}
+
+.itemLinhaTempo {
+  position: relative;
+  padding-left: var(--space-md);
+}
+
+.itemLinhaTempo.ativo .pontoLinhaTempo {
+  background: var(--color-accent-strong);
+  box-shadow: 0 0 12px var(--color-accent-glow);
+}
+
+.pontoLinhaTempo {
+  position: absolute;
+  left: calc(-1 * var(--space-md) - 5px);
+  top: 0.35rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-text-dim);
+}
+
+.dataLinhaTempo {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.empresaLinhaTempo {
+  font-size: clamp(1rem, 1.6vw, 1.125rem);
+  font-weight: 700;
+  color: var(--color-text);
+  margin-top: 0.25rem;
+}
+
+.cargoLinhaTempo {
+  font-size: clamp(0.8125rem, 1.4vw, 0.875rem);
+  color: var(--color-secondary);
+  margin-top: 0.125rem;
+}
+
+.descLinhaTempo {
+  font-size: clamp(0.8125rem, 1.4vw, 0.875rem);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin-top: 0.5rem;
+}
+
+.estatisticas {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-md);
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--color-border);
+}
+
+.estatistica {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.valorEstatistica {
+  font-family: var(--font-label);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-accent);
+  line-height: 1;
+}
+
+.rotuloEstatistica {
+  font-size: clamp(0.75rem, 1.4vw, 0.8125rem);
+  color: var(--color-text-muted);
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 900px) {
+  .grade {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  .estatisticas {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .blocoImagem {
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 380px) {
+  .estatisticas {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+}

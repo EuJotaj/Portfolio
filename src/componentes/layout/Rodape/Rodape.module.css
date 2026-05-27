@@ -1,0 +1,44 @@
+.rodape {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--color-border);
+  padding: var(--space-xl) var(--gutter) var(--space-lg);
+}
+
+.interno {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.marca {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 6vw, 3rem);
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  line-height: 1;
+}
+
+.slogan {
+  font-size: clamp(0.875rem, 1.6vw, 1rem);
+  color: var(--color-text-muted);
+  max-width: 420px;
+  line-height: 1.6;
+}
+
+.direitos {
+  margin-top: var(--space-sm);
+  font-size: 0.8125rem;
+  color: var(--color-text-dim);
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 768px) {
+  .direitos {
+    text-align: left;
+  }
+}
