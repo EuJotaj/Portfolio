@@ -1,6 +1,6 @@
 import type { GalleryItem } from '@/tipos'
 import type { Translations } from '@/i18n'
-import { JOGOS, LINKS } from './recursos'
+import { JOGOS } from './recursos'
 import { IMAGENS_PROJETOS } from './imagensProjetos'
 
 export interface ProjectBase {
@@ -75,7 +75,6 @@ export const PROJECTS: ProjectBase[] = [
     images: [...IMAGENS_PROJETOS.omsys],
     year: '2026',
     tags: ['JavaScript (jQuery)', 'HTML5', 'CSS3'],
-    web: LINKS.omega,
     githubPrivate: true,
     maskShape: 'ellipse',
     stackIndex: 4,

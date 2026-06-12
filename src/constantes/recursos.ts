@@ -15,7 +15,6 @@ export const LINKS = {
   linkedin: 'https://www.linkedin.com/in/janildocfariasjunior/',
   email: 'jjcalluete@gmail.com',
   portfolio: 'https://eujotaj.github.io/Portfolio/',
-  omega: 'https://omegacomercioexterior.com',
 } as const
 
 export const MAILTO =

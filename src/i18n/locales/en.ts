@@ -118,9 +118,9 @@ export const en: Translations = {
       shortDescription: 'Chrome dino-style game featuring Mario.',
     },
     omsys: {
-      title: 'OmSys',
+      title: 'ERP B2B PROFISSIONAL',
       description:
-        'I developed OmSys at Ômega Comércio Exterior — a high-complexity B2B ERP for international trade, controllership and customs logistics. I owned front-end architecture, evolution and maintenance of the platform, focusing on critical operational flows and document compliance in import/export processes. I standardized dynamic interfaces with Angular and React, REST API integration via Services and Dependency Injection, strong typing and management dashboards. I built cash-flow modules and billing automation, including commercial proposal integration with CT-e generation, XML handling and dynamic PDF output. I translated complex business rules into responsive interfaces using jQuery and modern JavaScript, prioritizing load performance and UX. I delivered 40+ functional modules supporting logistics, legal and financial operations.',
+        'A professional, high-complexity B2B ERP for international trade, controllership and customs logistics. I owned front-end architecture, evolution and maintenance of the platform, focusing on critical operational flows and document compliance in import/export processes. I standardized dynamic interfaces with Angular and React, REST API integration via Services and Dependency Injection, strong typing and management dashboards. I built cash-flow modules and billing automation, including commercial proposal integration with CT-e generation, XML handling and dynamic PDF output. I translated complex business rules into responsive interfaces using jQuery and modern JavaScript, prioritizing load performance and UX. I delivered 40+ functional modules supporting logistics, legal and financial operations.',
       shortDescription:
         'B2B ERP for foreign trade: dashboards, fiscal automation and 40+ operational modules.',
       aviso: 'Data shown in post-login screenshots has been replaced for security reasons.',

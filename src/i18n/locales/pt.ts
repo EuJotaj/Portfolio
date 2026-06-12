@@ -130,9 +130,9 @@ export const pt: Translations = {
       shortDescription: 'Jogo estilo dinossauro do Chrome com o personagem Mario.',
     },
     omsys: {
-      title: 'OmSys',
+      title: 'ERP B2B PROFISSIONAL',
       description:
-        'Desenvolvi o OmSys na Ômega Comércio Exterior — ERP B2B de alta complexidade para comércio internacional, controllership e logística aduaneira. Fui responsável pela arquitetura front-end, evolução e manutenção da plataforma, com foco em fluxos operacionais críticos e conformidade documental em processos de importação e exportação. Padronizei interfaces dinâmicas com Angular e React, integração de APIs REST via Services e Dependency Injection, tipagem forte e dashboards de gestão. Implementei módulos de fluxo de caixa e automação de faturamento, incluindo integração de propostas comerciais com geração de CT-es, manipulação de XML e PDFs dinâmicos. Traduzi regras de negócio complexas em interfaces responsivas com jQuery e JavaScript moderno, priorizando performance de carregamento e UX. Entreguei mais de 40 módulos funcionais que sustentam operações logísticas, jurídicas e de controle financeiro.',
+        'ERP B2B profissional de alta complexidade para comércio internacional, controllership e logística aduaneira. Fui responsável pela arquitetura front-end, evolução e manutenção da plataforma, com foco em fluxos operacionais críticos e conformidade documental em processos de importação e exportação. Padronizei interfaces dinâmicas com Angular e React, integração de APIs REST via Services e Dependency Injection, tipagem forte e dashboards de gestão. Implementei módulos de fluxo de caixa e automação de faturamento, incluindo integração de propostas comerciais com geração de CT-es, manipulação de XML e PDFs dinâmicos. Traduzi regras de negócio complexas em interfaces responsivas com jQuery e JavaScript moderno, priorizando performance de carregamento e UX. Entreguei mais de 40 módulos funcionais que sustentam operações logísticas, jurídicas e de controle financeiro.',
       shortDescription:
         'ERP B2B para comércio exterior: dashboards, automação fiscal e mais de 40 módulos operacionais.',
       aviso:

@@ -13,7 +13,7 @@ Landing page em React inspirada no [landonorris.com](https://landonorris.com), c
 
 Dados reais de **Janildo Júnior (JOTA)**:
 
-- Projetos: FinControl, SeaKalm, Sonorus, Mario Jump, OmSys
+- Projetos: FinControl, SeaKalm, Sonorus, Mario Jump, ERP B2B PROFISSIONAL
 - Experiência: Ômega Comércio Exterior, Exército Brasileiro, UNINASSAU
 - Contato: jjcalluete@gmail.com
 - Links: [GitHub](https://github.com/EuJotaj) · [LinkedIn](https://www.linkedin.com/in/janildocfariasjunior/)
