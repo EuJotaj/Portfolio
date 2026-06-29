@@ -80,6 +80,17 @@ export const PROJECTS: ProjectBase[] = [
     stackIndex: 4,
     photoStack: { rotation: -4, offsetX: -20, offsetY: 60, zIndex: 2 },
   },
+  {
+    id: 'imip',
+    category: 'projects',
+    images: [...IMAGENS_PROJETOS.imip],
+    year: '2026',
+    tags: ['React', 'Flask', 'MySQL'],
+    github: 'https://github.com/EuJotaj/Projeto_Imip',
+    maskShape: 'blob',
+    stackIndex: 5,
+    photoStack: { rotation: 2, offsetX: 20, offsetY: 90, zIndex: 5 },
+  },
 ]
 
 export function getLocalizedProject(base: ProjectBase, t: Translations): GalleryItem {

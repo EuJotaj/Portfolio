@@ -138,6 +138,13 @@ export const pt: Translations = {
       aviso:
         'Os dados exibidos nas imagens após o login foram alterados por questões de segurança.',
     },
+    imip: {
+      title: 'AVENTURA DAS LETRAS (IMIP)',
+      description:
+        'Plataforma web educacional e gamificada de alta usabilidade voltada para a alfabetização infantil de crianças em contexto hospitalar no IMIP. Desenvolvida em um formato colaborativo em grupo, participei ativamente da arquitetura full-stack, design de experiência (UX) e engenharia do ecossistema, combinando uma interface lúdica em React com um backend estruturado em Flask e persistência de dados em MySQL. Colaborei no desenho e na implementação de uma estrutura modular dividida em duas personas críticas: o portal do Explorador (aluno), com trilhas de aprendizagem dinâmicas, quizzes visuais, sistemas de vidas, recompensas por moedas e loja de itens; e o Painel do Educador (professor), com gestão de missões, criação de perguntas, acompanhamento de progresso e suporte via assistente virtual integrado com Inteligência Artificial. Priorizamos navegação fluida, acessível e otimizada para dispositivos móveis, garantindo um ambiente de aprendizagem escalável, seguro e altamente motivador durante internações.',
+      shortDescription:
+        'Plataforma gamificada para alfabetização infantil no hospital, com React, Flask e MySQL.',
+    },
   },
   experience: {
     exp1: {

@@ -125,6 +125,13 @@ export const en: Translations = {
         'B2B ERP for foreign trade: dashboards, fiscal automation and 40+ operational modules.',
       aviso: 'Data shown in post-login screenshots has been replaced for security reasons.',
     },
+    imip: {
+      title: 'AVENTURA DAS LETRAS (IMIP)',
+      description:
+        'Educational gamified web platform for literacy aimed at hospitalized children at IMIP. Built collaboratively with a playful React front-end, Flask backend and MySQL persistence, I helped architect the full-stack ecosystem, UX design and product engineering. The system supports two critical personas: the Explorer portal for students, with dynamic learning paths, visual quizzes, lives, coin rewards and item shop; and the Educator dashboard for mission control, question creation, progress tracking and an AI-powered virtual assistant. We prioritized fluid, accessible mobile-first navigation and secure authenticated routes to deliver a scalable, motivating learning environment during hospitalization.',
+      shortDescription:
+        'Gamified literacy platform for hospitalized children, built with React, Flask and MySQL.',
+    },
   },
   experience: {
     exp1: {

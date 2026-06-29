@@ -23,6 +23,17 @@ export const IMAGENS_PROJETOS = {
     'OmSysServicos.webp',
     'OmSysDocs.webp',
   ]),
+  imip: imagensDoProjeto('projetoImip', [
+    'ImipTrilha.webp',
+    'educadoratividades.webp',
+    'educadorDashboard.webp',
+    'educadorMissoes.webp',
+    'ImipAtividade.webp',
+    'ImipLogin.webp',
+    'ImipLoja.webp',
+    'ImipPalavras.webp',
+    'ImipPerfil.webp',
+  ]),
 } as const
 
 export type IdProjetoComImagens = keyof typeof IMAGENS_PROJETOS
