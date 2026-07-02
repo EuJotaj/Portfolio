@@ -1,4 +1,4 @@
-import type { Translations } from '../types'
+import type { Translations } from '../types';
 
 export const en: Translations = {
   meta: {
@@ -41,8 +41,7 @@ export const en: Translations = {
     marquee: 'FEATURED PROJECTS — CLICK TO EXPLORE',
     titleLine1: 'FEATURED',
     titleLine2: 'PROJECTS',
-    description:
-      'Click a project to see details, image carousel and links. Hover to highlight.',
+    description: 'Click a project to see details, image carousel and links. Hover to highlight.',
     filters: { all: 'All', projects: 'Projects', creative: 'Creative', tools: 'Tools' },
     clickToExplore: 'Click to explore',
   },
@@ -156,4 +155,4 @@ export const en: Translations = {
         'Undergraduate focused on continuous growth toward software engineering and web performance.',
     },
   },
-}
+};

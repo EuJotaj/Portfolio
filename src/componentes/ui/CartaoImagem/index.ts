@@ -1,1 +1,1 @@
-export { CartaoImagem } from './CartaoImagem'
+export { CartaoImagem } from './CartaoImagem';

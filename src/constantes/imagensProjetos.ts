@@ -1,7 +1,7 @@
-const BASE = '/assets/projetos'
+const BASE = '/assets/projetos';
 
 function imagensDoProjeto(pasta: string, arquivos: string[]) {
-  return arquivos.map((arquivo) => `${BASE}/${pasta}/${arquivo}`)
+  return arquivos.map(arquivo => `${BASE}/${pasta}/${arquivo}`);
 }
 
 /** Imagens por projeto — adicione arquivos na pasta correspondente em public/assets/projetos/ */
@@ -34,6 +34,6 @@ export const IMAGENS_PROJETOS = {
     'ImipPalavras.webp',
     'ImipPerfil.webp',
   ]),
-} as const
+} as const;
 
-export type IdProjetoComImagens = keyof typeof IMAGENS_PROJETOS
+export type IdProjetoComImagens = keyof typeof IMAGENS_PROJETOS;

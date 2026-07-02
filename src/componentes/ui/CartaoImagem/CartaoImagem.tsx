@@ -1,20 +1,20 @@
-﻿import { motion } from 'framer-motion'
-import { TrocaImagem } from '@/componentes/ui/TrocaImagem'
-import { useFocoHover } from '@/componentes/ui/GrupoFocoHover'
-import { useModalProjeto } from '@/aplicativo/provedores/ProvedorModalProjeto'
-import type { GalleryItem } from '@/tipos'
-import styles from './CartaoImagem.module.css'
+﻿import { motion } from 'framer-motion';
+import { TrocaImagem } from '@/componentes/ui/TrocaImagem';
+import { useFocoHover } from '@/componentes/ui/GrupoFocoHover';
+import { useModalProjeto } from '@/aplicativo/provedores/ProvedorModalProjeto';
+import type { GalleryItem } from '@/tipos';
+import styles from './CartaoImagem.module.css';
 
 interface CartaoImagemProps {
-  item: GalleryItem
-  index: number
+  item: GalleryItem;
+  index: number;
 }
 
 export function CartaoImagem({ item, index }: CartaoImagemProps) {
-  const { activeId, setActiveId } = useFocoHover()
-  const { abrirProjeto } = useModalProjeto()
-  const isActive = activeId === item.id
-  const isDimmed = activeId !== null && !isActive
+  const { activeId, setActiveId } = useFocoHover();
+  const { abrirProjeto } = useModalProjeto();
+  const isActive = activeId === item.id;
+  const isDimmed = activeId !== null && !isActive;
 
   return (
     <motion.article
@@ -51,13 +51,13 @@ export function CartaoImagem({ item, index }: CartaoImagemProps) {
             transition={{ duration: 0.3 }}
           >
             {item.tags.length > 0 && (
-            <div className={styles.etiquetas}>
-              {item.tags.map((tag) => (
-                <span key={tag} className={styles.etiqueta}>
-                  {tag}
-                </span>
-              ))}
-            </div>
+              <div className={styles.etiquetas}>
+                {item.tags.map(tag => (
+                  <span key={tag} className={styles.etiqueta}>
+                    {tag}
+                  </span>
+                ))}
+              </div>
             )}
           </motion.div>
           <motion.div
@@ -79,5 +79,5 @@ export function CartaoImagem({ item, index }: CartaoImagemProps) {
         </div>
       </button>
     </motion.article>
-  )
+  );
 }

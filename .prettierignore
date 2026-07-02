@@ -1,0 +1,8 @@
+node_modules
+dist
+public/assets/img/*.png
+coverage
+.turbo
+.next
+*.lock
+*.log

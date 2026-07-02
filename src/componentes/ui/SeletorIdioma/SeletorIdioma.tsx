@@ -1,8 +1,8 @@
-﻿import { useIdioma } from '@/aplicativo/provedores/ProvedorIdioma'
-import styles from './SeletorIdioma.module.css'
+﻿import { useIdioma } from '@/aplicativo/provedores/ProvedorIdioma';
+import styles from './SeletorIdioma.module.css';
 
 export function SeletorIdioma() {
-  const { locale, definirIdioma } = useIdioma()
+  const { locale, definirIdioma } = useIdioma();
 
   return (
     <div className={styles.seletor} role="group" aria-label="Language">
@@ -21,5 +21,5 @@ export function SeletorIdioma() {
         EN
       </button>
     </div>
-  )
+  );
 }

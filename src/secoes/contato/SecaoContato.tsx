@@ -1,16 +1,16 @@
-﻿import { motion } from 'framer-motion'
-import { Secao } from '@/componentes/layout/Secao'
-import { Botao } from '@/componentes/ui/Botao'
-import { SITE } from '@/constantes/site'
-import { SOCIAL_LINKS } from '@/constantes/conteudo'
-import { MAILTO } from '@/constantes/recursos'
-import { useIdioma } from '@/aplicativo/provedores/ProvedorIdioma'
-import { useModalCurriculo } from '@/aplicativo/provedores/ProvedorModalCurriculo'
-import styles from './SecaoContato.module.css'
+﻿import { motion } from 'framer-motion';
+import { Secao } from '@/componentes/layout/Secao';
+import { Botao } from '@/componentes/ui/Botao';
+import { SITE } from '@/constantes/site';
+import { SOCIAL_LINKS } from '@/constantes/conteudo';
+import { MAILTO } from '@/constantes/recursos';
+import { useIdioma } from '@/aplicativo/provedores/ProvedorIdioma';
+import { useModalCurriculo } from '@/aplicativo/provedores/ProvedorModalCurriculo';
+import styles from './SecaoContato.module.css';
 
 export function SecaoContato() {
-  const { t } = useIdioma()
-  const { abrirCurriculo } = useModalCurriculo()
+  const { t } = useIdioma();
+  const { abrirCurriculo } = useModalCurriculo();
 
   return (
     <Secao id="contact">
@@ -26,7 +26,9 @@ export function SecaoContato() {
           <h2 className={styles.titulo}>
             <span className={styles.linhaTitulo}>{t.contact.titleLine1}</span>
             <span className={styles.linhaTitulo}>{t.contact.titleLine2}</span>
-            <span className={`${styles.linhaTitulo} ${styles.destaque}`}>{t.contact.titleLine3}</span>
+            <span className={`${styles.linhaTitulo} ${styles.destaque}`}>
+              {t.contact.titleLine3}
+            </span>
           </h2>
           <p className={styles.descricao}>{t.contact.description}</p>
 
@@ -54,7 +56,7 @@ export function SecaoContato() {
         >
           <span className={styles.tituloSocial}>{t.contact.socialTitle}</span>
           <div className={styles.listaSocial}>
-            {SOCIAL_LINKS.filter((link) => link.id !== 'email').map((link) => (
+            {SOCIAL_LINKS.filter(link => link.id !== 'email').map(link => (
               <a
                 key={link.id}
                 href={link.href}
@@ -70,5 +72,5 @@ export function SecaoContato() {
         </motion.div>
       </div>
     </Secao>
-  )
+  );
 }

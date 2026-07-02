@@ -1,1 +1,1 @@
-export { SecaoSobre } from './SecaoSobre'
+export { SecaoSobre } from './SecaoSobre';

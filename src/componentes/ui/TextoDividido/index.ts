@@ -1,1 +1,1 @@
-export { TextoDividido } from './TextoDividido'
+export { TextoDividido } from './TextoDividido';

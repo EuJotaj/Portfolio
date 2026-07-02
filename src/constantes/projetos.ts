@@ -1,26 +1,26 @@
-import type { GalleryItem } from '@/tipos'
-import type { Translations } from '@/i18n'
-import { JOGOS } from './recursos'
-import { IMAGENS_PROJETOS } from './imagensProjetos'
+import type { GalleryItem } from '@/tipos';
+import type { Translations } from '@/i18n';
+import { JOGOS } from './recursos';
+import { IMAGENS_PROJETOS } from './imagensProjetos';
 
 export interface ProjectBase {
-  id: string
-  category: GalleryItem['category']
-  images: string[]
-  year: string
-  tags: string[]
-  github?: string
-  web?: string
-  githubPrivate?: boolean
-  playableUrl?: string
-  maskShape: 'ellipse' | 'hexagon' | 'diamond' | 'blob'
-  stackIndex: number
+  id: string;
+  category: GalleryItem['category'];
+  images: string[];
+  year: string;
+  tags: string[];
+  github?: string;
+  web?: string;
+  githubPrivate?: boolean;
+  playableUrl?: string;
+  maskShape: 'ellipse' | 'hexagon' | 'diamond' | 'blob';
+  stackIndex: number;
   photoStack: {
-    rotation: number
-    offsetX: number
-    offsetY: number
-    zIndex: number
-  }
+    rotation: number;
+    offsetX: number;
+    offsetY: number;
+    zIndex: number;
+  };
 }
 
 export const PROJECTS: ProjectBase[] = [
@@ -91,12 +91,12 @@ export const PROJECTS: ProjectBase[] = [
     stackIndex: 5,
     photoStack: { rotation: 2, offsetX: 20, offsetY: 90, zIndex: 5 },
   },
-]
+];
 
 export function getLocalizedProject(base: ProjectBase, t: Translations): GalleryItem {
-  const copy = t.projects[base.id]
-  const image = base.images[0]
-  const hoverImage = base.images[1] ?? base.images[0]
+  const copy = t.projects[base.id];
+  const image = base.images[0];
+  const hoverImage = base.images[1] ?? base.images[0];
 
   return {
     id: base.id,
@@ -115,14 +115,14 @@ export function getLocalizedProject(base: ProjectBase, t: Translations): Gallery
     description: copy.description,
     shortDescription: copy.shortDescription,
     aviso: copy.aviso,
-  }
+  };
 }
 
 export function getProjectById(id: string, t: Translations): GalleryItem | undefined {
-  const base = PROJECTS.find((p) => p.id === id)
-  return base ? getLocalizedProject(base, t) : undefined
+  const base = PROJECTS.find(p => p.id === id);
+  return base ? getLocalizedProject(base, t) : undefined;
 }
 
-export const PHOTO_STACK_PROJECT_IDS = PROJECTS.filter((p) => p.stackIndex < 4)
+export const PHOTO_STACK_PROJECT_IDS = PROJECTS.filter(p => p.stackIndex < 4)
   .sort((a, b) => a.stackIndex - b.stackIndex)
-  .map((p) => p.id)
+  .map(p => p.id);

@@ -1,26 +1,26 @@
-import type { ReactNode } from 'react'
-import { motion } from 'framer-motion'
-import { cn } from '@/biblioteca/cn'
-import styles from './Botao.module.css'
+import type { ReactNode } from 'react';
+import { motion } from 'framer-motion';
+import { cn } from '@/biblioteca/cn';
+import styles from './Botao.module.css';
 
-type VarianteBotao = 'primary' | 'outline' | 'ghost'
+type VarianteBotao = 'primary' | 'outline' | 'ghost';
 
 const variantes: Record<VarianteBotao, string> = {
   primary: styles.primario,
   outline: styles.contorno,
   ghost: styles.fantasma,
-}
+};
 
 interface BotaoProps {
-  children: ReactNode
-  href?: string
-  variant?: VarianteBotao
-  className?: string
-  onClick?: () => void
+  children: ReactNode;
+  href?: string;
+  variant?: VarianteBotao;
+  className?: string;
+  onClick?: () => void;
 }
 
 export function Botao({ children, href, variant = 'primary', className, onClick }: BotaoProps) {
-  const classes = cn(styles.botao, variantes[variant], className)
+  const classes = cn(styles.botao, variantes[variant], className);
 
   if (href) {
     return (
@@ -32,7 +32,7 @@ export function Botao({ children, href, variant = 'primary', className, onClick 
       >
         {children}
       </motion.a>
-    )
+    );
   }
 
   return (
@@ -45,5 +45,5 @@ export function Botao({ children, href, variant = 'primary', className, onClick 
     >
       {children}
     </motion.button>
-  )
+  );
 }

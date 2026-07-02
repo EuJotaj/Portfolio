@@ -1,1 +1,1 @@
-export { ModalProjeto } from './ModalProjeto'
+export { ModalProjeto } from './ModalProjeto';

@@ -1,36 +1,36 @@
-﻿import type { ReactNode } from 'react'
-import { useEffect, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { SITE } from '@/constantes/site'
-import { useIdioma } from '@/aplicativo/provedores/ProvedorIdioma'
-import styles from './TelaCarregamento.module.css'
+﻿import type { ReactNode } from 'react';
+import { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { SITE } from '@/constantes/site';
+import { useIdioma } from '@/aplicativo/provedores/ProvedorIdioma';
+import styles from './TelaCarregamento.module.css';
 
 interface PreloaderProps {
-  onComplete: () => void
+  onComplete: () => void;
 }
 
 export function TelaCarregamento({ onComplete }: PreloaderProps) {
-  const { t } = useIdioma()
-  const [progress, setProgress] = useState(0)
+  const { t } = useIdioma();
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const duration = 2200
-    const start = performance.now()
+    const duration = 2200;
+    const start = performance.now();
 
     const tick = (now: number) => {
-      const elapsed = now - start
-      const next = Math.min(Math.round((elapsed / duration) * 100), 100)
-      setProgress(next)
+      const elapsed = now - start;
+      const next = Math.min(Math.round((elapsed / duration) * 100), 100);
+      setProgress(next);
 
       if (next < 100) {
-        requestAnimationFrame(tick)
+        requestAnimationFrame(tick);
       } else {
-        setTimeout(onComplete, 400)
+        setTimeout(onComplete, 400);
       }
-    }
+    };
 
-    requestAnimationFrame(tick)
-  }, [onComplete])
+    requestAnimationFrame(tick);
+  }, [onComplete]);
 
   return (
     <motion.div
@@ -56,19 +56,16 @@ export function TelaCarregamento({ onComplete }: PreloaderProps) {
           {SITE.brand}
         </motion.h1>
         <div className={styles.barraProgresso}>
-          <motion.div
-            className={styles.preenchimentoProgresso}
-            style={{ width: `${progress}%` }}
-          />
+          <motion.div className={styles.preenchimentoProgresso} style={{ width: `${progress}%` }} />
         </div>
         <span className={styles.porcentagem}>{progress}%</span>
       </div>
     </motion.div>
-  )
+  );
 }
 
 export function EnvoltorioTelaCarregamento({ children }: { children: ReactNode }) {
-  const [loaded, setLoaded] = useState(false)
+  const [loaded, setLoaded] = useState(false);
 
   return (
     <>
@@ -77,5 +74,5 @@ export function EnvoltorioTelaCarregamento({ children }: { children: ReactNode }
       </AnimatePresence>
       {loaded && children}
     </>
-  )
+  );
 }

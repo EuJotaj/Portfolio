@@ -1,1 +1,1 @@
-export { SecaoVitrine } from './SecaoVitrine'
+export { SecaoVitrine } from './SecaoVitrine';

@@ -1,1 +1,1 @@
-export { Secao } from './Secao'
+export { Secao } from './Secao';

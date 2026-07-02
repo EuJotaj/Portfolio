@@ -1,19 +1,19 @@
-import { useState, useCallback, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { cn } from '@/biblioteca/cn'
-import styles from './CarrosselImagens.module.css'
+import { useState, useCallback, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { cn } from '@/biblioteca/cn';
+import styles from './CarrosselImagens.module.css';
 
 interface CarrosselImagensProps {
-  images: string[]
-  alt: string
-  className?: string
-  resetKey?: string
-  ajustarImagem?: boolean
+  images: string[];
+  alt: string;
+  className?: string;
+  resetKey?: string;
+  ajustarImagem?: boolean;
   labels?: {
-    prev: string
-    next: string
-    slideOf: string
-  }
+    prev: string;
+    next: string;
+    slideOf: string;
+  };
 }
 
 export function CarrosselImagens({
@@ -24,19 +24,19 @@ export function CarrosselImagens({
   ajustarImagem = false,
   labels = { prev: 'Anterior', next: 'Próxima', slideOf: 'de' },
 }: CarrosselImagensProps) {
-  const [index, setIndex] = useState(0)
-  const hasMultiple = images.length > 1
+  const [index, setIndex] = useState(0);
+  const hasMultiple = images.length > 1;
 
   useEffect(() => {
-    setIndex(0)
-  }, [resetKey])
+    setIndex(0);
+  }, [resetKey]);
 
   const go = useCallback(
     (dir: -1 | 1) => {
-      setIndex((i) => (i + dir + images.length) % images.length)
+      setIndex(i => (i + dir + images.length) % images.length);
     },
-    [images.length],
-  )
+    [images.length]
+  );
 
   return (
     <div className={cn(styles.carrossel, ajustarImagem && styles.carrosselAjustado, className)}>
@@ -88,5 +88,5 @@ export function CarrosselImagens({
         </>
       )}
     </div>
-  )
+  );
 }

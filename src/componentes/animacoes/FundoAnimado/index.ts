@@ -1,1 +1,1 @@
-export { FundoAnimado } from './FundoAnimado'
+export { FundoAnimado } from './FundoAnimado';

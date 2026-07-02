@@ -1,1 +1,1 @@
-export { Botao } from './Botao'
+export { Botao } from './Botao';

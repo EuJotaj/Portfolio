@@ -1,1 +1,1 @@
-export { FaixaAnimada } from './FaixaAnimada'
+export { FaixaAnimada } from './FaixaAnimada';

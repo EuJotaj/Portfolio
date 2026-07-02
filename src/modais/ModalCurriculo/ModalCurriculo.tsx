@@ -1,24 +1,24 @@
-﻿import { useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { useModalCurriculo } from '@/aplicativo/provedores/ProvedorModalCurriculo'
-import { useIdioma } from '@/aplicativo/provedores/ProvedorIdioma'
-import { useConsultaMidia } from '@/ganchos/useConsultaMidia'
-import styles from './ModalCurriculo.module.css'
+﻿import { useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useModalCurriculo } from '@/aplicativo/provedores/ProvedorModalCurriculo';
+import { useIdioma } from '@/aplicativo/provedores/ProvedorIdioma';
+import { useConsultaMidia } from '@/ganchos/useConsultaMidia';
+import styles from './ModalCurriculo.module.css';
 
 export function ModalCurriculo() {
-  const { estaAberto, fecharCurriculo } = useModalCurriculo()
-  const { t, cvPath, locale } = useIdioma()
-  const isMobile = useConsultaMidia('(max-width: 600px)')
+  const { estaAberto, fecharCurriculo } = useModalCurriculo();
+  const { t, cvPath, locale } = useIdioma();
+  const isMobile = useConsultaMidia('(max-width: 600px)');
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') fecharCurriculo()
-    }
-    if (estaAberto) window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [estaAberto, fecharCurriculo])
+      if (e.key === 'Escape') fecharCurriculo();
+    };
+    if (estaAberto) window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [estaAberto, fecharCurriculo]);
 
-  const downloadName = locale === 'en' ? 'Resume-Janildo-Junior.pdf' : 'CV-Janildo-Junior.pdf'
+  const downloadName = locale === 'en' ? 'Resume-Janildo-Junior.pdf' : 'CV-Janildo-Junior.pdf';
 
   return (
     <AnimatePresence>
@@ -35,7 +35,7 @@ export function ModalCurriculo() {
             initial={{ opacity: 0, y: 30, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.98 }}
-            onClick={(e) => e.stopPropagation()}
+            onClick={e => e.stopPropagation()}
             role="dialog"
             aria-modal="true"
             aria-label={t.cvModal.title}
@@ -65,11 +65,7 @@ export function ModalCurriculo() {
                   ⤓
                 </div>
                 <p className={styles.textoMobile}>{t.cvModal.title}</p>
-                <a
-                  href={cvPath}
-                  download={downloadName}
-                  className={styles.botaoMobile}
-                >
+                <a href={cvPath} download={downloadName} className={styles.botaoMobile}>
                   ⤓ {t.cvModal.download}
                 </a>
                 <a
@@ -92,5 +88,5 @@ export function ModalCurriculo() {
         </motion.div>
       )}
     </AnimatePresence>
-  )
+  );
 }

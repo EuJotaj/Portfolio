@@ -1,1 +1,1 @@
-export { SeletorIdioma } from './SeletorIdioma'
+export { SeletorIdioma } from './SeletorIdioma';

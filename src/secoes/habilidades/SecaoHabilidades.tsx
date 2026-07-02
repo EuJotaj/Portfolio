@@ -1,17 +1,20 @@
-﻿import { motion } from 'framer-motion'
-import { Secao } from '@/componentes/layout/Secao'
-import { TextoDividido } from '@/componentes/ui/TextoDividido'
-import { SKILLS, TECH_MARQUEE } from '@/constantes/conteudo'
-import { useIdioma } from '@/aplicativo/provedores/ProvedorIdioma'
-import styles from './SecaoHabilidades.module.css'
+﻿import { motion } from 'framer-motion';
+import { Secao } from '@/componentes/layout/Secao';
+import { TextoDividido } from '@/componentes/ui/TextoDividido';
+import { SKILLS, TECH_MARQUEE } from '@/constantes/conteudo';
+import { useIdioma } from '@/aplicativo/provedores/ProvedorIdioma';
+import styles from './SecaoHabilidades.module.css';
 
 export function SecaoHabilidades() {
-  const { t } = useIdioma()
+  const { t } = useIdioma();
 
   return (
     <Secao id="stack">
       <div className={styles.cabecalho}>
-        <TextoDividido lines={[t.skills.titleLine1, t.skills.titleLine2]} className={styles.tituloDividido} />
+        <TextoDividido
+          lines={[t.skills.titleLine1, t.skills.titleLine2]}
+          className={styles.tituloDividido}
+        />
       </div>
 
       <div className={styles.gradeHabilidades}>
@@ -37,7 +40,9 @@ export function SecaoHabilidades() {
                 transition={{ duration: 1, delay: 0.2 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
               />
             </div>
-            <span className={styles.categoriaHabilidade}>{t.skills.categories[skill.category]}</span>
+            <span className={styles.categoriaHabilidade}>
+              {t.skills.categories[skill.category]}
+            </span>
           </motion.div>
         ))}
       </div>
@@ -57,5 +62,5 @@ export function SecaoHabilidades() {
         </div>
       </motion.div>
     </Secao>
-  )
+  );
 }

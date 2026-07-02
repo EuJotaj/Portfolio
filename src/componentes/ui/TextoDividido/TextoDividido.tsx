@@ -1,14 +1,14 @@
-import { motion } from 'framer-motion'
-import { useVisivel } from '@/ganchos'
-import styles from './TextoDividido.module.css'
+import { motion } from 'framer-motion';
+import { useVisivel } from '@/ganchos';
+import styles from './TextoDividido.module.css';
 
 interface TextoDivididoProps {
-  lines: string[]
-  className?: string
+  lines: string[];
+  className?: string;
 }
 
 export function TextoDividido({ lines, className }: TextoDivididoProps) {
-  const [ref, isInView] = useVisivel<HTMLDivElement>({ threshold: 0.3 })
+  const [ref, isInView] = useVisivel<HTMLDivElement>({ threshold: 0.3 });
 
   return (
     <div ref={ref} className={`${styles.container} ${className ?? ''}`}>
@@ -32,5 +32,5 @@ export function TextoDividido({ lines, className }: TextoDivididoProps) {
         </div>
       ))}
     </div>
-  )
+  );
 }

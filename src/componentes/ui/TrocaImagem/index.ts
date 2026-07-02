@@ -1,1 +1,1 @@
-export { TrocaImagem } from './TrocaImagem'
+export { TrocaImagem } from './TrocaImagem';

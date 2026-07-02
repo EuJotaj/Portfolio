@@ -108,7 +108,9 @@
   letter-spacing: 0.04em;
   text-transform: uppercase;
   border-bottom: 1px solid var(--color-border);
-  transition: color var(--transition-base), padding-left var(--transition-base);
+  transition:
+    color var(--transition-base),
+    padding-left var(--transition-base);
 }
 
 .itemSocial:hover {

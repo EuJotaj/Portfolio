@@ -1,17 +1,17 @@
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { cn } from '@/biblioteca/cn'
-import styles from './TrocaImagem.module.css'
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { cn } from '@/biblioteca/cn';
+import styles from './TrocaImagem.module.css';
 
 interface TrocaImagemProps {
-  primary: string
-  secondary: string
-  alt: string
-  className?: string
-  aspectRatio?: string
-  reveal?: 'clip' | 'fade' | 'both'
-  loading?: 'lazy' | 'eager'
-  objectFit?: 'cover' | 'contain'
+  primary: string;
+  secondary: string;
+  alt: string;
+  className?: string;
+  aspectRatio?: string;
+  reveal?: 'clip' | 'fade' | 'both';
+  loading?: 'lazy' | 'eager';
+  objectFit?: 'cover' | 'contain';
 }
 
 export function TrocaImagem({
@@ -24,7 +24,7 @@ export function TrocaImagem({
   loading = 'lazy',
   objectFit = 'cover',
 }: TrocaImagemProps) {
-  const [hovered, setHovered] = useState(false)
+  const [hovered, setHovered] = useState(false);
 
   return (
     <div
@@ -68,5 +68,5 @@ export function TrocaImagem({
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       />
     </div>
-  )
+  );
 }

@@ -1,1 +1,1 @@
-export { TelaCarregamento, EnvoltorioTelaCarregamento } from './TelaCarregamento'
+export { TelaCarregamento, EnvoltorioTelaCarregamento } from './TelaCarregamento';

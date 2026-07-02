@@ -1,4 +1,4 @@
-import type { Translations } from '../types'
+import type { Translations } from '../types';
 
 export const pt: Translations = {
   meta: {
@@ -169,4 +169,4 @@ export const pt: Translations = {
         'Graduando focado em evolução contínua para engenharia de software e performance web.',
     },
   },
-}
+};

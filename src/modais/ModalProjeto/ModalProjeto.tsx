@@ -1,25 +1,25 @@
-﻿import { useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { CarrosselImagens } from '@/componentes/ui/CarrosselImagens'
-import { useModalProjeto } from '@/aplicativo/provedores/ProvedorModalProjeto'
-import { useIdioma } from '@/aplicativo/provedores/ProvedorIdioma'
-import { getProjectById } from '@/constantes/projetos'
-import { cn } from '@/biblioteca/cn'
-import styles from './ModalProjeto.module.css'
+﻿import { useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { CarrosselImagens } from '@/componentes/ui/CarrosselImagens';
+import { useModalProjeto } from '@/aplicativo/provedores/ProvedorModalProjeto';
+import { useIdioma } from '@/aplicativo/provedores/ProvedorIdioma';
+import { getProjectById } from '@/constantes/projetos';
+import { cn } from '@/biblioteca/cn';
+import styles from './ModalProjeto.module.css';
 
 export function ModalProjeto() {
-  const { idProjetoAtivo, fecharProjeto } = useModalProjeto()
-  const { t } = useIdioma()
-  const project = idProjetoAtivo ? getProjectById(idProjetoAtivo, t) : null
-  const isWebLayout = Boolean(project?.web || project?.playableUrl)
+  const { idProjetoAtivo, fecharProjeto } = useModalProjeto();
+  const { t } = useIdioma();
+  const project = idProjetoAtivo ? getProjectById(idProjetoAtivo, t) : null;
+  const isWebLayout = Boolean(project?.web || project?.playableUrl);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') fecharProjeto()
-    }
-    if (idProjetoAtivo) window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [idProjetoAtivo, fecharProjeto])
+      if (e.key === 'Escape') fecharProjeto();
+    };
+    if (idProjetoAtivo) window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [idProjetoAtivo, fecharProjeto]);
 
   return (
     <AnimatePresence>
@@ -37,7 +37,7 @@ export function ModalProjeto() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.98 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            onClick={(e) => e.stopPropagation()}
+            onClick={e => e.stopPropagation()}
             role="dialog"
             aria-modal="true"
             aria-labelledby="project-modal-title"
@@ -74,7 +74,7 @@ export function ModalProjeto() {
                 </p>
               )}
               <div className={styles.etiquetas}>
-                {project.tags.map((tag) => (
+                {project.tags.map(tag => (
                   <span key={tag} className={styles.etiqueta}>
                     {tag}
                   </span>
@@ -119,5 +119,5 @@ export function ModalProjeto() {
         </motion.div>
       )}
     </AnimatePresence>
-  )
+  );
 }

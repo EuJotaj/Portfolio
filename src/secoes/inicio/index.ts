@@ -1,1 +1,1 @@
-export { SecaoInicio } from './SecaoInicio'
+export { SecaoInicio } from './SecaoInicio';

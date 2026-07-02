@@ -1,10 +1,10 @@
-﻿import { SITE } from '@/constantes/site'
-import { useIdioma } from '@/aplicativo/provedores/ProvedorIdioma'
-import styles from './Rodape.module.css'
+﻿import { SITE } from '@/constantes/site';
+import { useIdioma } from '@/aplicativo/provedores/ProvedorIdioma';
+import styles from './Rodape.module.css';
 
 export function Rodape() {
-  const { t } = useIdioma()
-  const year = new Date().getFullYear()
+  const { t } = useIdioma();
+  const year = new Date().getFullYear();
 
   return (
     <footer className={styles.rodape}>
@@ -16,5 +16,5 @@ export function Rodape() {
         </p>
       </div>
     </footer>
-  )
+  );
 }

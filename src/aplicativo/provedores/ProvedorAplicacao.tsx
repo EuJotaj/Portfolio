@@ -1,10 +1,10 @@
-import type { ReactNode } from 'react'
-import { AnimatePresence } from 'framer-motion'
+import type { ReactNode } from 'react';
+import { AnimatePresence } from 'framer-motion';
 
 interface ProvedorAplicacaoProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
 export function ProvedorAplicacao({ children }: ProvedorAplicacaoProps) {
-  return <AnimatePresence mode="wait">{children}</AnimatePresence>
+  return <AnimatePresence mode="wait">{children}</AnimatePresence>;
 }

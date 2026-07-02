@@ -13,7 +13,9 @@
   letter-spacing: 0.08em;
   color: var(--color-text-muted);
   background: transparent;
-  transition: background var(--transition-base), color var(--transition-base);
+  transition:
+    background var(--transition-base),
+    color var(--transition-base);
   min-width: 36px;
 }
 

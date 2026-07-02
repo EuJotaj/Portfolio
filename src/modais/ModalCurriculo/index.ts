@@ -1,1 +1,1 @@
-export { ModalCurriculo } from './ModalCurriculo'
+export { ModalCurriculo } from './ModalCurriculo';

@@ -1,14 +1,14 @@
-import { motion } from 'framer-motion'
-import styles from './FaixaAnimada.module.css'
+import { motion } from 'framer-motion';
+import styles from './FaixaAnimada.module.css';
 
 interface FaixaAnimadaProps {
-  text: string
-  speed?: number
-  reverse?: boolean
+  text: string;
+  speed?: number;
+  reverse?: boolean;
 }
 
 export function FaixaAnimada({ text, speed = 65, reverse = false }: FaixaAnimadaProps) {
-  const repeated = Array(6).fill(text).join(' — ')
+  const repeated = Array(6).fill(text).join(' — ');
 
   return (
     <div className={styles.envoltorio} aria-hidden="true">
@@ -21,5 +21,5 @@ export function FaixaAnimada({ text, speed = 65, reverse = false }: FaixaAnimada
         <span className={styles.texto}>{repeated}</span>
       </motion.div>
     </div>
-  )
+  );
 }

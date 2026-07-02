@@ -161,6 +161,39 @@
   z-index: 1;
 }
 
+
+:global(.pretoInterno) path, :global(.pretoExterno) path {
+  fill: rgba(0, 0, 0, 0);
+  stroke: rgb(0, 0, 0);
+  stroke-width: 1;
+  stroke-dasharray: 600;
+  stroke-dashoffset: 900;
+  animation: desenharPreto 3.5s ease forwards;
+}
+@keyframes desenharPreto {
+  to {
+    stroke-dashoffset: 0;
+    fill: rgba(0, 0, 0, 0.77);
+  }
+}
+
+:global(.brancoCal) path{
+  fill: #A078FF;
+  stroke: #A078FF;
+  stroke-width: 2;
+  stroke-dasharray: 800;
+  stroke-dashoffset: 800;
+  animation: desenharBranco 3s ease forwards;
+}
+
+@keyframes desenharBranco {
+  100% {
+    stroke-dashoffset: 0;
+    stroke: #A078FF;
+    fill: rgba(255, 255, 255, 0.886);
+  }
+}
+
 .dicaScroll {
   position: absolute;
   bottom: calc(var(--space-xl) + 52px);

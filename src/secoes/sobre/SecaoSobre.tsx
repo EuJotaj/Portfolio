@@ -1,19 +1,22 @@
-﻿import { motion } from 'framer-motion'
-import { Secao } from '@/componentes/layout/Secao'
-import { TextoDividido } from '@/componentes/ui/TextoDividido'
-import { PilhaFotos } from '@/secoes/sobre/PilhaFotos'
-import { STATS_VALUES, EXPERIENCE_IDS } from '@/constantes/conteudo'
-import { useIdioma } from '@/aplicativo/provedores/ProvedorIdioma'
-import styles from './SecaoSobre.module.css'
+﻿import { motion } from 'framer-motion';
+import { Secao } from '@/componentes/layout/Secao';
+import { TextoDividido } from '@/componentes/ui/TextoDividido';
+import { PilhaFotos } from '@/secoes/sobre/PilhaFotos';
+import { STATS_VALUES, EXPERIENCE_IDS } from '@/constantes/conteudo';
+import { useIdioma } from '@/aplicativo/provedores/ProvedorIdioma';
+import styles from './SecaoSobre.module.css';
 
 export function SecaoSobre() {
-  const { t } = useIdioma()
+  const { t } = useIdioma();
 
   return (
     <Secao id="experience">
       <div className={styles.grade}>
         <div className={styles.blocoTexto}>
-          <TextoDividido lines={[t.about.titleLine1, t.about.titleLine2]} className={styles.tituloDividido} />
+          <TextoDividido
+            lines={[t.about.titleLine1, t.about.titleLine2]}
+            className={styles.tituloDividido}
+          />
 
           <motion.p
             className={styles.descricao}
@@ -36,7 +39,7 @@ export function SecaoSobre() {
           </motion.blockquote>
 
           <div className={styles.etiquetas}>
-            {t.about.tags.map((tag) => (
+            {t.about.tags.map(tag => (
               <span key={tag} className={styles.etiqueta}>
                 {tag}
               </span>
@@ -57,7 +60,7 @@ export function SecaoSobre() {
 
           <div className={styles.linhaTempo}>
             {EXPERIENCE_IDS.map((expId, i) => {
-              const exp = t.experience[expId]
+              const exp = t.experience[expId];
               return (
                 <motion.div
                   key={expId}
@@ -73,7 +76,7 @@ export function SecaoSobre() {
                   <p className={styles.cargoLinhaTempo}>{exp.role}</p>
                   <p className={styles.descLinhaTempo}>{exp.description}</p>
                 </motion.div>
-              )
+              );
             })}
           </div>
         </div>
@@ -95,5 +98,5 @@ export function SecaoSobre() {
         ))}
       </div>
     </Secao>
-  )
+  );
 }

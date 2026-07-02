@@ -1,1 +1,1 @@
-export { CarrosselImagens } from './CarrosselImagens'
+export { CarrosselImagens } from './CarrosselImagens';

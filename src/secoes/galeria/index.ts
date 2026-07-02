@@ -1,1 +1,1 @@
-export { SecaoGaleria } from './SecaoGaleria'
+export { SecaoGaleria } from './SecaoGaleria';

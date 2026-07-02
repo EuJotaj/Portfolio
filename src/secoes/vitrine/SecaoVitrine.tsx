@@ -1,23 +1,26 @@
-﻿import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { Secao } from '@/componentes/layout/Secao'
-import { TextoDividido } from '@/componentes/ui/TextoDividido'
-import { CarrosselImagens } from '@/componentes/ui/CarrosselImagens'
-import { useIdioma } from '@/aplicativo/provedores/ProvedorIdioma'
-import styles from './SecaoVitrine.module.css'
+﻿import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Secao } from '@/componentes/layout/Secao';
+import { TextoDividido } from '@/componentes/ui/TextoDividido';
+import { CarrosselImagens } from '@/componentes/ui/CarrosselImagens';
+import { useIdioma } from '@/aplicativo/provedores/ProvedorIdioma';
+import styles from './SecaoVitrine.module.css';
 
 export function SecaoVitrine() {
-  const { projects, t } = useIdioma()
-  const [activeIndex, setActiveIndex] = useState(0)
-  const [hoveredThumb, setHoveredThumb] = useState<string | null>(null)
-  const active = projects[activeIndex]
+  const { projects, t } = useIdioma();
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [hoveredThumb, setHoveredThumb] = useState<string | null>(null);
+  const active = projects[activeIndex];
 
-  if (!active) return null
+  if (!active) return null;
 
   return (
     <Secao id="showcase">
       <div className={styles.cabecalho}>
-        <TextoDividido lines={[t.showcase.titleLine1, t.showcase.titleLine2]} className={styles.tituloDividido} />
+        <TextoDividido
+          lines={[t.showcase.titleLine1, t.showcase.titleLine2]}
+          className={styles.tituloDividido}
+        />
         <p className={styles.descCabecalho}>{t.showcase.description}</p>
       </div>
 
@@ -42,8 +45,8 @@ export function SecaoVitrine() {
 
         <div className={styles.miniaturas}>
           {projects.map((item, i) => {
-            const isHovered = hoveredThumb === item.id
-            const isActive = activeIndex === i
+            const isHovered = hoveredThumb === item.id;
+            const isActive = activeIndex === i;
 
             return (
               <motion.button
@@ -51,8 +54,8 @@ export function SecaoVitrine() {
                 type="button"
                 className={`${styles.miniatura} ${isActive ? styles.miniaturaAtiva : ''}`}
                 onMouseEnter={() => {
-                  setHoveredThumb(item.id)
-                  setActiveIndex(i)
+                  setHoveredThumb(item.id);
+                  setActiveIndex(i);
                 }}
                 onMouseLeave={() => setHoveredThumb(null)}
                 animate={{
@@ -87,10 +90,10 @@ export function SecaoVitrine() {
                 </div>
                 <span className={styles.rotuloMiniatura}>{item.title}</span>
               </motion.button>
-            )
+            );
           })}
         </div>
       </div>
     </Secao>
-  )
+  );
 }

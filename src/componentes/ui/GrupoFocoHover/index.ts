@@ -1,1 +1,1 @@
-export { GrupoFocoHover, useFocoHover } from './GrupoFocoHover'
+export { GrupoFocoHover, useFocoHover } from './GrupoFocoHover';
