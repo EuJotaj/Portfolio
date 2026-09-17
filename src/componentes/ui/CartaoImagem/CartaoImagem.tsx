@@ -1,7 +1,8 @@
-﻿import { motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { TrocaImagem } from '@/componentes/ui/TrocaImagem';
 import { useFocoHover } from '@/componentes/ui/GrupoFocoHover';
 import { useModalProjeto } from '@/aplicativo/provedores/ProvedorModalProjeto';
+import { useIdioma } from '@/aplicativo/provedores/ProvedorIdioma';
 import type { GalleryItem } from '@/tipos';
 import styles from './CartaoImagem.module.css';
 
@@ -13,8 +14,12 @@ interface CartaoImagemProps {
 export function CartaoImagem({ item, index }: CartaoImagemProps) {
   const { activeId, setActiveId } = useFocoHover();
   const { abrirProjeto } = useModalProjeto();
+  const { t } = useIdioma();
   const isActive = activeId === item.id;
   const isDimmed = activeId !== null && !isActive;
+
+  const categoriaInfo = t.gallery.categories[item.category];
+  const rotuloCategoria = categoriaInfo?.tag ?? item.category;
 
   return (
     <motion.article
@@ -45,20 +50,28 @@ export function CartaoImagem({ item, index }: CartaoImagemProps) {
             alt={item.title}
             className={styles.troca}
           />
+
+          <div className={`${styles.badgeCategoriaTopo} ${styles[item.category]}`}>
+            {rotuloCategoria}
+          </div>
+
           <motion.div
             className={styles.sobreposicao}
             animate={{ opacity: isActive ? 1 : 0 }}
             transition={{ duration: 0.3 }}
           >
-            {item.tags.length > 0 && (
-              <div className={styles.etiquetas}>
-                {item.tags.map(tag => (
-                  <span key={tag} className={styles.etiqueta}>
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            )}
+            <div className={styles.etiquetas}>
+              <span
+                className={`${styles.etiqueta} ${styles.etiquetaCategoria} ${styles[item.category]}`}
+              >
+                {rotuloCategoria}
+              </span>
+              {item.tags.map(tag => (
+                <span key={tag} className={styles.etiqueta}>
+                  {tag}
+                </span>
+              ))}
+            </div>
           </motion.div>
           <motion.div
             className={styles.bordaBrilho}
@@ -67,7 +80,13 @@ export function CartaoImagem({ item, index }: CartaoImagemProps) {
           />
         </div>
         <div className={styles.info}>
-          <span className={styles.ano}>{item.year}</span>
+          <div className={styles.metaCabecalho}>
+            <span className={`${styles.tagCategoriaTexto} ${styles[item.category]}`}>
+              {rotuloCategoria}
+            </span>
+            <span className={styles.separadorMeta}>•</span>
+            <span className={styles.ano}>{item.year}</span>
+          </div>
           <motion.h3
             className={styles.titulo}
             animate={{ color: isActive ? 'var(--color-accent)' : 'var(--color-text)' }}

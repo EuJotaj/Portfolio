@@ -1,0 +1,331 @@
+.list {
+  position: relative;
+  width: 100%;
+  transition: height 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.itemWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform, width, height, opacity, filter;
+  cursor: pointer;
+  outline: none;
+}
+
+.cardCorpo {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #0d0d10;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.25rem;
+  overflow: hidden;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.72);
+  transition:
+    border-color var(--transition-base),
+    box-shadow var(--transition-base),
+    background var(--transition-base),
+    transform var(--transition-base);
+}
+
+.itemWrapper:hover .cardCorpo,
+.itemWrapper:focus-visible .cardCorpo {
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 26px 60px -20px rgba(0, 0, 0, 0.8);
+  background: rgba(15, 18, 28, 0.8);
+}
+
+.itemWrapper.profissionais:hover .cardCorpo {
+  border-color: rgba(246, 193, 119, 0.34);
+  box-shadow:
+    0 26px 60px -20px rgba(0, 0, 0, 0.8),
+    0 0 26px rgba(246, 193, 119, 0.09);
+}
+
+.itemWrapper.portfolio:hover .cardCorpo {
+  border-color: rgba(177, 146, 255, 0.38);
+  box-shadow:
+    0 26px 60px -20px rgba(0, 0, 0, 0.8),
+    0 0 26px rgba(177, 146, 255, 0.12);
+}
+
+.itemWrapper.estudos:hover .cardCorpo {
+  border-color: rgba(94, 234, 212, 0.34);
+  box-shadow:
+    0 26px 60px -20px rgba(0, 0, 0, 0.8),
+    0 0 26px rgba(94, 234, 212, 0.1);
+}
+
+/* Envoltorio da Imagem Widescreen */
+.envoltorioImagem {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: #0d0d10;
+}
+
+.imagemBase,
+.imagemHover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition:
+    opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  filter: grayscale(1);
+  pointer-events: none;
+}
+
+.imagemOculta {
+  opacity: 0;
+}
+
+.imagemTrocaFoto {
+  animation: revelarFoto 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.imagemHover {
+  opacity: 0;
+}
+
+.imagemHoverVisivel {
+  opacity: 1;
+  transform: scale(1.03);
+}
+
+.itemWrapper:hover .imagemBase:not(.imagemOculta),
+.itemWrapper:focus-visible .imagemBase:not(.imagemOculta) {
+  transform: scale(1.03);
+  filter: grayscale(0);
+}
+
+.itemWrapper:hover .imagemHover,
+.itemWrapper:focus-visible .imagemHover {
+  filter: grayscale(0);
+}
+
+/* Badges da Foto */
+.badgeCategoria {
+  position: absolute;
+  top: 0.875rem;
+  left: 0.875rem;
+  z-index: 4;
+  font-family: var(--font-label);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.625rem;
+  border-radius: var(--radius-sm);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-0.35rem);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.itemWrapper:hover .badgeCategoria,
+.itemWrapper:focus-visible .badgeCategoria,
+.itemWrapper:hover .badgeAno,
+.itemWrapper:focus-visible .badgeAno {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.badgeCategoria.profissionais {
+  background: rgba(246, 193, 119, 0.2);
+  border: 1px solid rgba(246, 193, 119, 0.45);
+  color: #f6c177;
+}
+
+.badgeCategoria.portfolio {
+  background: var(--color-accent-dim);
+  border: 1px solid rgba(208, 188, 255, 0.45);
+  color: var(--color-accent);
+}
+
+.badgeCategoria.estudos {
+  background: rgba(94, 234, 212, 0.2);
+  border: 1px solid rgba(94, 234, 212, 0.45);
+  color: #5eead4;
+}
+
+.badgeAno {
+  position: absolute;
+  top: 0.875rem;
+  right: 0.875rem;
+  z-index: 4;
+  font-family: var(--font-label);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  background: rgba(14, 14, 18, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  pointer-events: none;
+}
+
+/* Color Overlay do Masonry */
+.colorOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.colorOverlay.profissionais {
+  background: linear-gradient(180deg, transparent 40%, rgba(246, 193, 119, 0.18) 100%);
+}
+
+.colorOverlay.portfolio {
+  background: linear-gradient(180deg, transparent 40%, rgba(160, 120, 255, 0.18) 100%);
+}
+
+.colorOverlay.estudos {
+  background: linear-gradient(180deg, transparent 40%, rgba(94, 234, 212, 0.18) 100%);
+}
+
+/* Informações do Card */
+.info {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  padding: 1.25rem;
+  background: linear-gradient(180deg, transparent 32%, rgba(5, 7, 12, 0.9) 100%);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(0.5rem);
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.itemWrapper:hover .info,
+.itemWrapper:focus-visible .info {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.metaLinha {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0;
+  min-height: 1rem;
+}
+
+.categoriaTexto {
+  font-family: var(--font-label);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.92;
+}
+
+.categoriaTexto.profissionais {
+  color: #f6c177;
+}
+
+.categoriaTexto.portfolio {
+  color: var(--color-accent);
+}
+
+.categoriaTexto.estudos {
+  color: #5eead4;
+}
+
+.divisorPonto {
+  color: var(--color-text-dim);
+  font-size: 0.625rem;
+}
+
+.anoTexto {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--color-text-dim);
+}
+
+.titulo {
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #f4f6fb;
+  margin: 0;
+  line-height: 1.25;
+  transition: color var(--transition-fast);
+}
+
+.itemWrapper:hover .titulo {
+  color: #ffffff;
+}
+
+.itemWrapper.profissionais:hover .titulo {
+  color: #ffd9a2;
+}
+
+.itemWrapper.estudos:hover .titulo {
+  color: #9ef2e2;
+}
+
+.etiquetas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.etiqueta {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(227, 233, 243, 0.82);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.22rem 0.45rem;
+  border-radius: 999px;
+}
+
+@keyframes revelarFoto {
+  from {
+    opacity: 0;
+    transform: scale(1.08);
+    filter: grayscale(1) blur(5px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: grayscale(1) blur(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .imagemTrocaFoto {
+    animation: none;
+  }
+}

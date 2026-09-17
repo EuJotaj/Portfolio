@@ -44,12 +44,58 @@ export const pt: Translations = {
     titleLine1: 'PROJETOS',
     titleLine2: 'DESTAQUE',
     description:
-      'Clique em um projeto para ver detalhes, carrossel de imagens e links. Passe o mouse para destacar.',
+      'Explore os projetos divididos entre experiências corporativas, iniciativas pessoais e pesquisas acadêmicas. Passe o mouse no ícone ? para entender cada seção.',
+    allProjectsTitle: 'Todos os Projetos',
+    allProjectsSubtitle:
+      'Visão unificada reunindo soluções corporativas em produção, plataformas autorais e estudos acadêmicos.',
+    tooltipAriaLabel: 'Informações sobre a seção',
+    whatIsIncluded: 'O que você encontra aqui:',
+    projectCountSingular: 'projeto',
+    projectCountPlural: 'projetos',
+    categories: {
+      profissionais: {
+        title: 'Projetos Profissionais',
+        tag: 'Profissional',
+        badge: 'Carreira & Mercado',
+        description:
+          'Trabalhos desenvolvidos em ambiente corporativo, sistemas de produção em larga escala, soluções empresariais e contratos como freelancer.',
+        scope: [
+          'Sistemas ERP e plataformas B2B',
+          'Aplicações em produção com regras de negócio complexas',
+          'Projetos para clientes e empresas',
+        ],
+      },
+      portfolio: {
+        title: 'Projetos de Portfólio',
+        tag: 'Portfólio',
+        badge: 'Projetos Pessoais Robustos',
+        description:
+          'Projetos pessoais de maior envergadura e maturidade arquitetural, desenvolvidos para explorar novos ecossistemas técnicos e resolver problemas reais sem pretensão comercial imediata.',
+        scope: [
+          'Plataformas SaaS completas e multi-tenant',
+          'Arquiteturas modernas full-stack',
+          'Aplicações interativas não triviais',
+        ],
+      },
+      estudos: {
+        title: 'Estudos & Acadêmicos',
+        tag: 'Estudo',
+        badge: 'Faculdade & Aprendizado',
+        description:
+          'Projetos básicos de programação e introduções a novas linguagens, além de projetos acadêmicos e trabalhos desenvolvidos na faculdade.',
+        scope: [
+          'Projetos básicos de programação e algoritmos',
+          'Introduções e práticas com novas linguagens',
+          'Projetos de faculdade e trabalhos acadêmicos',
+          'Minijogos e exercícios práticos de lógica',
+        ],
+      },
+    },
     filters: {
       all: 'Todos',
-      projects: 'Projetos',
-      creative: 'Criativo',
-      tools: 'Ferramentas',
+      profissionais: 'Profissionais',
+      portfolio: 'Portfólio',
+      estudos: 'Estudos',
     },
     clickToExplore: 'Clique para explorar',
   },

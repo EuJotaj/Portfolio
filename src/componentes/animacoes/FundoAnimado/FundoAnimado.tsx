@@ -2,10 +2,42 @@ import { useEffect, useRef } from 'react';
 import { Renderer, Program, Mesh, Triangle } from 'ogl';
 import styles from './FundoAnimado.module.css';
 
+type FundoAnimadoProps = {
+  lowColor?: string;
+  midColor?: string;
+  highColor?: string;
+  speed?: number;
+  morphAmount?: number;
+  morphSpeed?: number;
+  bands?: number;
+  thickness?: number;
+  scale?: number;
+  pixelSize?: number;
+  glow?: number;
+  colorMode?: 'elevation' | 'uniform' | 'alternating';
+  contrast?: number;
+  brightness?: number;
+  fillBands?: boolean;
+  opacity?: number;
+  grain?: boolean;
+  grainIntensity?: number;
+  mouseInteraction?: boolean;
+  mouseRadius?: number;
+  mouseStrength?: number;
+  lightMode?: boolean;
+  className?: string;
+};
+
 const hexToRgb = (hex: string): [number, number, number] => {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   if (!result) return [1, 1, 1];
   return [parseInt(result[1], 16) / 255, parseInt(result[2], 16) / 255, parseInt(result[3], 16) / 255];
+};
+
+const colorModeToFloat = (mode: FundoAnimadoProps['colorMode']) => {
+  if (mode === 'uniform') return 1.0;
+  if (mode === 'alternating') return 2.0;
+  return 0.0;
 };
 
 const vertex = `#version 300 es
@@ -30,6 +62,7 @@ uniform float uContrast;
 uniform float uBrightness;
 uniform float uFillBands;
 uniform float uOpacity;
+uniform float uLightMode;
 uniform vec3 uLow;
 uniform vec3 uMid;
 uniform vec3 uHigh;
@@ -66,7 +99,7 @@ vec3 elevationColor(float e) {
 void main() {
   vec2 res = iResolution.xy;
   vec2 uv = gl_FragCoord.xy / res;
-  vec2 aspect = res / min(res.x, res.y);
+  vec2 aspect = res / max(min(res.x, res.y), 1.0);
 
   vec2 suv = (uv - 0.5) * aspect / max(uScale, 0.001) + 0.5;
 
@@ -129,7 +162,13 @@ void main() {
   outColor = clamp(outColor, 0.0, 1.0);
 
   float a = clamp(outAlpha, 0.0, 1.0) * uOpacity;
-  fragColor = vec4(outColor * a, a);
+  if (uLightMode > 0.5) {
+    float peak = max(outColor.r, max(outColor.g, outColor.b));
+    vec3 chroma = pow(clamp(outColor / max(peak, 0.0001), 0.0, 1.0), vec3(1.18));
+    fragColor = vec4(mix(vec3(1.0), chroma, a * 0.94), 1.0);
+  } else {
+    fragColor = vec4(outColor * a, a);
+  }
 }
 `;
 
@@ -142,7 +181,31 @@ const CTRL_INDICES = [
   [-1, -3, 8, 9]
 ];
 
-export function FundoAnimado() {
+export function FundoAnimado({
+  lowColor = '#2b004b',
+  midColor = '#ca56ff',
+  highColor = '#dac5ff',
+  speed = 0.05,
+  morphAmount = 1.3,
+  morphSpeed = 0.15,
+  bands = 2.5,
+  thickness = 0.02,
+  scale = 2,
+  pixelSize = 2,
+  glow = 0.5,
+  colorMode = 'alternating',
+  contrast = 1.7,
+  brightness = 1,
+  fillBands = true,
+  opacity = 0.45,
+  grain = false,
+  grainIntensity = 0.05,
+  mouseInteraction = false,
+  mouseRadius = 0.3,
+  mouseStrength = 0.35,
+  lightMode = false,
+  className = ''
+}: FundoAnimadoProps = {}) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -172,28 +235,29 @@ export function FundoAnimado() {
       uniforms: {
         iTime: { value: 0 },
         iResolution: { value: new Float32Array([1, 1]) },
-        uSpeed: { value: 0.55 },
-        uMorphAmount: { value: 4.0 },
-        uMorphSpeed: { value: 0.05 },
-        uBands: { value: 2.5 },
-        uThickness: { value: 0.01 },
-        uScale: { value: 1.90 },
-        uPixelSize: { value: 1.0 },
-        uGlow: { value: 0.7 },
-        uColorMode: { value: 0.0 },
-        uContrast: { value: 1.2 },
-        uBrightness: { value: 1.0 },
-        uFillBands: { value: 1.0 },
-        uOpacity: { value: 1.0 },
-        uGrain: { value: 1.0 },
-        uGrainIntensity: { value: 0.03 },
-        uLow: { value: new Float32Array(hexToRgb('#4f008a')) },
-        uMid: { value: new Float32Array(hexToRgb('#af00ff')) },
-        uHigh: { value: new Float32Array(hexToRgb('#d796ff')) },
+        uSpeed: { value: speed },
+        uMorphAmount: { value: morphAmount },
+        uMorphSpeed: { value: morphSpeed },
+        uBands: { value: bands },
+        uThickness: { value: thickness },
+        uScale: { value: scale },
+        uPixelSize: { value: pixelSize },
+        uGlow: { value: glow },
+        uColorMode: { value: colorModeToFloat(colorMode) },
+        uContrast: { value: contrast },
+        uBrightness: { value: brightness },
+        uFillBands: { value: fillBands ? 1.0 : 0.0 },
+        uOpacity: { value: opacity },
+        uLightMode: { value: lightMode ? 1.0 : 0.0 },
+        uGrain: { value: grain ? 1.0 : 0.0 },
+        uGrainIntensity: { value: grainIntensity },
+        uLow: { value: new Float32Array(hexToRgb(lowColor)) },
+        uMid: { value: new Float32Array(hexToRgb(midColor)) },
+        uHigh: { value: new Float32Array(hexToRgb(highColor)) },
         uMouse: { value: new Float32Array([0.5, 0.5]) },
-        uMouseEnabled: { value: 1.0 },
-        uMouseRadius: { value: 0.78 },
-        uMouseStrength: { value: 0.6 },
+        uMouseEnabled: { value: mouseInteraction ? 1.0 : 0.0 },
+        uMouseRadius: { value: mouseRadius },
+        uMouseStrength: { value: mouseStrength },
         uMouseActive: { value: 0.0 },
         uCtrlA: { value: new Float32Array([0, 0, 0, 0]) },
         uCtrlB: { value: new Float32Array([0, 0, 0, 0]) },
@@ -325,7 +389,33 @@ export function FundoAnimado() {
       }
       gl.getExtension('WEBGL_lose_context')?.loseContext();
     };
-  }, []);
+  }, [
+    bands,
+    brightness,
+    className,
+    colorMode,
+    contrast,
+    fillBands,
+    glow,
+    grain,
+    grainIntensity,
+    highColor,
+    lightMode,
+    lowColor,
+    midColor,
+    morphAmount,
+    morphSpeed,
+    mouseInteraction,
+    mouseRadius,
+    mouseStrength,
+    opacity,
+    pixelSize,
+    scale,
+    speed,
+    thickness
+  ]);
 
-  return <div ref={containerRef} className={styles.fundo} aria-hidden="true" />;
+  return <div ref={containerRef} className={`${styles.fundo} ${className}`.trim()} aria-hidden="true" />;
 }
+
+export default FundoAnimado;

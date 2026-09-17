@@ -1,0 +1,20 @@
+.iconeSvg {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+  transition:
+    transform var(--transition-fast),
+    stroke var(--transition-fast);
+}
+
+.profissionais {
+  color: inherit;
+}
+
+.portfolio {
+  color: inherit;
+}
+
+.estudos {
+  color: inherit;
+}

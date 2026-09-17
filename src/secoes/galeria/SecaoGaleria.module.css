@@ -4,10 +4,10 @@
   margin-top: var(--space-xl);
 }
 
-.cabecalho {
+.cabecalhoSecao {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: var(--space-xl);
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 4%;
   align-items: end;
   margin-bottom: var(--space-xl);
 }
@@ -21,58 +21,378 @@
 }
 
 .descCabecalho {
-  font-size: clamp(0.9375rem, 1.6vw, 1rem);
+  font-size: clamp(0.9375rem, 1.6vw, 1.0625rem);
   color: var(--color-text-muted);
   line-height: 1.7;
-  max-width: 400px;
+  max-width: 90%;
   justify-self: end;
+}
+
+.cardGigante {
+  position: relative;
+}
+
+.barraFiltros {
+  margin-bottom: 1.5rem;
+  padding: 0.35rem;
+}
+
+/* Barra de Controles e Filtros */
+.barraControle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2%;
+  flex-wrap: wrap;
+  padding: 0.3rem 0.65rem;
 }
 
 .filtros {
   display: flex;
-  gap: var(--space-xs);
-  margin-bottom: var(--space-xl);
+  gap: 0.5rem;
   flex-wrap: wrap;
 }
 
 .botaoFiltro {
-  padding: clamp(0.5rem, 1.5vw, 0.625rem) clamp(0.875rem, 2.5vw, 1.25rem);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5625rem 1rem;
+  font-family: var(--font-label);
   font-size: clamp(0.6875rem, 1.4vw, 0.75rem);
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-text-muted);
+  background: rgba(255, 255, 255, 0.035);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   transition: all var(--transition-base);
   white-space: nowrap;
+  cursor: pointer;
+}
+
+.iconeFiltro {
+  flex-shrink: 0;
+}
+
+.badgeContador {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.25rem;
+  height: 1.25rem;
+  padding: 0 0.35rem;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-text-muted);
+  transition: all var(--transition-fast);
 }
 
 .botaoFiltro:hover {
-  border-color: var(--color-accent-strong);
+  border-color: rgba(255, 255, 255, 0.22);
   color: var(--color-text);
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-1px);
 }
 
 .botaoFiltro.ativo {
   background: var(--color-accent-strong);
   border-color: var(--color-accent-strong);
   color: #0e0e0e;
+  box-shadow: 0 4px 16px var(--color-accent-dim);
 }
 
-.grade {
+.botaoFiltro.ativo .badgeContador {
+  background: rgba(0, 0, 0, 0.25);
+  color: #0e0e0e;
+}
+
+/* Atalhos de Ajuda no modo Todos */
+.ajudaCategorias {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  flex-wrap: wrap;
+}
+
+.rotuloAjuda {
+  font-family: var(--font-label);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+}
+
+.chipsAjuda {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.chipItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.55rem;
+  font-family: var(--font-label);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.chipItem.profissionais {
+  color: #f6c177;
+  border-color: rgba(246, 193, 119, 0.25);
+}
+
+.chipItem.portfolio {
+  color: var(--color-accent);
+  border-color: rgba(208, 188, 255, 0.25);
+}
+
+.chipItem.estudos {
+  color: #5eead4;
+  border-color: rgba(94, 234, 212, 0.25);
+}
+
+.chipTexto {
+  line-height: 1;
+}
+
+/* Banner de Categoria / Contexto */
+.bannerCategoria {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.bannerCategoria.profissionais {
+  border-bottom-color: rgba(246, 193, 119, 0.3);
+}
+
+.bannerCategoria.portfolio {
+  border-bottom-color: rgba(160, 120, 255, 0.3);
+}
+
+.bannerCategoria.estudos {
+  border-bottom-color: rgba(94, 234, 212, 0.3);
+}
+
+.bannerInfo {
+  flex: 1;
+}
+
+.bannerMeta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-family: var(--font-label);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.375rem;
+  color: var(--color-text-dim);
+}
+
+.bannerNumero {
+  color: var(--color-accent);
+}
+
+.bannerCategoria.profissionais .bannerNumero {
+  color: #f6c177;
+}
+
+.bannerCategoria.portfolio .bannerNumero {
+  color: var(--color-accent);
+}
+
+.bannerCategoria.estudos .bannerNumero {
+  color: #5eead4;
+}
+
+.bannerSeparador {
+  opacity: 0.5;
+}
+
+.bannerBadge {
+  color: var(--color-text-muted);
+}
+
+.bannerTituloLinha {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.375rem;
+  flex-wrap: wrap;
+}
+
+.bannerTitulo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.bannerIconeWrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.bannerCategoria.profissionais .bannerIcone {
+  stroke: #f6c177;
+}
+
+.bannerCategoria.portfolio .bannerIcone {
+  stroke: var(--color-accent);
+}
+
+.bannerCategoria.estudos .bannerIcone {
+  stroke: #5eead4;
+}
+
+.bannerDescricao {
+  font-size: clamp(0.8125rem, 1.4vw, 0.9375rem);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  max-width: 720px;
+  margin: 0;
+}
+
+.bannerContador {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 4rem;
+  padding: 0.5rem 0.875rem;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  align-self: center;
+}
+
+.bannerContadorNumero {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--color-text);
+}
+
+.bannerContadorTexto {
+  font-family: var(--font-label);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+  margin-top: 0.25rem;
+}
+
+/* Banner da Visão "Todos" */
+.bannerTodos {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0 0 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 1.5rem;
+}
+
+.bannerTodosTexto {
+  flex: 1;
+}
+
+.bannerTodosTitulo {
+  font-family: var(--font-display);
+  font-size: clamp(1.125rem, 2.2vw, 1.5rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--color-text);
+  margin: 0 0 0.25rem 0;
+}
+
+.bannerTodosDescricao {
+  font-size: clamp(0.8125rem, 1.4vw, 0.875rem);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.divisorInterno {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.04) 70%,
+    transparent 100%
+  );
+  margin-bottom: 1.75rem;
+}
+
+.containerMasonry {
+  position: relative;
+  width: 100%;
+  min-height: 30vw;
+}
+
+/* Grade de Projetos: 2 Colunas, Alta Visibilidade, Widescreen */
+.gradeProjetos {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--space-md);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 2.2vw, 1.75rem);
 }
 
-@media (max-width: 1100px) {
-  .grade {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+.itemGrade {
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .gradeProjetos {
+    grid-template-columns: 1fr;
+  }
+
+  .bannerCategoria,
+  .bannerTodos {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .bannerContador {
+    align-self: flex-start;
+    flex-direction: row;
+    gap: 0.5rem;
   }
 }
 
 @media (max-width: 768px) {
-  .cabecalho {
+  .cabecalhoSecao {
     grid-template-columns: 1fr;
     gap: var(--space-md);
   }
@@ -80,10 +400,25 @@
   .descCabecalho {
     justify-self: start;
   }
+
+  .barraControle {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
 }
 
 @media (max-width: 520px) {
-  .grade {
-    grid-template-columns: 1fr;
+  .cardGigante {
+    padding: 1rem;
+  }
+
+  .botaoFiltro {
+    padding: 0.45rem 0.75rem;
+    font-size: 0.6875rem;
+  }
+
+  .filtros {
+    gap: 0.35rem;
   }
 }

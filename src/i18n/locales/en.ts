@@ -41,8 +41,60 @@ export const en: Translations = {
     marquee: 'FEATURED PROJECTS — CLICK TO EXPLORE',
     titleLine1: 'FEATURED',
     titleLine2: 'PROJECTS',
-    description: 'Click a project to see details, image carousel and links. Hover to highlight.',
-    filters: { all: 'All', projects: 'Projects', creative: 'Creative', tools: 'Tools' },
+    description:
+      'Explore projects categorized into enterprise corporate work, personal deep-dives, and academic research. Hover over the ? icon to understand each section.',
+    allProjectsTitle: 'All Projects',
+    allProjectsSubtitle:
+      'Unified showcase bringing together corporate production systems, portfolio platforms, and academic studies.',
+    tooltipAriaLabel: 'Information about this section',
+    whatIsIncluded: 'What you will find here:',
+    projectCountSingular: 'project',
+    projectCountPlural: 'projects',
+    categories: {
+      profissionais: {
+        title: 'Professional Projects',
+        tag: 'Professional',
+        badge: 'Career & Market',
+        description:
+          'Projects developed in corporate settings, large-scale production systems, enterprise solutions, and client freelancing contracts.',
+        scope: [
+          'ERP systems and B2B platforms',
+          'Production applications with complex business rules',
+          'Client and corporate delivery work',
+        ],
+      },
+      portfolio: {
+        title: 'Portfolio Projects',
+        tag: 'Portfolio',
+        badge: 'Robust Personal Projects',
+        description:
+          'Larger personal projects with architectural maturity, crafted to explore new technology stacks and solve real-world problems without immediate commercial intent.',
+        scope: [
+          'Full-scale multi-tenant SaaS platforms',
+          'Modern full-stack architectures',
+          'Non-trivial interactive applications',
+        ],
+      },
+      estudos: {
+        title: 'Studies & Academic',
+        tag: 'Study',
+        badge: 'College & Learning',
+        description:
+          'Basic programming projects and introductions to new languages, along with academic projects and coursework developed at university.',
+        scope: [
+          'Basic programming projects and algorithms',
+          'Introductions and practice with new languages',
+          'College projects and academic assignments',
+          'Minigames and practical logic exercises',
+        ],
+      },
+    },
+    filters: {
+      all: 'All',
+      profissionais: 'Professional',
+      portfolio: 'Portfolio',
+      estudos: 'Studies',
+    },
     clickToExplore: 'Click to explore',
   },
   showcase: {

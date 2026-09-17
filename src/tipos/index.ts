@@ -11,10 +11,12 @@ export interface SocialLink {
   handle: string;
 }
 
+export type ProjectCategory = 'profissionais' | 'portfolio' | 'estudos';
+
 export interface GalleryItem {
   id: string;
   title: string;
-  category: 'projects' | 'creative' | 'tools';
+  category: ProjectCategory;
   images: string[];
   image: string;
   hoverImage: string;

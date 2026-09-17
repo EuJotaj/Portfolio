@@ -1,0 +1,1 @@
+export { ModalExplicacaoSecao } from './ModalExplicacaoSecao';

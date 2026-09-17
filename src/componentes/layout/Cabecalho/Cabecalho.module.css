@@ -4,8 +4,8 @@
   left: 50%;
   transform: translateX(-50%);
   z-index: 100;
-  width: min(92vw, calc(var(--max-width) + 2rem));
-  max-width: calc(var(--max-width) + 2rem);
+  width: 80vw;
+  max-width: 94vw;
   height: 3.7rem;
   border-radius: 999px;
   overflow: hidden;
@@ -205,7 +205,8 @@
 
 @media (max-width: 900px) {
   .cabecalho {
-    width: calc(100% - 1rem);
+    width: 94%;
+    max-width: 94%;
     height: 3.4rem;
     top: 0.6rem;
   }

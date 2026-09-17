@@ -23,6 +23,6 @@
 
 @media (max-width: 480px) {
   .secao {
-    padding: clamp(2.5rem, 10vw, 4rem) var(--gutter);
+    padding: clamp(2.5rem, 10vw, 4rem) 4vw;
   }
 }

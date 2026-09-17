@@ -1,6 +1,7 @@
 ﻿import { motion } from 'framer-motion';
 import { Secao } from '@/componentes/layout/Secao';
 import { Botao } from '@/componentes/ui/Botao';
+import { GlassSurface } from '@/componentes/ui/GlassSurface/GlassSurface';
 import { SITE } from '@/constantes/site';
 import { SOCIAL_LINKS } from '@/constantes/conteudo';
 import { MAILTO } from '@/constantes/recursos';
@@ -14,7 +15,13 @@ export function SecaoContato() {
 
   return (
     <Secao id="contact">
-      <div className={styles.envoltorio}>
+      <GlassSurface
+        className={styles.envoltorio}
+        variant="soft"
+        borderRadius={24}
+        backgroundOpacity={0.05}
+        blur={6}
+      >
         <motion.div
           className={styles.conteudo}
           initial={{ opacity: 0, y: 40 }}
@@ -70,7 +77,7 @@ export function SecaoContato() {
             ))}
           </div>
         </motion.div>
-      </div>
+      </GlassSurface>
     </Secao>
   );
 }

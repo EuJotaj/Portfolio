@@ -1,9 +1,36 @@
 ﻿import { motion } from 'framer-motion';
 import { Secao } from '@/componentes/layout/Secao';
 import { TextoDividido } from '@/componentes/ui/TextoDividido';
-import { SKILLS, TECH_MARQUEE } from '@/constantes/conteudo';
+import { GlassSurface } from '@/componentes/ui/GlassSurface/GlassSurface';
+import { LogoLoop, type LogoItem } from '@/componentes/ui/LogoLoop/LogoLoop';
+import {
+  SiAngular,
+  SiCss,
+  SiGit,
+  SiGithub,
+  SiHtml5,
+  SiJavascript,
+  SiPython,
+  SiReact,
+  SiTailwindcss,
+  SiTypescript,
+} from 'react-icons/si';
+import { SKILLS } from '@/constantes/conteudo';
 import { useIdioma } from '@/aplicativo/provedores/ProvedorIdioma';
 import styles from './SecaoHabilidades.module.css';
+
+const TECH_LOGOS: LogoItem[] = [
+  { node: <SiJavascript />, title: 'JavaScript' },
+  { node: <SiReact />, title: 'React' },
+  { node: <SiAngular />, title: 'Angular' },
+  { node: <SiTypescript />, title: 'TypeScript' },
+  { node: <SiHtml5 />, title: 'HTML5' },
+  { node: <SiCss />, title: 'CSS3' },
+  { node: <SiTailwindcss />, title: 'Tailwind CSS' },
+  { node: <SiPython />, title: 'Python' },
+  { node: <SiGit />, title: 'Git' },
+  { node: <SiGithub />, title: 'GitHub' },
+];
 
 export function SecaoHabilidades() {
   const { t } = useIdioma();
@@ -19,31 +46,37 @@ export function SecaoHabilidades() {
 
       <div className={styles.gradeHabilidades}>
         {SKILLS.map((skill, i) => (
-          <motion.div
+          <GlassSurface
             key={skill.id}
             className={styles.cartaoHabilidade}
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.08 }}
+            borderRadius={14}
+            backgroundOpacity={0.05}
           >
-            <div className={styles.cabecalhoHabilidade}>
-              <span className={styles.nomeHabilidade}>{skill.name}</span>
-              <span className={styles.nivelHabilidade}>{skill.level}%</span>
-            </div>
-            <div className={styles.barraHabilidade}>
-              <motion.div
-                className={styles.preenchimentoHabilidade}
-                initial={{ width: 0 }}
-                whileInView={{ width: `${skill.level}%` }}
-                viewport={{ once: true }}
-                transition={{ duration: 1, delay: 0.2 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-              />
-            </div>
-            <span className={styles.categoriaHabilidade}>
-              {t.skills.categories[skill.category]}
-            </span>
-          </motion.div>
+            <motion.div
+              className={styles.conteudoHabilidade}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+            >
+              <div className={styles.cabecalhoHabilidade}>
+                <span className={styles.nomeHabilidade}>{skill.name}</span>
+                <span className={styles.nivelHabilidade}>{skill.level}%</span>
+              </div>
+              <div className={styles.barraHabilidade}>
+                <motion.div
+                  className={styles.preenchimentoHabilidade}
+                  initial={{ width: 0 }}
+                  whileInView={{ width: `${skill.level}%` }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1, delay: 0.2 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                />
+              </div>
+              <span className={styles.categoriaHabilidade}>
+                {t.skills.categories[skill.category]}
+              </span>
+            </motion.div>
+          </GlassSurface>
         ))}
       </div>
 
@@ -53,13 +86,16 @@ export function SecaoHabilidades() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
       >
-        <div className={styles.trilhaTech}>
-          {[...TECH_MARQUEE, ...TECH_MARQUEE].map((tech, i) => (
-            <span key={`${tech}-${i}`} className={styles.itemTech}>
-              {tech}
-            </span>
-          ))}
-        </div>
+        <LogoLoop
+          logos={TECH_LOGOS}
+          speed={55}
+          direction="right"
+          logoHeight={34}
+          gap={38}
+          hoverSpeed={12}
+          scaleOnHover
+          ariaLabel="Tecnologias utilizadas no portfólio"
+        />
       </motion.div>
     </Secao>
   );

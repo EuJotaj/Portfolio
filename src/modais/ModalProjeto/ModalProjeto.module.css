@@ -70,6 +70,39 @@
   flex-wrap: wrap;
 }
 
+.tagCategoria {
+  font-family: var(--font-label);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-sm);
+}
+
+.tagCategoria.profissionais {
+  background: rgba(246, 193, 119, 0.18);
+  border: 1px solid rgba(246, 193, 119, 0.45);
+  color: #f6c177;
+}
+
+.tagCategoria.portfolio {
+  background: var(--color-accent-dim);
+  border: 1px solid rgba(208, 188, 255, 0.45);
+  color: var(--color-accent);
+}
+
+.tagCategoria.estudos {
+  background: rgba(94, 234, 212, 0.18);
+  border: 1px solid rgba(94, 234, 212, 0.45);
+  color: #5eead4;
+}
+
+.separadorMeta {
+  color: var(--color-text-dim);
+  font-size: 0.625rem;
+}
+
 .ano,
 .local {
   font-size: 0.6875rem;
@@ -79,7 +112,7 @@
 }
 
 .ano {
-  color: var(--color-accent-strong);
+  color: var(--color-text-muted);
 }
 
 .local {

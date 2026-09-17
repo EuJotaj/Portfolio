@@ -1,7 +1,7 @@
 .cabecalho {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: var(--space-xl);
+  gap: 4%;
   align-items: end;
   margin-bottom: var(--space-2xl);
 }
@@ -18,21 +18,23 @@
   font-size: clamp(0.9375rem, 1.6vw, 1rem);
   color: var(--color-text-muted);
   line-height: 1.7;
-  max-width: 420px;
+  max-width: 100%;
   justify-self: end;
 }
 
 .layout {
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-  gap: var(--space-xl);
+  gap: 4%;
   align-items: start;
 }
 
 .visualizacao {
   position: relative;
-  width: 100%;
-  max-width: 680px;
+  width: 92%;
+  max-width: 100%;
+  justify-self: center;
+  aspect-ratio: 16 / 10;
   border-radius: var(--radius-lg);
   overflow: hidden;
   background: var(--color-bg-card);
@@ -41,6 +43,7 @@
 
 .carrosselVisualizacao {
   width: 100%;
+  height: 100%;
 }
 
 .sobreposicaoVisualizacao {
@@ -139,13 +142,16 @@
   }
 
   .visualizacao {
-    max-width: 100%;
+    width: 100%;
+    aspect-ratio: 16 / 10;
   }
 }
 
 @media (max-width: 600px) {
   .visualizacao {
+    width: 100%;
     max-width: 100%;
+    aspect-ratio: 4 / 3;
   }
 }
 

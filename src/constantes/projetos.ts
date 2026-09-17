@@ -26,7 +26,7 @@ export interface ProjectBase {
 export const PROJECTS: ProjectBase[] = [
   {
     id: 'fincontrol',
-    category: 'projects',
+    category: 'portfolio',
     images: [...IMAGENS_PROJETOS.fincontrol],
     year: '2026',
     tags: ['Angular', 'Java'],
@@ -37,7 +37,7 @@ export const PROJECTS: ProjectBase[] = [
   },
   {
     id: 'seakalm',
-    category: 'creative',
+    category: 'estudos',
     images: [...IMAGENS_PROJETOS.seakalm],
     year: '2025',
     tags: ['JavaScript (jQuery)', 'HTML5', 'CSS3'],
@@ -48,7 +48,7 @@ export const PROJECTS: ProjectBase[] = [
   },
   {
     id: 'sonorus',
-    category: 'tools',
+    category: 'portfolio',
     images: [...IMAGENS_PROJETOS.sonorus],
     year: '2026',
     tags: ['Python', 'JavaScript (jQuery)', 'HTML5', 'CSS3'],
@@ -59,7 +59,7 @@ export const PROJECTS: ProjectBase[] = [
   },
   {
     id: 'mario',
-    category: 'projects',
+    category: 'estudos',
     images: [...IMAGENS_PROJETOS.mario],
     year: '2026',
     tags: ['JavaScript (jQuery)', 'HTML5', 'CSS3'],
@@ -71,7 +71,7 @@ export const PROJECTS: ProjectBase[] = [
   },
   {
     id: 'omsys',
-    category: 'projects',
+    category: 'profissionais',
     images: [...IMAGENS_PROJETOS.omsys],
     year: '2026',
     tags: ['JavaScript (jQuery)', 'HTML5', 'CSS3'],
@@ -82,7 +82,7 @@ export const PROJECTS: ProjectBase[] = [
   },
   {
     id: 'imip',
-    category: 'projects',
+    category: 'estudos',
     images: [...IMAGENS_PROJETOS.imip],
     year: '2026',
     tags: ['React', 'Flask', 'MySQL'],

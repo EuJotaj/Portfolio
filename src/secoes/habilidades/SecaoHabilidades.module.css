@@ -19,15 +19,11 @@
 
 .cartaoHabilidade {
   padding: var(--space-md);
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  transition: border-color var(--transition-base);
   min-width: 0;
 }
 
-.cartaoHabilidade:hover {
-  border-color: var(--color-accent-dim);
+.conteudoHabilidade {
+  width: 100%;
 }
 
 .cabecalhoHabilidade {
@@ -81,31 +77,6 @@
   overflow: hidden;
   border-top: 1px solid var(--color-border);
   padding-top: var(--space-lg);
-}
-
-.trilhaTech {
-  display: flex;
-  gap: var(--space-xl);
-  animation: scrollTech 40s linear infinite;
-  width: max-content;
-}
-
-.itemTech {
-  font-family: var(--font-display);
-  font-size: clamp(1.25rem, 4vw, 3.5rem);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-text-dim);
-  white-space: nowrap;
-}
-
-@keyframes scrollTech {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
 }
 
 @media (max-width: 600px) {

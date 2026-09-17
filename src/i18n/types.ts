@@ -14,6 +14,14 @@ export interface ExperienceTranslation {
   description: string;
 }
 
+export interface CategoryExplanation {
+  title: string;
+  tag: string;
+  badge: string;
+  description: string;
+  scope: string[];
+}
+
 export interface Translations {
   meta: {
     title: string;
@@ -55,11 +63,22 @@ export interface Translations {
     titleLine1: string;
     titleLine2: string;
     description: string;
+    allProjectsTitle: string;
+    allProjectsSubtitle: string;
+    tooltipAriaLabel: string;
+    whatIsIncluded: string;
+    projectCountSingular: string;
+    projectCountPlural: string;
+    categories: {
+      profissionais: CategoryExplanation;
+      portfolio: CategoryExplanation;
+      estudos: CategoryExplanation;
+    };
     filters: {
       all: string;
-      projects: string;
-      creative: string;
-      tools: string;
+      profissionais: string;
+      portfolio: string;
+      estudos: string;
     };
     clickToExplore: string;
   };

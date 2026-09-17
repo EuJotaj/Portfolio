@@ -1,0 +1,1 @@
+export { IconeCategoria } from './IconeCategoria';

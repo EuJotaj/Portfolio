@@ -1,19 +1,19 @@
-﻿import { motion } from 'framer-motion'
-import { Botao } from '@/componentes/ui/Botao'
-import { FaixaAnimada } from '@/componentes/ui/FaixaAnimada'
-import { SITE } from '@/constantes/site'
-import { MAILTO } from '@/constantes/recursos'
-import { useIdioma } from '@/aplicativo/provedores/ProvedorIdioma'
-import { useModalCurriculo } from '@/aplicativo/provedores/ProvedorModalCurriculo'
-import { rolarParaSecao } from '@/biblioteca/rolarParaSecao'
-import LogoJotaAnimado from './LogoJotaAnimadoAnimated'
-import styles from './SecaoInicio.module.css'
+﻿import { motion } from 'framer-motion';
+import { SpecularButton } from '@/componentes/ui/SpecularButton/SpecularButton';
+import { FaixaAnimada } from '@/componentes/ui/FaixaAnimada';
+import { SITE } from '@/constantes/site';
+import { MAILTO } from '@/constantes/recursos';
+import { useIdioma } from '@/aplicativo/provedores/ProvedorIdioma';
+import { useModalCurriculo } from '@/aplicativo/provedores/ProvedorModalCurriculo';
+import { rolarParaSecao } from '@/biblioteca/rolarParaSecao';
+import LogoJotaAnimado from './LogoJotaAnimadoAnimated';
+import styles from './SecaoInicio.module.css';
 
 export function SecaoInicio() {
-  const { t } = useIdioma()
-  const { abrirCurriculo } = useModalCurriculo()
-  const [firstName, ...lastNameParts] = SITE.name.split(' ')
-  const lastName = lastNameParts.join(' ')
+  const { t } = useIdioma();
+  const { abrirCurriculo } = useModalCurriculo();
+  const [firstName, ...lastNameParts] = SITE.name.split(' ');
+  const lastName = lastNameParts.join(' ');
 
   return (
     <section className={styles.inicio} id="hero">
@@ -45,13 +45,15 @@ export function SecaoInicio() {
           <p className={styles.subtitulo}>{t.hero.role}</p>
 
           <div className={styles.acoes}>
-            <Botao href="#projects">{t.hero.viewProjects}</Botao>
-            <Botao href={MAILTO} variant="outline">
+            <SpecularButton href="#projects" size="md" autoAnimate>
+              {t.hero.viewProjects}
+            </SpecularButton>
+            <SpecularButton href={MAILTO} size="md" autoAnimate>
               {t.hero.contactMe}
-            </Botao>
-            <Botao variant="outline" onClick={abrirCurriculo}>
+            </SpecularButton>
+            <SpecularButton size="md" autoAnimate onClick={abrirCurriculo}>
               {t.hero.viewCv}
-            </Botao>
+            </SpecularButton>
           </div>
         </motion.div>
       </div>
@@ -63,9 +65,9 @@ export function SecaoInicio() {
       <a
         href="#experience"
         className={styles.dicaScroll}
-        onClick={(e) => {
-          e.preventDefault()
-          rolarParaSecao('#experience')
+        onClick={e => {
+          e.preventDefault();
+          rolarParaSecao('#experience');
         }}
       >
         <span>{t.hero.scroll}</span>
@@ -76,5 +78,5 @@ export function SecaoInicio() {
         />
       </a>
     </section>
-  )
+  );
 }

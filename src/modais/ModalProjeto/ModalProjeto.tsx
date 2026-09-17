@@ -1,4 +1,4 @@
-﻿import { useEffect } from 'react';
+import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CarrosselImagens } from '@/componentes/ui/CarrosselImagens';
 import { useModalProjeto } from '@/aplicativo/provedores/ProvedorModalProjeto';
@@ -61,6 +61,10 @@ export function ModalProjeto() {
 
             <div className={styles.corpo}>
               <div className={styles.meta}>
+                <span className={cn(styles.tagCategoria, styles[project.category])}>
+                  {t.gallery.categories[project.category]?.tag ?? project.category}
+                </span>
+                <span className={styles.separadorMeta}>•</span>
                 <span className={styles.ano}>{project.year}</span>
               </div>
               <h2 id="project-modal-title" className={styles.titulo}>
