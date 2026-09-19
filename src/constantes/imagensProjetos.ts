@@ -18,7 +18,7 @@ export const IMAGENS_PROJETOS = {
   sonorus: imagensDoProjeto('sonorus', ['01-capa.webp']),
   mario: imagensDoProjeto('mario', ['01-capa.webp', 'MarioGameOver.webp']),
   omsys: imagensDoProjeto('omsys', [
-    '01-capa.png',
+    '01-capa.webp',
     'OmSysComercial.webp',
     'OmSysServicos.webp',
     'OmSysDocs.webp',
