@@ -2,14 +2,14 @@ import type { SkillItem, SocialLink } from '@/tipos';
 import { LINKS } from './recursos';
 
 export const SKILLS: SkillItem[] = [
-  { id: 's1', name: 'JavaScript', level: 89, category: 'frontend' },
-  { id: 's2', name: 'React', level: 78, category: 'frontend' },
-  { id: 's3', name: 'Angular', level: 80, category: 'frontend' },
-  { id: 's4', name: 'TypeScript', level: 79, category: 'frontend' },
-  { id: 's5', name: 'HTML5 / CSS3', level: 97, category: 'frontend' },
-  { id: 's6', name: 'Python', level: 57, category: 'backend' },
-  { id: 's7', name: 'Tailwind CSS', level: 55, category: 'frontend' },
-  { id: 's8', name: 'Git / GitHub', level: 85, category: 'tools' },
+  { id: 's1', name: 'JavaScript', level: 89, experience: '3+', tagKey: 'javascript', category: 'frontend' },
+  { id: 's2', name: 'React', level: 78, experience: '3+', tagKey: 'react', category: 'frontend' },
+  { id: 's3', name: 'Angular', level: 80, experience: '2+', tagKey: 'angular', category: 'frontend' },
+  { id: 's4', name: 'TypeScript', level: 79, experience: '3+', tagKey: 'typescript', category: 'frontend' },
+  { id: 's5', name: 'HTML5 / CSS3', level: 97, experience: '3+', tagKey: 'htmlCss', category: 'frontend' },
+  { id: 's6', name: 'Python', level: 57, experience: '2+', tagKey: 'python', category: 'backend' },
+  { id: 's7', name: 'Tailwind CSS', level: 55, experience: '1+', tagKey: 'tailwind', category: 'frontend' },
+  { id: 's8', name: 'Git / GitHub', level: 85, experience: '3+', tagKey: 'git', category: 'tools' },
 ];
 
 export const TECH_MARQUEE = [

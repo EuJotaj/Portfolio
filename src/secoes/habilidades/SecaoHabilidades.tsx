@@ -32,12 +32,24 @@ const TECH_LOGOS: LogoItem[] = [
   { node: <SiGithub />, title: 'GitHub' },
 ];
 
+const ICONE_POR_HABILIDADE: Record<string, typeof SiJavascript> = {
+  JavaScript: SiJavascript,
+  React: SiReact,
+  Angular: SiAngular,
+  TypeScript: SiTypescript,
+  'HTML5 / CSS3': SiHtml5,
+  Python: SiPython,
+  'Tailwind CSS': SiTailwindcss,
+  'Git / GitHub': SiGit,
+};
+
 export function SecaoHabilidades() {
   const { t } = useIdioma();
 
   return (
-    <Secao id="stack">
+    <Secao id="stack" className={styles.secaoHabilidades}>
       <div className={styles.cabecalho}>
+        <div className={styles.eyebrow}>Matriz de capacidades</div>
         <TextoDividido
           lines={[t.skills.titleLine1, t.skills.titleLine2]}
           className={styles.tituloDividido}
@@ -45,39 +57,60 @@ export function SecaoHabilidades() {
       </div>
 
       <div className={styles.gradeHabilidades}>
-        {SKILLS.map((skill, i) => (
-          <GlassSurface
-            key={skill.id}
-            className={styles.cartaoHabilidade}
-            borderRadius={14}
-            backgroundOpacity={0.05}
-          >
-            <motion.div
-              className={styles.conteudoHabilidade}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
+        {SKILLS.map((skill, i) => {
+          const topicos = t.skills.tags[skill.tagKey as keyof typeof t.skills.tags] ?? [
+            t.skills.categories[skill.category],
+          ];
+          const Icone = ICONE_POR_HABILIDADE[skill.name];
+
+          return (
+            <GlassSurface
+              key={skill.id}
+              className={styles.cartaoHabilidade}
+              borderRadius={18}
+              backgroundOpacity={0.04}
+              variant="soft"
             >
-              <div className={styles.cabecalhoHabilidade}>
-                <span className={styles.nomeHabilidade}>{skill.name}</span>
-                <span className={styles.nivelHabilidade}>{skill.level}%</span>
-              </div>
-              <div className={styles.barraHabilidade}>
-                <motion.div
-                  className={styles.preenchimentoHabilidade}
-                  initial={{ width: 0 }}
-                  whileInView={{ width: `${skill.level}%` }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1, delay: 0.2 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                />
-              </div>
-              <span className={styles.categoriaHabilidade}>
-                {t.skills.categories[skill.category]}
-              </span>
-            </motion.div>
-          </GlassSurface>
-        ))}
+              <motion.div
+                className={styles.conteudoHabilidade}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: i * 0.06 }}
+              >
+                <div className={styles.cabecalhoHabilidade}>
+                  <span className={styles.etiqueta}>{t.skills.categories[skill.category]}</span>
+                  <span className={styles.nivelHabilidade}>{skill.experience} anos</span>
+                </div>
+
+                <div className={styles.nomeLinha}>
+                  <div className={styles.nomeBloco}>
+                    <span className={styles.nomeHabilidade}>{skill.name}</span>
+                  </div>
+
+                  {Icone && (
+                    <span className={styles.iconeHabilidade} aria-label={skill.name} title={skill.name}>
+                      <Icone />
+                    </span>
+                  )}
+
+                  <span className={styles.statusHabilidade}>
+                    <span className={styles.pontoStatus} />
+                    {t.contact.active}
+                  </span>
+                </div>
+
+                <div className={styles.tagsHabilidade}>
+                  {topicos.map((topico) => (
+                    <span key={`${skill.id}-${topico}`} className={styles.tagItem}>
+                      {topico}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            </GlassSurface>
+          );
+        })}
       </div>
 
       <motion.div

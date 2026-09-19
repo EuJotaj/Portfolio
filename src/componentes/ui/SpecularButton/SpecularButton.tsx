@@ -52,6 +52,9 @@ interface SpecularButtonProps {
   disabled?: boolean;
   onClick?: MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>;
   href?: string;
+  target?: string;
+  rel?: string;
+  'aria-pressed'?: boolean;
   type?: 'button' | 'submit' | 'reset';
   className?: string;
 }
@@ -77,6 +80,9 @@ export function SpecularButton({
   disabled = false,
   onClick,
   href,
+  target,
+  rel,
+  'aria-pressed': ariaPressed,
   type = 'button',
   className = '',
 }: SpecularButtonProps) {
@@ -238,6 +244,9 @@ export function SpecularButton({
           buttonRef.current = node;
         }}
         href={href}
+        target={target}
+        rel={rel}
+        aria-pressed={ariaPressed}
         onClick={onClick as MouseEventHandler<HTMLAnchorElement>}
         className={classes}
         style={style}
@@ -252,6 +261,7 @@ export function SpecularButton({
       }}
       type={type}
       disabled={disabled}
+      aria-pressed={ariaPressed}
       onClick={onClick as MouseEventHandler<HTMLButtonElement>}
       className={classes}
       style={style}

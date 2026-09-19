@@ -44,6 +44,8 @@ export interface SkillItem {
   id: string;
   name: string;
   level: number;
+  experience: '1+' | '2+' | '3+';
+  tagKey: string;
   category: 'frontend' | 'backend' | 'tools';
 }
 

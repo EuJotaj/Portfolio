@@ -8,6 +8,7 @@ import styles from './ModalExplicacaoSecao.module.css';
 interface ModalExplicacaoSecaoProps {
   categoria: ProjectCategory;
   dados: CategoryExplanation;
+  alinhamento?: 'left' | 'center' | 'right';
   rotuloAria?: string;
   rotuloOQueInclui?: string;
   className?: string;
@@ -16,6 +17,7 @@ interface ModalExplicacaoSecaoProps {
 export function ModalExplicacaoSecao({
   categoria,
   dados,
+  alinhamento = 'left',
   rotuloAria = 'Informações sobre a seção',
   rotuloOQueInclui = 'O que você encontra aqui:',
   className = '',
@@ -105,7 +107,7 @@ export function ModalExplicacaoSecao({
             id={tooltipId}
             role="dialog"
             aria-label={dados.title}
-            className={`${styles.miniModal} ${styles[categoria]}`}
+            className={`${styles.miniModal} ${styles[categoria]} ${styles[alinhamento]}`}
             initial={{ opacity: 0, y: 10, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 6, scale: 0.97 }}

@@ -6,6 +6,7 @@ import { FaixaAnimada } from '@/componentes/ui/FaixaAnimada';
 import { ModalExplicacaoSecao } from '@/componentes/ui/ModalExplicacaoSecao';
 import { IconeCategoria } from '@/componentes/ui/IconeCategoria';
 import { GlassSurface } from '@/componentes/ui/GlassSurface/GlassSurface';
+import { SpecularButton } from '@/componentes/ui/SpecularButton/SpecularButton';
 import { Masonry, type MasonryItem } from '@/componentes/ui/Masonry';
 import { useModalProjeto } from '@/aplicativo/provedores/ProvedorModalProjeto';
 import { useIdioma } from '@/aplicativo/provedores/ProvedorIdioma';
@@ -96,22 +97,36 @@ export function SecaoGaleria() {
         </div>
 
         <div className={styles.cardGigante}>
-          <GlassSurface className={styles.barraFiltros} borderRadius={18} backgroundOpacity={0.06}>
+          <GlassSurface
+            className={styles.barraFiltros}
+            variant="soft"
+            borderRadius={28}
+            backgroundOpacity={0.08}
+            blur={10}
+          >
             <div className={styles.barraControle}>
               <div className={styles.filtros}>
                 {filters.map(f => (
-                  <button
+                  <SpecularButton
                     key={f.id}
-                    type="button"
+                    size="sm"
+                    radius={10}
+                    tint="#ffffff"
+                    tintOpacity={0.04}
+                    baseColor={filter === f.id ? '#8e6bd1' : '#525252'}
+                    lineColor={filter === f.id ? '#d4b8ff' : '#ffffff'}
+                    textColor={filter === f.id ? '#0e0e0e' : 'var(--color-text-muted)'}
+                    autoAnimate={filter === f.id}
                     className={`${styles.botaoFiltro} ${filter === f.id ? styles.ativo : ''} ${
                       f.id !== 'all' ? styles[f.id] : ''
                     }`}
                     onClick={() => setFilter(f.id)}
+                    aria-pressed={filter === f.id}
                   >
                     <IconeCategoria categoria={f.id} size={15} className={styles.iconeFiltro} />
                     <span>{f.label}</span>
                     <span className={styles.badgeContador}>{f.count}</span>
-                  </button>
+                  </SpecularButton>
                 ))}
               </div>
 
@@ -127,6 +142,7 @@ export function SecaoGaleria() {
                         <ModalExplicacaoSecao
                           categoria={cat}
                           dados={t.gallery.categories[cat]}
+                          alinhamento={cat === 'portfolio' ? 'center' : cat === 'estudos' ? 'right' : 'left'}
                           rotuloAria={t.gallery.tooltipAriaLabel}
                           rotuloOQueInclui={t.gallery.whatIsIncluded}
                         />

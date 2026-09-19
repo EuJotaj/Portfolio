@@ -33,12 +33,25 @@
 }
 
 .barraFiltros {
+  position: relative;
+  z-index: 20;
   margin-bottom: 1.5rem;
-  padding: 0.35rem;
+  padding: 0.5rem;
+  overflow: visible;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02) 38%, rgba(132, 86, 255, 0.08)),
+    rgba(13, 11, 22, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.04),
+    0 20px 40px rgba(8, 6, 16, 0.26);
 }
 
 /* Barra de Controles e Filtros */
 .barraControle {
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -54,22 +67,11 @@
 }
 
 .botaoFiltro {
-  display: inline-flex;
-  align-items: center;
   gap: 0.5rem;
-  padding: 0.5625rem 1rem;
+  padding: 0.72rem 1rem;
   font-family: var(--font-label);
   font-size: clamp(0.6875rem, 1.4vw, 0.75rem);
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-text-muted);
-  background: rgba(255, 255, 255, 0.035);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  transition: all var(--transition-base);
   white-space: nowrap;
-  cursor: pointer;
 }
 
 .iconeFiltro {
@@ -92,15 +94,11 @@
 }
 
 .botaoFiltro:hover {
-  border-color: rgba(255, 255, 255, 0.22);
-  color: var(--color-text);
-  background: rgba(255, 255, 255, 0.06);
   transform: translateY(-1px);
 }
 
 .botaoFiltro.ativo {
   background: var(--color-accent-strong);
-  border-color: var(--color-accent-strong);
   color: #0e0e0e;
   box-shadow: 0 4px 16px var(--color-accent-dim);
 }
@@ -112,6 +110,8 @@
 
 /* Atalhos de Ajuda no modo Todos */
 .ajudaCategorias {
+  position: relative;
+  z-index: 3;
   display: inline-flex;
   align-items: center;
   gap: 0.625rem;

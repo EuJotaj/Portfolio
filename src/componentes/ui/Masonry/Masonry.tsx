@@ -1,4 +1,11 @@
-import { useEffect, useLayoutEffect, useMemo, useRef, useState, type MouseEvent } from 'react';
+import {
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+  type MouseEvent,
+} from 'react';
 import { gsap } from 'gsap';
 import { useIdioma } from '@/aplicativo/provedores/ProvedorIdioma';
 import type { GalleryItem } from '@/tipos';
@@ -91,7 +98,6 @@ export function Masonry({
   const [containerRef, { width }] = useMeasure();
   const [imagesReady, setImagesReady] = useState(false);
   const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
-  const [indicesFotos, setIndicesFotos] = useState<Record<string, number>>({});
 
   // 2 colunas amplas para telas >= 850px, 1 coluna em telas menores para fotos grandes
   const columns = useMedia<number>(['(min-width: 850px)'], [2], 1);
@@ -105,7 +111,7 @@ export function Masonry({
     if (!width || items.length === 0) return { grid: [], totalHeight: 0 };
 
     const colHeights = new Array(columns).fill(0);
-    const gap = width * 0.018;
+    const gap = 20;
     const totalGaps = (columns - 1) * gap;
     const columnWidth = Math.max(0, (width - totalGaps) / columns);
 
@@ -113,10 +119,11 @@ export function Masonry({
       const col = colHeights.indexOf(Math.min(...colHeights));
       const x = col * (columnWidth + gap);
 
-      // Proporção widescreen 16:10: os metadados vivem sobre a imagem.
-      const imageHeight = columnWidth * 0.625;
+      // Proporção widescreen 16:10 para a imagem + bloco de metadados
+      const imageHeight = columnWidth * 0.62;
+      const infoHeight = 150;
       const multiplier = child.heightMultiplier ?? 1;
-      const height = Math.round(imageHeight * multiplier);
+      const height = Math.round((imageHeight + infoHeight) * multiplier);
 
       const y = colHeights[col];
       colHeights[col] += height + gap;
@@ -164,61 +171,52 @@ export function Masonry({
     }
   };
 
+  const hasMounted = useRef(false);
+
   useLayoutEffect(() => {
     if (!imagesReady || grid.length === 0) return;
 
-    const elements = grid
-      .map(item => document.querySelector<HTMLElement>(`[data-key="${item.id}"]`))
-      .filter((element): element is HTMLElement => Boolean(element));
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    elements.forEach((element, index) => {
-      const item = grid[index];
-      const initialPos = getInitialPosition(item);
-
-      gsap.set(element, {
-        opacity: prefersReducedMotion ? 1 : 0,
-        x: prefersReducedMotion ? item.x : initialPos.x,
-        y: prefersReducedMotion ? item.y : initialPos.y,
+    grid.forEach((item, index) => {
+      const selector = `[data-key="${item.id}"]`;
+      const animationProps = {
+        x: item.x,
+        y: item.y,
         width: item.w,
         height: item.h,
-        ...(blurToFocus && { filter: prefersReducedMotion ? 'blur(0px)' : 'blur(10px)' }),
-      });
+      };
+
+      if (!hasMounted.current) {
+        const initialPos = getInitialPosition(item);
+        const initialState = {
+          opacity: 0,
+          x: initialPos.x,
+          y: initialPos.y,
+          width: item.w,
+          height: item.h,
+          ...(blurToFocus && { filter: 'blur(10px)' }),
+        };
+
+        gsap.fromTo(selector, initialState, {
+          opacity: 1,
+          ...animationProps,
+          ...(blurToFocus && { filter: 'blur(0px)' }),
+          duration: 0.75,
+          ease: 'power3.out',
+          delay: index * stagger,
+        });
+      } else {
+        gsap.to(selector, {
+          opacity: 1,
+          ...animationProps,
+          ...(blurToFocus && { filter: 'blur(0px)' }),
+          duration,
+          ease,
+          overwrite: 'auto',
+        });
+      }
     });
 
-    if (prefersReducedMotion) return;
-
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-
-          const element = entry.target as HTMLElement;
-          const item = grid.find(candidate => candidate.id === element.dataset.key);
-          if (!item) return;
-
-          gsap.to(element, {
-            opacity: 1,
-            x: item.x,
-            y: item.y,
-            ...(blurToFocus && { filter: 'blur(0px)' }),
-            duration: Math.max(duration, 0.7),
-            ease,
-            delay: (item.y / Math.max(item.h, 1)) * stagger * 0.35,
-            overwrite: 'auto',
-          });
-          observer.unobserve(element);
-        });
-      },
-      { rootMargin: '0px 0px -12% 0px', threshold: 0.12 }
-    );
-
-    elements.forEach(element => observer.observe(element));
-
-    return () => {
-      observer.disconnect();
-      elements.forEach(element => gsap.killTweensOf(element));
-    };
+    hasMounted.current = true;
   }, [grid, imagesReady, stagger, animateFrom, blurToFocus, duration, ease]);
 
   const handleMouseEnter = (e: MouseEvent<HTMLDivElement>, item: MasonryItem) => {
@@ -267,20 +265,6 @@ export function Masonry({
     }
   };
 
-  const mudarFoto = (id: string, delta: number, total: number, e: MouseEvent) => {
-    e.stopPropagation();
-    setIndicesFotos(prev => {
-      const atual = prev[id] ?? 0;
-      const proximo = (atual + delta + total) % total;
-      return { ...prev, [id]: proximo };
-    });
-  };
-
-  const selecionarFoto = (id: string, index: number, e: MouseEvent) => {
-    e.stopPropagation();
-    setIndicesFotos(prev => ({ ...prev, [id]: index }));
-  };
-
   return (
     <div
       ref={containerRef}
@@ -290,10 +274,6 @@ export function Masonry({
       {grid.map(item => {
         const isHovered = hoveredCardId === item.id;
         const categoriaTag = t.gallery.categories[item.category]?.tag ?? item.category;
-        const fotos = item.images && item.images.length > 0 ? item.images : [item.image];
-        const fotoIndex = indicesFotos[item.id] ?? 0;
-        const fotoAtual = fotos[fotoIndex] ?? item.image;
-        const totalFotos = fotos.length;
 
         return (
           <div
@@ -314,12 +294,15 @@ export function Masonry({
             }}
           >
             <div className={styles.cardCorpo}>
-              <div className={styles.envoltorioImagem} style={{ height: item.imageHeight }}>
+              {/* Imagem Widescreen com Suporte a Hover Preview */}
+              <div
+                className={styles.envoltorioImagem}
+                style={{ height: item.imageHeight }}
+              >
                 <img
-                  key={`${item.id}-${fotoIndex}`}
-                  src={fotoAtual}
+                  src={item.image}
                   alt={item.title}
-                  className={`${styles.imagemBase} ${styles.imagemTrocaFoto} ${
+                  className={`${styles.imagemBase} ${
                     isHovered && item.hoverImage && item.hoverImage !== item.image
                       ? styles.imagemOculta
                       : ''
@@ -336,101 +319,42 @@ export function Masonry({
                   />
                 )}
 
-                {totalFotos > 1 && (
-                  <>
-                    <button
-                      type="button"
-                      className={`${styles.botaoNavFoto} ${styles.botaoNavEsquerda}`}
-                      onClick={e => mudarFoto(item.id, -1, totalFotos, e)}
-                      aria-label="Foto anterior"
-                    >
-                      <svg
-                        width="14"
-                        height="14"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        aria-hidden="true"
-                      >
-                        <polyline points="15 18 9 12 15 6" />
-                      </svg>
-                    </button>
-
-                    <button
-                      type="button"
-                      className={`${styles.botaoNavFoto} ${styles.botaoNavDireita}`}
-                      onClick={e => mudarFoto(item.id, 1, totalFotos, e)}
-                      aria-label="Próxima foto"
-                    >
-                      <svg
-                        width="14"
-                        height="14"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        aria-hidden="true"
-                      >
-                        <polyline points="9 18 15 12 9 6" />
-                      </svg>
-                    </button>
-
-                    <div className={styles.indicadorPontos}>
-                      {fotos.map((_, idx) => (
-                        <button
-                          key={idx}
-                          type="button"
-                          className={`${styles.pontoFoto} ${
-                            idx === fotoIndex ? styles.pontoFotoAtivo : ''
-                          }`}
-                          onClick={e => selecionarFoto(item.id, idx, e)}
-                          aria-label={`Ver foto ${idx + 1}`}
-                        />
-                      ))}
-                    </div>
-
-                    <div className={styles.badgeQtdFotos}>
-                      {fotoIndex + 1} / {totalFotos}
-                    </div>
-                  </>
-                )}
-
+                {/* Badge da Categoria no topo da foto */}
                 <div className={`${styles.badgeCategoria} ${styles[item.category]}`}>
                   {categoriaTag}
                 </div>
 
+                {/* Ano de Lançamento */}
                 <div className={styles.badgeAno}>{item.year}</div>
 
+                {/* Efeito Color Shift / Glow no Hover */}
                 {colorShiftOnHover && (
                   <div className={`${styles.colorOverlay} ${styles[item.category]}`} />
                 )}
+              </div>
 
-                <div className={styles.info}>
-                  <div className={styles.metaLinha}>
-                    <span className={`${styles.categoriaTexto} ${styles[item.category]}`}>
-                      {categoriaTag}
-                    </span>
-                    <span className={styles.divisorPonto}>•</span>
-                    <span className={styles.anoTexto}>{item.year}</span>
-                  </div>
-
-                  <h4 className={styles.titulo}>{item.title}</h4>
-
-                  {item.tags.length > 0 && (
-                    <div className={styles.etiquetas}>
-                      {item.tags.slice(0, 4).map(tag => (
-                        <span key={tag} className={styles.etiqueta}>
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  )}
+              {/* Informações do Projeto */}
+              <div className={styles.info}>
+                <div className={styles.metaLinha}>
+                  <span className={`${styles.categoriaTexto} ${styles[item.category]}`}>
+                    {categoriaTag}
+                  </span>
+                  <span className={styles.divisorPonto}>•</span>
+                  <span className={styles.anoTexto}>{item.year}</span>
                 </div>
+
+                <h4 className={styles.titulo}>{item.title}</h4>
+                <p className={styles.descricao}>{item.shortDescription}</p>
+
+                {item.tags.length > 0 && (
+                  <div className={styles.etiquetas}>
+                    {item.tags.slice(0, 4).map(tag => (
+                      <span key={tag} className={styles.etiqueta}>
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -439,3 +363,4 @@ export function Masonry({
     </div>
   );
 }
+

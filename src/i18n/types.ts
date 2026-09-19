@@ -95,6 +95,16 @@ export interface Translations {
       backend: string;
       tools: string;
     };
+    tags: {
+      javascript: string[];
+      react: string[];
+      angular: string[];
+      typescript: string[];
+      htmlCss: string[];
+      python: string[];
+      tailwind: string[];
+      git: string[];
+    };
   };
   contact: {
     eyebrow: string;
@@ -106,6 +116,8 @@ export interface Translations {
     viewProjects: string;
     downloadCv: string;
     socialTitle: string;
+    active: string;
+    directEmail?: string;
   };
   footer: {
     tagline: string;
