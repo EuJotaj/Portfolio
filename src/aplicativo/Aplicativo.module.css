@@ -1,7 +1,7 @@
 .aplicativo {
   position: relative;
   min-height: 100vh;
-  background: var(--color-bg, #131313);
+  background: transparent;
 }
 
 .aplicativo main {

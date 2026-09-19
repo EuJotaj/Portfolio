@@ -65,12 +65,39 @@ export function TelaCarregamento({ onComplete }: PreloaderProps) {
 }
 
 export function EnvoltorioTelaCarregamento({ children }: { children: ReactNode }) {
-  const [loaded, setLoaded] = useState(false);
+  const [preloaderFinished, setPreloaderFinished] = useState(false);
+  const [documentLoaded, setDocumentLoaded] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const markDocumentLoaded = async () => {
+      // Aguarda as fontes antes de montar o canvas, evitando uma nova
+      // medição/layout enquanto o fundo WebGL está sendo inicializado.
+      await document.fonts?.ready;
+      if (!cancelled) setDocumentLoaded(true);
+    };
+
+    if (document.readyState === 'complete') {
+      void markDocumentLoaded();
+    } else {
+      window.addEventListener('load', markDocumentLoaded, { once: true });
+    }
+
+    return () => {
+      cancelled = true;
+      window.removeEventListener('load', markDocumentLoaded);
+    };
+  }, []);
+
+  const loaded = preloaderFinished && documentLoaded;
 
   return (
     <>
       <AnimatePresence mode="wait">
-        {!loaded && <TelaCarregamento key="preloader" onComplete={() => setLoaded(true)} />}
+        {!loaded && (
+          <TelaCarregamento key="preloader" onComplete={() => setPreloaderFinished(true)} />
+        )}
       </AnimatePresence>
       {loaded && children}
     </>

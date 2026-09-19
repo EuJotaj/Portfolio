@@ -6,8 +6,17 @@
   pointer-events: none;
   min-height: 100svh;
   min-height: 100dvh;
-  background: var(--color-bg, #131313);
+  background:
+    radial-gradient(circle at 18% 18%, rgba(160, 120, 255, 0.16), transparent 34%),
+    radial-gradient(circle at 82% 76%, rgba(76, 215, 246, 0.08), transparent 30%), #131313;
   isolation: isolate;
+}
+
+.camadaFallback {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: #131313;
 }
 
 @media (max-width: 600px) {

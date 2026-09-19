@@ -31,7 +31,7 @@ html {
 
 body {
   font-family: var(--font-body);
-  background-color: var(--color-bg);
+  background-color: #131313;
   color: var(--color-text);
   line-height: 1.6;
   overflow-x: hidden;
@@ -41,6 +41,7 @@ body {
 #root {
   min-height: 100vh;
   overflow-x: clip;
+  background-color: #131313;
 }
 
 a {

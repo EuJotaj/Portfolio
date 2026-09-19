@@ -119,7 +119,9 @@ export function SpecularButton({
     const button = buttonRef.current;
     const effect = effectRef.current;
     if (!button || !effect) return;
-    const dpr = window.devicePixelRatio || 1;
+    // Em telas touch o efeito é ocultado por CSS; não crie um contexto WebGL extra.
+    if (window.innerWidth <= 768 || window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
     let renderer: Renderer;
     try {
       renderer = new Renderer({ alpha: true, premultipliedAlpha: true, antialias: true, dpr });

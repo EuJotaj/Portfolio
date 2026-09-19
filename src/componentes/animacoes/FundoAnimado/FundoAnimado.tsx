@@ -31,7 +31,11 @@ type FundoAnimadoProps = {
 const hexToRgb = (hex: string): [number, number, number] => {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   if (!result) return [1, 1, 1];
-  return [parseInt(result[1], 16) / 255, parseInt(result[2], 16) / 255, parseInt(result[3], 16) / 255];
+  return [
+    parseInt(result[1], 16) / 255,
+    parseInt(result[2], 16) / 255,
+    parseInt(result[3], 16) / 255,
+  ];
 };
 
 const colorModeToFloat = (mode: FundoAnimadoProps['colorMode']) => {
@@ -42,6 +46,15 @@ const colorModeToFloat = (mode: FundoAnimadoProps['colorMode']) => {
 
 const vertex = `#version 300 es
 in vec2 position;
+void main() {
+  gl_Position = vec4(position, 0.0, 1.0);
+}
+`;
+
+// Alguns navegadores móveis ainda não expõem WebGL2, embora suportem WebGL1.
+// O shader mantém a mesma aparência nos dois contextos.
+const vertexWebGL1 = `
+attribute vec2 position;
 void main() {
   gl_Position = vec4(position, 0.0, 1.0);
 }
@@ -162,15 +175,17 @@ void main() {
   outColor = clamp(outColor, 0.0, 1.0);
 
   float a = clamp(outAlpha, 0.0, 1.0) * uOpacity;
-  if (uLightMode > 0.5) {
-    float peak = max(outColor.r, max(outColor.g, outColor.b));
-    vec3 chroma = pow(clamp(outColor / max(peak, 0.0001), 0.0, 1.0), vec3(1.18));
-    fragColor = vec4(mix(vec3(1.0), chroma, a * 0.94), 1.0);
-  } else {
-    fragColor = vec4(outColor * a, a);
-  }
+  // O fundo do portfólio é sempre escuro. Manter a saída alfa aqui evita que
+  // um contexto móvel parcialmente inicializado pinte o canvas inteiro de branco.
+  fragColor = vec4(outColor * a, a);
 }
 `;
+
+const fragmentWebGL1 = `#extension GL_OES_standard_derivatives : enable
+${fragment
+  .replace('#version 300 es\n', '')
+  .replace('out vec4 fragColor;', '')
+  .replace(/\bfragColor\b/g, 'gl_FragColor')}`;
 
 const ctxMap = new WeakMap<HTMLDivElement, { renderer: Renderer; program: Program; mesh: Mesh }>();
 
@@ -178,7 +193,7 @@ const CTRL_INDICES = [
   [1, -2, 3, -4],
   [9, -8, 7, -6],
   [5, 2, 5, -5],
-  [-1, -3, 8, 9]
+  [-1, -3, 8, 9],
 ];
 
 export function FundoAnimado({
@@ -204,7 +219,7 @@ export function FundoAnimado({
   mouseRadius = 0.3,
   mouseStrength = 0.35,
   lightMode = false,
-  className = ''
+  className = '',
 }: FundoAnimadoProps = {}) {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -212,192 +227,242 @@ export function FundoAnimado({
     const container = containerRef.current;
     if (!container) return;
 
-    let renderer: Renderer;
-    try {
-      renderer = new Renderer({
-        webgl: 2,
-        alpha: true,
-        premultipliedAlpha: true,
-        antialias: false,
-        dpr: Math.min(window.devicePixelRatio || 1, window.innerWidth <= 600 ? 1.5 : 2)
-      });
-    } catch {
-      return;
-    }
+    let cancelled = false;
+    let cleanupInitialization: (() => void) | undefined;
 
-    const gl = renderer.gl;
-    gl.clearColor(0, 0, 0, 0);
-    const canvas = gl.canvas as HTMLCanvasElement;
-    canvas.style.width = '100%';
-    canvas.style.height = '100%';
-    canvas.style.display = 'block';
-    container.appendChild(canvas);
+    const initialize = () => {
+      if (cancelled) return;
 
-    const geometry = new Triangle(gl);
-    const program = new Program(gl, {
-      vertex,
-      fragment,
-      uniforms: {
-        iTime: { value: 0 },
-        iResolution: { value: new Float32Array([1, 1]) },
-        uSpeed: { value: speed },
-        uMorphAmount: { value: morphAmount },
-        uMorphSpeed: { value: morphSpeed },
-        uBands: { value: bands },
-        uThickness: { value: thickness },
-        uScale: { value: scale },
-        uPixelSize: { value: pixelSize },
-        uGlow: { value: glow },
-        uColorMode: { value: colorModeToFloat(colorMode) },
-        uContrast: { value: contrast },
-        uBrightness: { value: brightness },
-        uFillBands: { value: fillBands ? 1.0 : 0.0 },
-        uOpacity: { value: opacity },
-        uLightMode: { value: lightMode ? 1.0 : 0.0 },
-        uGrain: { value: grain ? 1.0 : 0.0 },
-        uGrainIntensity: { value: grainIntensity },
-        uLow: { value: new Float32Array(hexToRgb(lowColor)) },
-        uMid: { value: new Float32Array(hexToRgb(midColor)) },
-        uHigh: { value: new Float32Array(hexToRgb(highColor)) },
-        uMouse: { value: new Float32Array([0.5, 0.5]) },
-        uMouseEnabled: { value: mouseInteraction ? 1.0 : 0.0 },
-        uMouseRadius: { value: mouseRadius },
-        uMouseStrength: { value: mouseStrength },
-        uMouseActive: { value: 0.0 },
-        uCtrlA: { value: new Float32Array([0, 0, 0, 0]) },
-        uCtrlB: { value: new Float32Array([0, 0, 0, 0]) },
-        uCtrlC: { value: new Float32Array([0, 0, 0, 0]) },
-        uCtrlD: { value: new Float32Array([0, 0, 0, 0]) }
-      }
-    });
-
-    const mesh = new Mesh(gl, { geometry, program });
-    ctxMap.set(container, { renderer, program, mesh });
-
-    const setSize = () => {
-      const rect = container.getBoundingClientRect();
-      const width = Math.max(1, Math.floor(rect.width));
-      const height = Math.max(1, Math.floor(rect.height));
-      renderer.setSize(width, height);
-      const res = program.uniforms.iResolution.value as Float32Array;
-      res[0] = gl.drawingBufferWidth;
-      res[1] = gl.drawingBufferHeight;
-      renderer.render({ scene: mesh });
-    };
-
-    const ro = new ResizeObserver(setSize);
-    ro.observe(container);
-    const viewport = window.visualViewport;
-    viewport?.addEventListener('resize', setSize);
-    window.addEventListener('orientationchange', setSize);
-    setSize();
-
-    const currentMouse = [0.5, 0.5];
-    const targetMouse = [0.5, 0.5];
-    let mouseActive = 0;
-    let mouseActiveTarget = 0;
-
-    const onMouseMove = (event: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      targetMouse[0] = (event.clientX - rect.left) / rect.width;
-      targetMouse[1] = 1.0 - (event.clientY - rect.top) / rect.height;
-      mouseActiveTarget = 1;
-    };
-
-    const onMouseLeave = () => {
-      mouseActiveTarget = 0;
-    };
-
-    window.addEventListener('mousemove', onMouseMove);
-    window.addEventListener('mouseout', onMouseLeave);
-
-    const ctrlArrays = [
-      program.uniforms.uCtrlA.value as Float32Array,
-      program.uniforms.uCtrlB.value as Float32Array,
-      program.uniforms.uCtrlC.value as Float32Array,
-      program.uniforms.uCtrlD.value as Float32Array
-    ];
-
-    let raf = 0;
-    let isVisible = true;
-    let isPageVisible = !document.hidden;
-    const t0 = performance.now();
-
-    const loop = (t: number) => {
-      const time = (t - t0) * 0.001;
-      const u = program.uniforms as any;
-      u.iTime.value = time;
-
-      const ma = u.uMorphAmount.value;
-      const sp = u.uSpeed?.value ?? 0.35;
-      const msp = u.uMorphSpeed?.value ?? 0.05;
-
-      for (let g = 0; g < 4; g += 1) {
-        const arr = ctrlArrays[g];
-        const idx = CTRL_INDICES[g];
-        for (let j = 0; j < 4; j += 1) {
-          const i = idx[j];
-          arr[j] = ma * Math.sin(time * sp * Math.sin(i * msp) + i);
+      let renderer: Renderer;
+      let isWebGL2 = true;
+      const isMobileViewport =
+        window.innerWidth <= 768 ||
+        window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+      const dpr = Math.min(window.devicePixelRatio || 1, isMobileViewport ? 1 : 2);
+      try {
+        renderer = new Renderer({
+          webgl: 2,
+          alpha: true,
+          premultipliedAlpha: true,
+          antialias: false,
+          dpr,
+        });
+      } catch {
+        // WebGL2 pode falhar em Safari/iOS, WebViews e em visualizadores que
+        // exibem vários dispositivos ao mesmo tempo. Tente o contexto amplo.
+        try {
+          isWebGL2 = false;
+          renderer = new Renderer({
+            webgl: 1,
+            alpha: true,
+            premultipliedAlpha: true,
+            antialias: false,
+            dpr,
+          });
+        } catch {
+          // O fundo CSS continua visível como fallback quando WebGL não existe.
+          return;
         }
       }
 
-      currentMouse[0] += 0.05 * (targetMouse[0] - currentMouse[0]);
-      currentMouse[1] += 0.05 * (targetMouse[1] - currentMouse[1]);
-      u.uMouse.value[0] = currentMouse[0];
-      u.uMouse.value[1] = currentMouse[1];
+      const gl = renderer.gl;
+      gl.clearColor(0, 0, 0, 0);
+      const canvas = gl.canvas as HTMLCanvasElement;
+      canvas.style.width = '100%';
+      canvas.style.height = '100%';
+      canvas.style.display = 'block';
+      container.appendChild(canvas);
 
-      mouseActive += 0.05 * (mouseActiveTarget - mouseActive);
-      u.uMouseActive.value = mouseActive;
+      const onContextLost = (event: Event) => {
+        event.preventDefault();
+        // Deixe a camada base assumir sem exibir um canvas parcialmente pintado.
+        canvas.style.display = 'none';
+      };
+      canvas.addEventListener('webglcontextlost', onContextLost, false);
 
-      renderer.render({ scene: mesh });
-      raf = requestAnimationFrame(loop);
-    };
-
-    const tryStart = () => {
-      if (isVisible && isPageVisible && raf === 0) raf = requestAnimationFrame(loop);
-    };
-
-    const tryStop = () => {
-      if (raf !== 0) {
-        cancelAnimationFrame(raf);
-        raf = 0;
+      const geometry = new Triangle(gl);
+      let program: Program;
+      try {
+        program = new Program(gl, {
+          vertex: isWebGL2 ? vertex : vertexWebGL1,
+          fragment: isWebGL2 ? fragment : fragmentWebGL1,
+          uniforms: {
+            iTime: { value: 0 },
+            iResolution: { value: new Float32Array([1, 1]) },
+            uSpeed: { value: speed },
+            uMorphAmount: { value: morphAmount },
+            uMorphSpeed: { value: morphSpeed },
+            uBands: { value: bands },
+            uThickness: { value: thickness },
+            uScale: { value: scale },
+            uPixelSize: { value: pixelSize },
+            uGlow: { value: glow },
+            uColorMode: { value: colorModeToFloat(colorMode) },
+            uContrast: { value: contrast },
+            uBrightness: { value: brightness },
+            uFillBands: { value: fillBands ? 1.0 : 0.0 },
+            uOpacity: { value: opacity },
+            uLightMode: { value: lightMode ? 1.0 : 0.0 },
+            uGrain: { value: grain ? 1.0 : 0.0 },
+            uGrainIntensity: { value: grainIntensity },
+            uLow: { value: new Float32Array(hexToRgb(lowColor)) },
+            uMid: { value: new Float32Array(hexToRgb(midColor)) },
+            uHigh: { value: new Float32Array(hexToRgb(highColor)) },
+            uMouse: { value: new Float32Array([0.5, 0.5]) },
+            uMouseEnabled: { value: mouseInteraction ? 1.0 : 0.0 },
+            uMouseRadius: { value: mouseRadius },
+            uMouseStrength: { value: mouseStrength },
+            uMouseActive: { value: 0.0 },
+            uCtrlA: { value: new Float32Array([0, 0, 0, 0]) },
+            uCtrlB: { value: new Float32Array([0, 0, 0, 0]) },
+            uCtrlC: { value: new Float32Array([0, 0, 0, 0]) },
+            uCtrlD: { value: new Float32Array([0, 0, 0, 0]) },
+          },
+        });
+      } catch {
+        gl.getExtension('WEBGL_lose_context')?.loseContext();
+        return;
       }
+
+      const mesh = new Mesh(gl, { geometry, program });
+      ctxMap.set(container, { renderer, program, mesh });
+
+      const setSize = () => {
+        const rect = container.getBoundingClientRect();
+        const width = Math.max(1, Math.floor(rect.width));
+        const height = Math.max(1, Math.floor(rect.height));
+        renderer.setSize(width, height);
+        const res = program.uniforms.iResolution.value as Float32Array;
+        res[0] = gl.drawingBufferWidth;
+        res[1] = gl.drawingBufferHeight;
+        renderer.render({ scene: mesh });
+      };
+
+      const ro = new ResizeObserver(setSize);
+      ro.observe(container);
+      const viewport = window.visualViewport;
+      viewport?.addEventListener('resize', setSize);
+      window.addEventListener('orientationchange', setSize);
+      setSize();
+
+      const currentMouse = [0.5, 0.5];
+      const targetMouse = [0.5, 0.5];
+      let mouseActive = 0;
+      let mouseActiveTarget = 0;
+
+      const onMouseMove = (event: MouseEvent) => {
+        const rect = canvas.getBoundingClientRect();
+        targetMouse[0] = (event.clientX - rect.left) / rect.width;
+        targetMouse[1] = 1.0 - (event.clientY - rect.top) / rect.height;
+        mouseActiveTarget = 1;
+      };
+
+      const onMouseLeave = () => {
+        mouseActiveTarget = 0;
+      };
+
+      window.addEventListener('mousemove', onMouseMove);
+      window.addEventListener('mouseout', onMouseLeave);
+
+      const ctrlArrays = [
+        program.uniforms.uCtrlA.value as Float32Array,
+        program.uniforms.uCtrlB.value as Float32Array,
+        program.uniforms.uCtrlC.value as Float32Array,
+        program.uniforms.uCtrlD.value as Float32Array,
+      ];
+
+      let raf = 0;
+      let isVisible = true;
+      let isPageVisible = !document.hidden;
+      const t0 = performance.now();
+
+      const loop = (t: number) => {
+        const time = (t - t0) * 0.001;
+        const u = program.uniforms as any;
+        u.iTime.value = time;
+
+        const ma = u.uMorphAmount.value;
+        const sp = u.uSpeed?.value ?? 0.35;
+        const msp = u.uMorphSpeed?.value ?? 0.05;
+
+        for (let g = 0; g < 4; g += 1) {
+          const arr = ctrlArrays[g];
+          const idx = CTRL_INDICES[g];
+          for (let j = 0; j < 4; j += 1) {
+            const i = idx[j];
+            arr[j] = ma * Math.sin(time * sp * Math.sin(i * msp) + i);
+          }
+        }
+
+        currentMouse[0] += 0.05 * (targetMouse[0] - currentMouse[0]);
+        currentMouse[1] += 0.05 * (targetMouse[1] - currentMouse[1]);
+        u.uMouse.value[0] = currentMouse[0];
+        u.uMouse.value[1] = currentMouse[1];
+
+        mouseActive += 0.05 * (mouseActiveTarget - mouseActive);
+        u.uMouseActive.value = mouseActive;
+
+        renderer.render({ scene: mesh });
+        raf = requestAnimationFrame(loop);
+      };
+
+      const tryStart = () => {
+        if (isVisible && isPageVisible && raf === 0) raf = requestAnimationFrame(loop);
+      };
+
+      const tryStop = () => {
+        if (raf !== 0) {
+          cancelAnimationFrame(raf);
+          raf = 0;
+        }
+      };
+
+      const io = new IntersectionObserver(
+        ([entry]) => {
+          isVisible = entry.isIntersecting;
+          isVisible ? tryStart() : tryStop();
+        },
+        { threshold: 0 }
+      );
+
+      io.observe(container);
+
+      const onVisibility = () => {
+        isPageVisible = !document.hidden;
+        isPageVisible ? tryStart() : tryStop();
+      };
+
+      document.addEventListener('visibilitychange', onVisibility);
+      tryStart();
+
+      cleanupInitialization = () => {
+        tryStop();
+        ro.disconnect();
+        viewport?.removeEventListener('resize', setSize);
+        window.removeEventListener('orientationchange', setSize);
+        io.disconnect();
+        document.removeEventListener('visibilitychange', onVisibility);
+        window.removeEventListener('mousemove', onMouseMove);
+        window.removeEventListener('mouseout', onMouseLeave);
+        canvas.removeEventListener('webglcontextlost', onContextLost);
+        ctxMap.delete(container);
+        try {
+          container.removeChild(canvas);
+        } catch {
+          // ignore
+        }
+        gl.getExtension('WEBGL_lose_context')?.loseContext();
+      };
     };
 
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        isVisible = entry.isIntersecting;
-        isVisible ? tryStart() : tryStop();
-      },
-      { threshold: 0 }
-    );
-
-    io.observe(container);
-
-    const onVisibility = () => {
-      isPageVisible = !document.hidden;
-      isPageVisible ? tryStart() : tryStop();
-    };
-
-    document.addEventListener('visibilitychange', onVisibility);
-    tryStart();
+    // Adia a criação do contexto para que o primeiro ciclo de montagem do
+    // React StrictMode seja cancelado antes de alocar WebGL no mobile.
+    const initializationTimer = window.setTimeout(initialize, 0);
 
     return () => {
-      tryStop();
-      ro.disconnect();
-      viewport?.removeEventListener('resize', setSize);
-      window.removeEventListener('orientationchange', setSize);
-      io.disconnect();
-      document.removeEventListener('visibilitychange', onVisibility);
-      window.removeEventListener('mousemove', onMouseMove);
-      window.removeEventListener('mouseout', onMouseLeave);
-      ctxMap.delete(container);
-      try {
-        container.removeChild(canvas);
-      } catch {
-        // ignore
-      }
-      gl.getExtension('WEBGL_lose_context')?.loseContext();
+      cancelled = true;
+      window.clearTimeout(initializationTimer);
+      cleanupInitialization?.();
     };
   }, [
     bands,
@@ -422,10 +487,14 @@ export function FundoAnimado({
     pixelSize,
     scale,
     speed,
-    thickness
+    thickness,
   ]);
 
-  return <div ref={containerRef} className={`${styles.fundo} ${className}`.trim()} aria-hidden="true" />;
+  return (
+    <div ref={containerRef} className={`${styles.fundo} ${className}`.trim()} aria-hidden="true">
+      <div className={styles.camadaFallback} />
+    </div>
+  );
 }
 
 export default FundoAnimado;
