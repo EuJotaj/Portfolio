@@ -420,7 +420,11 @@ export function FundoAnimado({
     thickness
   ]);
 
-  return <div ref={containerRef} className={`${styles.fundo} ${className}`.trim()} aria-hidden="true" />;
+  return (
+    <div ref={containerRef} className={`${styles.fundo} ${className}`.trim()} aria-hidden="true">
+      <div className={styles.camadaFallback} />
+    </div>
+  );
 }
 
 export default FundoAnimado;
