@@ -219,7 +219,7 @@ export function FundoAnimado({
         alpha: true,
         premultipliedAlpha: true,
         antialias: false,
-        dpr: Math.min(window.devicePixelRatio || 1, 2)
+        dpr: Math.min(window.devicePixelRatio || 1, window.innerWidth <= 600 ? 1.5 : 2)
       });
     } catch {
       return;
@@ -287,6 +287,9 @@ export function FundoAnimado({
 
     const ro = new ResizeObserver(setSize);
     ro.observe(container);
+    const viewport = window.visualViewport;
+    viewport?.addEventListener('resize', setSize);
+    window.addEventListener('orientationchange', setSize);
     setSize();
 
     const currentMouse = [0.5, 0.5];
@@ -382,6 +385,8 @@ export function FundoAnimado({
     return () => {
       tryStop();
       ro.disconnect();
+      viewport?.removeEventListener('resize', setSize);
+      window.removeEventListener('orientationchange', setSize);
       io.disconnect();
       document.removeEventListener('visibilitychange', onVisibility);
       window.removeEventListener('mousemove', onMouseMove);
@@ -420,11 +425,7 @@ export function FundoAnimado({
     thickness
   ]);
 
-  return (
-    <div ref={containerRef} className={`${styles.fundo} ${className}`.trim()} aria-hidden="true">
-      <div className={styles.camadaFallback} />
-    </div>
-  );
+  return <div ref={containerRef} className={`${styles.fundo} ${className}`.trim()} aria-hidden="true" />;
 }
 
 export default FundoAnimado;
