@@ -198,6 +198,9 @@
   .blocoSocial {
     grid-column: 1;
     grid-row: auto;
+    align-items: stretch;
+    width: 100%;
+    margin-left: 0;
     border-left: none;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     padding-left: 0;
@@ -221,6 +224,28 @@
 
   .acoes > * {
     width: 100%;
+  }
+
+  .listaSocial {
+    align-items: stretch;
+  }
+
+  .itemSocial {
+    width: 100%;
+    margin-left: 0;
+    padding: 0.85rem 1rem;
+    font-size: 0.78rem;
+  }
+
+  .rotuloSocial {
+    flex-shrink: 0;
+  }
+
+  .handleSocial {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 
