@@ -6,8 +6,20 @@
   pointer-events: none;
   min-height: 100svh;
   min-height: 100dvh;
-  background-color: var(--color-bg, #050816);
+  background:
+    radial-gradient(circle at 18% 18%, rgba(160, 120, 255, 0.16), transparent 34%),
+    radial-gradient(circle at 82% 76%, rgba(76, 215, 246, 0.08), transparent 30%),
+    var(--color-bg, #131313);
   isolation: isolate;
+}
+
+@media (max-width: 600px) {
+  .fundo {
+    background:
+      radial-gradient(circle at 12% 12%, rgba(160, 120, 255, 0.2), transparent 42%),
+      radial-gradient(circle at 90% 82%, rgba(76, 215, 246, 0.1), transparent 36%),
+      #131313;
+  }
 }
 
 .fundo canvas {
