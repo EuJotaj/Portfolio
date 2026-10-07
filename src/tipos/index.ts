@@ -18,6 +18,7 @@ export interface GalleryItem {
   title: string;
   category: ProjectCategory;
   images: string[];
+  video?: string;
   image: string;
   hoverImage: string;
   year: string;

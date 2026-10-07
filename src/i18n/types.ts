@@ -133,6 +133,9 @@ export interface Translations {
     carouselPrev: string;
     carouselNext: string;
     slideOf: string;
+    viewVideo: string;
+    viewImages: string;
+    videoLabel: string;
     securityNote: string;
   };
   cvModal: {

@@ -63,6 +63,7 @@ export function SecaoGaleria() {
   const masonryItems: MasonryItem[] = useMemo(() => {
     // Variação de altura para efeito dinâmico do Masonry React Bits
     const multiplicadores: Record<string, number> = {
+      motionstudio: 1.08,
       fincontrol: 1.06,
       seakalm: 0.95,
       sonorus: 1.02,

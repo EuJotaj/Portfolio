@@ -146,6 +146,9 @@ export const en: Translations = {
     carouselPrev: 'Previous',
     carouselNext: 'Next',
     slideOf: 'of',
+    viewVideo: 'Video',
+    viewImages: 'Images',
+    videoLabel: 'Project video demonstration',
     securityNote: 'Security note:',
   },
   cvModal: {
@@ -155,6 +158,13 @@ export const en: Translations = {
     openInNewTab: 'Open in new tab',
   },
   projects: {
+    motionstudio: {
+      title: 'Motion Studio',
+      description:
+        'A browser-based visual editor for creating websites and animations, designed to make the path from design to implementation simpler. I structured the experience around editable pages, sections and layers, with a motion preset library, keyframe timeline, synchronized animations and a React Bits component catalog. The project lets creators preview motion as they work and export both an editable project document and a complete website as a ZIP, along with static captures in several formats.',
+      shortDescription:
+        'Visual site editor with layers, an animation timeline, React Bits and project export.',
+    },
     fincontrol: {
       title: 'FinControl',
       description:

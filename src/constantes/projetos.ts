@@ -7,6 +7,7 @@ export interface ProjectBase {
   id: string;
   category: GalleryItem['category'];
   images: string[];
+  video?: string;
   year: string;
   tags: string[];
   github?: string;
@@ -24,6 +25,19 @@ export interface ProjectBase {
 }
 
 export const PROJECTS: ProjectBase[] = [
+  {
+    id: 'motionstudio',
+    category: 'portfolio',
+    images: [...IMAGENS_PROJETOS.motionstudio],
+    video: '/assets/projetos/motionstudio/demonstracao.mp4',
+    year: '2026',
+    tags: ['React', 'TypeScript', 'Vite', 'Web Animations API', 'React Bits'],
+    github: 'https://github.com/EuJotaj/MotionStudio',
+    web: 'https://motionstudiodesign.vercel.app/',
+    maskShape: 'hexagon',
+    stackIndex: 6,
+    photoStack: { rotation: 0, offsetX: 0, offsetY: 0, zIndex: 6 },
+  },
   {
     id: 'fincontrol',
     category: 'portfolio',
@@ -102,6 +116,7 @@ export function getLocalizedProject(base: ProjectBase, t: Translations): Gallery
     id: base.id,
     category: base.category,
     images: base.images,
+    video: base.video,
     image,
     hoverImage,
     year: base.year,

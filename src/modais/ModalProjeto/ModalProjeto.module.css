@@ -42,6 +42,7 @@
 }
 
 .midia {
+  --carousel-counter-right: calc(var(--space-sm) + 44px);
   position: relative;
   width: 100%;
   aspect-ratio: 4 / 3;
@@ -54,6 +55,49 @@
 .modalWeb .midia {
   aspect-ratio: 16 / 9;
   max-height: min(260px, 34vh);
+}
+
+.video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #0e1018;
+}
+
+.seletorMidia {
+  position: absolute;
+  top: var(--space-sm);
+  left: var(--space-sm);
+  z-index: 4;
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: rgba(14, 14, 14, 0.88);
+}
+
+.opcaoMidia {
+  padding: 0.35rem 0.7rem;
+  border: 0;
+  border-radius: 3px;
+  color: var(--color-text-muted);
+  background: transparent;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+}
+
+.opcaoMidia:hover,
+.opcaoMidia:focus-visible {
+  color: var(--color-text);
+}
+
+.opcaoMidiaAtiva {
+  color: #0e0e0e;
+  background: var(--color-accent-strong);
 }
 
 .corpo {

@@ -1,11 +1,64 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CarrosselImagens } from '@/componentes/ui/CarrosselImagens';
 import { useModalProjeto } from '@/aplicativo/provedores/ProvedorModalProjeto';
 import { useIdioma } from '@/aplicativo/provedores/ProvedorIdioma';
 import { getProjectById } from '@/constantes/projetos';
 import { cn } from '@/biblioteca/cn';
+import type { GalleryItem } from '@/tipos';
+import type { Translations } from '@/i18n';
 import styles from './ModalProjeto.module.css';
+
+function MidiaProjeto({ project, labels }: { project: GalleryItem; labels: Translations['modal'] }) {
+  const [exibirVideo, setExibirVideo] = useState(Boolean(project.video));
+
+  return (
+    <div className={styles.midia}>
+      {project.video && (
+        <div className={styles.seletorMidia} aria-label={project.title}>
+          <button
+            type="button"
+            className={cn(styles.opcaoMidia, exibirVideo && styles.opcaoMidiaAtiva)}
+            onClick={() => setExibirVideo(true)}
+            aria-pressed={exibirVideo}
+          >
+            {labels.viewVideo}
+          </button>
+          <button
+            type="button"
+            className={cn(styles.opcaoMidia, !exibirVideo && styles.opcaoMidiaAtiva)}
+            onClick={() => setExibirVideo(false)}
+            aria-pressed={!exibirVideo}
+          >
+            {labels.viewImages}
+          </button>
+        </div>
+      )}
+      {exibirVideo && project.video ? (
+        <video
+          className={styles.video}
+          src={project.video}
+          poster={project.image}
+          controls
+          playsInline
+          preload="none"
+          aria-label={`${labels.videoLabel}: ${project.title}`}
+        />
+      ) : (
+        <CarrosselImagens
+          images={project.images}
+          alt={project.title}
+          resetKey={project.id}
+          labels={{
+            prev: labels.carouselPrev,
+            next: labels.carouselNext,
+            slideOf: labels.slideOf,
+          }}
+        />
+      )}
+    </div>
+  );
+}
 
 export function ModalProjeto() {
   const { idProjetoAtivo, fecharProjeto } = useModalProjeto();
@@ -46,18 +99,7 @@ export function ModalProjeto() {
               ×
             </button>
 
-            <div className={styles.midia}>
-              <CarrosselImagens
-                images={project.images}
-                alt={project.title}
-                resetKey={project.id}
-                labels={{
-                  prev: t.modal.carouselPrev,
-                  next: t.modal.carouselNext,
-                  slideOf: t.modal.slideOf,
-                }}
-              />
-            </div>
+            <MidiaProjeto key={project.id} project={project} labels={t.modal} />
 
             <div className={styles.corpo}>
               <div className={styles.meta}>

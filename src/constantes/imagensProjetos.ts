@@ -6,6 +6,12 @@ function imagensDoProjeto(pasta: string, arquivos: string[]) {
 
 /** Imagens por projeto — adicione arquivos na pasta correspondente em public/assets/projetos/ */
 export const IMAGENS_PROJETOS = {
+  motionstudio: imagensDoProjeto('motionstudio', [
+    '01-editor.png',
+    '02-biblioteca-de-movimento.png',
+    '03-react-bits.png',
+    '04-exportacao.png',
+  ]),
   fincontrol: imagensDoProjeto('fincontrol', [
     '01-capa.webp',
     '02-login.webp',

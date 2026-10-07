@@ -96,7 +96,7 @@
 .contador {
   position: absolute;
   top: var(--space-sm);
-  right: var(--space-sm);
+  right: var(--carousel-counter-right, var(--space-sm));
   z-index: 2;
   font-size: 0.6875rem;
   font-weight: 600;

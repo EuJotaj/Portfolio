@@ -152,6 +152,9 @@ export const pt: Translations = {
     carouselPrev: 'Anterior',
     carouselNext: 'Próxima',
     slideOf: 'de',
+    viewVideo: 'Vídeo',
+    viewImages: 'Imagens',
+    videoLabel: 'Demonstração em vídeo do projeto',
     securityNote: 'Aviso de segurança:',
   },
   cvModal: {
@@ -161,6 +164,13 @@ export const pt: Translations = {
     openInNewTab: 'Abrir em nova aba',
   },
   projects: {
+    motionstudio: {
+      title: 'Motion Studio',
+      description:
+        'Editor visual para criar sites e animações no navegador, pensado para simplificar a passagem do design à implementação. Organizei a experiência em páginas, seções e camadas editáveis, com biblioteca de movimentos, linha do tempo de keyframes, sincronização de animações e catálogo de componentes React Bits. O projeto permite visualizar e testar o movimento durante a criação e exportar tanto o documento editável quanto um site completo em ZIP, além de capturas estáticas em diversos formatos.',
+      shortDescription:
+        'Editor visual de sites com camadas, timeline de animação, React Bits e exportação do projeto.',
+    },
     fincontrol: {
       title: 'FinControl',
       description:
