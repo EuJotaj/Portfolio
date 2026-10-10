@@ -8,6 +8,10 @@ export interface ProjectTranslation {
 }
 
 export interface ExperienceTranslation {
+  shortCompany: string;
+  periodShort: string;
+  highlights: string[];
+  skills: string[];
   period: string;
   company: string;
   role: string;
@@ -140,10 +144,30 @@ export interface Translations {
   };
   cvModal: {
     title: string;
+    description: string;
+    profile: string;
+    language: string;
+    profiles: { frontend: string; fullstack: string };
+    languages: { pt: string; en: string };
     download: string;
     close: string;
     openInNewTab: string;
   };
   projects: Record<string, ProjectTranslation>;
   experience: Record<string, ExperienceTranslation>;
+  trajectory: {
+    details: string;
+    hideDetails: string;
+    title: string;
+    description: string;
+    work: string;
+    learning: string;
+    current: string;
+    ongoing: string;
+    completed: string;
+    previous: string;
+    next: string;
+    stages: string;
+    skills: string;
+  };
 }

@@ -1,8 +1,8 @@
 export const ASSETS = {
   logo: '/assets/img/Jota.png',
   cv: {
-    pt: '/CVJota.pdf',
-    en: '/CVJota-en.pdf',
+    frontend: { pt: '/CVJota.pdf', en: '/CVJota-en.pdf' },
+    fullstack: { pt: '/CVJota-fullstack.pdf', en: '/CVJota-fullstack-en.pdf' },
   },
 } as const;
 
@@ -14,7 +14,7 @@ export const LINKS = {
   github: 'https://github.com/EuJotaj',
   linkedin: 'https://www.linkedin.com/in/janildocfariasjunior/',
   email: 'jjcalluete@gmail.com',
-  portfolio: 'https://eujotaj.github.io/Portfolio/',
+  portfolio: 'https://portfoliojotaj.vercel.app/',
 } as const;
 
 export const MAILTO =

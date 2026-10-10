@@ -4,7 +4,7 @@ export const en: Translations = {
   meta: {
     title: 'JOTA | Janildo Júnior - Front-End Developer',
     description:
-      'Portfolio of Janildo Júnior — Front-End Developer with React, Angular and JavaScript.',
+      'Janildo Júnior’s portfolio — professional front-end experience with JavaScript and jQuery, and projects with React, Angular, Java and Spring Boot.',
   },
   nav: {
     experience: 'Experience',
@@ -26,10 +26,10 @@ export const en: Translations = {
     titleLine1: 'TURNING',
     titleLine2: 'DESIGNS',
     description:
-      'Turning complex designs into functional interfaces. Specialized in high-performance digital ecosystems with React, Angular and JavaScript.',
+      'I am a developer with professional experience in JavaScript and jQuery and hands-on project experience with React, Angular, TypeScript, Java and Spring Boot. I contributed to the development of more than 40 B2B ERP modules, connecting interfaces, REST APIs and document generation. I currently work as a MAKER Support Intern at the City of Paulista, supporting educational software, programming and testing. I am studying Information Systems and continuing my training in cloud computing with AWS.',
     quote:
       'My approach combines technical rigor and discipline, ensuring every line of code contributes to a flawless user experience.',
-    tags: ['#FrontendDevelopment', '#ReactJS', '#SystemArchitecture'],
+    tags: ['#FrontendDevelopment', '#FullStackProjects', '#ContinuousLearning'],
     stats: {
       projects: 'Featured projects',
       experience: 'Years of experience',
@@ -153,6 +153,11 @@ export const en: Translations = {
   },
   cvModal: {
     title: 'Resume',
+    description: 'Choose the professional focus and PDF language.',
+    profile: 'Professional focus',
+    language: 'PDF language',
+    profiles: { frontend: 'Front-end', fullstack: 'Full-stack' },
+    languages: { pt: 'Portuguese', en: 'English' },
     download: 'Download PDF',
     close: 'Close',
     openInNewTab: 'Open in new tab',
@@ -193,9 +198,9 @@ export const en: Translations = {
     omsys: {
       title: 'ERP B2B PROFISSIONAL',
       description:
-        'A professional, high-complexity B2B ERP for international trade, controllership and customs logistics. I owned front-end architecture, evolution and maintenance of the platform, focusing on critical operational flows and document compliance in import/export processes. I standardized dynamic interfaces with Angular and React, REST API integration via Services and Dependency Injection, strong typing and management dashboards. I built cash-flow modules and billing automation, including commercial proposal integration with CT-e generation, XML handling and dynamic PDF output. I translated complex business rules into responsive interfaces using jQuery and modern JavaScript, prioritizing load performance and UX. I delivered 40+ functional modules supporting logistics, legal and financial operations.',
+        'A B2B ERP for foreign trade and logistics, developed as part of my work at Ômega Comércio Exterior & Logística. I contributed to the development and enhancement of more than 40 modules supporting financial, legal and controlling processes. I built interfaces, dashboards and reusable components with JavaScript and jQuery to standardize modules. I integrated the interfaces with REST APIs and JSON data and worked on commercial proposal, billing and XML/PDF document generation workflows.',
       shortDescription:
-        'B2B ERP for foreign trade: dashboards, fiscal automation and 40+ operational modules.',
+        'B2B ERP for foreign trade: JavaScript, jQuery, REST APIs and 40+ operational modules.',
       aviso: 'Data shown in post-login screenshots has been replaced for security reasons.',
     },
     imip: {
@@ -206,15 +211,61 @@ export const en: Translations = {
         'Gamified literacy platform for hospitalized children, built with React, Flask and MySQL.',
     },
   },
+  trajectory: {
+    details: 'View details',
+    hideDetails: 'Close details',
+    title: 'Professional journey',
+    description: 'Select a stage to explore my work and education.',
+    work: 'Experience',
+    learning: 'Education',
+    current: 'Current role',
+    ongoing: 'In progress',
+    completed: 'Past experience',
+    previous: 'Previous stage',
+    next: 'Next stage',
+    stages: 'Career stages',
+    skills: 'Technologies and skills',
+  },
   experience: {
+    exp0: {
+      shortCompany: 'City of Paulista',
+      periodShort: 'SEP 2026 — PRESENT',
+      highlights: [
+        'Supporting educational software development, programming and testing.',
+        'User support, equipment maintenance and configuration.',
+        'Assistance with network infrastructure and cabling.',
+      ],
+      skills: ['Educational software', 'Programming', 'Testing', 'Technical support', 'Networks'],
+      period: 'SEP 2026 — PRESENT',
+      company: 'Prefeitura da Cidade do Paulista',
+      role: 'MAKER Support Intern',
+      description:
+        'I support educational software development, programming and testing in the Expanded Learning Spaces unit. I provide technical support to users, maintain and configure equipment, and assist with network infrastructure and cabling in Paulista, Pernambuco, Brazil.',
+    },
     exp1: {
-      period: 'JUL 2025 — MAY 2026',
-      company: 'Ômega Comércio Exterior',
+      shortCompany: 'Ômega',
+      periodShort: '2025 — 2026',
+      highlights: [
+        'Contributed to more than 40 B2B ERP modules for financial, legal and controlling processes.',
+        'Interfaces, dashboards and reusable components with JavaScript and jQuery.',
+        'REST and JSON integrations, commercial proposals, billing and XML/PDF documents.',
+      ],
+      skills: ['JavaScript', 'jQuery', 'REST APIs', 'JSON', 'XML / PDF'],
+      period: 'JUL 2025 — JUN 2026',
+      company: 'Ômega Comércio Exterior & Logística',
       role: 'Front-End Developer',
       description:
-        'Building modern interfaces for robust logistics systems, API integration and automation of critical documents such as PDFs and XMLs.',
+        'Contributed to the development and enhancement of more than 40 B2B ERP modules for financial, legal and controlling processes. Built interfaces, dashboards and reusable components with JavaScript and jQuery, integrated REST APIs and JSON data, and developed workflows for commercial proposals, billing and XML/PDF document generation in Recife, Pernambuco, Brazil.',
     },
     exp2: {
+      shortCompany: 'Brazilian Army',
+      periodShort: '2024 — 2025',
+      highlights: [
+        'Network maintenance and support in critical communication environments.',
+        'Technical work in communications and support operations.',
+        'Recognized with Merit Honor for technical performance and discipline.',
+      ],
+      skills: ['Networks', 'Technical support', 'Communications'],
       period: '2024 — 2025',
       company: 'Brazilian Army',
       role: 'Communications & Networks Soldier',
@@ -222,11 +273,34 @@ export const en: Translations = {
         'Technical work maintaining networks and supporting critical communication environments. Recognized with Merit Honor for discipline and performance.',
     },
     exp3: {
-      period: 'EDUCATION',
+      shortCompany: 'UNINASSAU',
+      periodShort: 'GRADUATION: 2028',
+      highlights: [
+        'Bachelor’s degree in Information Systems in progress.',
+        'Hands-on experience with web applications, interface and API integration, and data persistence.',
+        'Expected graduation in November 2028.',
+      ],
+      skills: ['Information Systems', 'Web applications', 'APIs', 'Data persistence'],
+      period: 'IN PROGRESS — EXPECTED GRADUATION: NOVEMBER 2028',
       company: 'UNINASSAU',
-      role: 'Information Systems',
+      role: 'Bachelor’s Degree in Information Systems (in progress)',
       description:
-        'Undergraduate focused on continuous growth toward software engineering and web performance.',
+        'Undergraduate studies with hands-on experience in web application development, interface and API integration, and data persistence. Expected graduation in November 2028.',
     },
+    exp4: {
+      shortCompany: 'Projeto Start',
+      periodShort: '2026 — 2027',
+      highlights: [
+        'AWS cloud computing training through Projeto Start / Rede Cidadã.',
+        'Training in progress, with completion expected in January 2027.',
+      ],
+      skills: ['Cloud Computing', 'AWS', 'Python'],
+      period: 'AUG 2026 — JAN 2027 (EXPECTED)',
+      company: 'Projeto Start · Rede Cidadã',
+      role: 'Cloud Computing with AWS',
+      description:
+        'Training in Cloud Computing with AWS through Projeto Start / Rede Cidadã. The course is in progress, with completion expected in January 2027.',
+    },
+
   },
 };

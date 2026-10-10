@@ -75,62 +75,6 @@
   justify-content: center;
 }
 
-.linhaTempo {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-lg);
-  padding-left: var(--space-md);
-  border-left: 2px solid var(--color-border);
-}
-
-.itemLinhaTempo {
-  position: relative;
-  padding-left: var(--space-md);
-}
-
-.itemLinhaTempo.ativo .pontoLinhaTempo {
-  background: var(--color-accent-strong);
-  box-shadow: 0 0 12px var(--color-accent-glow);
-}
-
-.pontoLinhaTempo {
-  position: absolute;
-  left: calc(-1 * var(--space-md) - 5px);
-  top: 0.35rem;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--color-text-dim);
-}
-
-.dataLinhaTempo {
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--color-accent);
-}
-
-.empresaLinhaTempo {
-  font-size: clamp(1rem, 1.6vw, 1.125rem);
-  font-weight: 700;
-  color: var(--color-text);
-  margin-top: 0.25rem;
-}
-
-.cargoLinhaTempo {
-  font-size: clamp(0.8125rem, 1.4vw, 0.875rem);
-  color: var(--color-secondary);
-  margin-top: 0.125rem;
-}
-
-.descLinhaTempo {
-  font-size: clamp(0.8125rem, 1.4vw, 0.875rem);
-  color: var(--color-text-muted);
-  line-height: 1.6;
-  margin-top: 0.5rem;
-}
-
 .estatisticas {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));

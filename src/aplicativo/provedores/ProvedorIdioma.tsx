@@ -16,22 +16,15 @@ import {
 } from '@/i18n';
 import type { GalleryItem } from '@/tipos';
 import { PROJECTS, getLocalizedProject } from '@/constantes/projetos';
-import { ASSETS } from '@/constantes/recursos';
 
 interface ValorContextoIdioma {
   locale: Locale;
   definirIdioma: (locale: Locale) => void;
   t: Translations;
   projects: GalleryItem[];
-  cvPath: string;
 }
 
 const ContextoIdioma = createContext<ValorContextoIdioma | null>(null);
-
-const CAMINHOS_CV: Record<Locale, string> = {
-  pt: ASSETS.cv.pt,
-  en: ASSETS.cv.en,
-};
 
 export function ProvedorIdioma({ children }: { children: ReactNode }) {
   const [locale, definirLocale] = useState<Locale>(getDefaultLocale);
@@ -51,7 +44,7 @@ export function ProvedorIdioma({ children }: { children: ReactNode }) {
   const valor = useMemo<ValorContextoIdioma>(() => {
     const t = locales[locale];
     const projects = PROJECTS.map(p => getLocalizedProject(p, t));
-    return { locale, definirIdioma, t, projects, cvPath: CAMINHOS_CV[locale] };
+    return { locale, definirIdioma, t, projects };
   }, [locale, definirIdioma]);
 
   return <ContextoIdioma.Provider value={valor}>{children}</ContextoIdioma.Provider>;

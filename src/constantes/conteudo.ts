@@ -34,7 +34,7 @@ export const SOCIAL_LINKS: SocialLink[] = [
   { id: 'email', label: 'Email', href: 'mailto:jjcalluete@gmail.com', handle: LINKS.email },
 ];
 
-export const EXPERIENCE_IDS = ['exp1', 'exp2', 'exp3'] as const;
+export const EXPERIENCE_IDS = ['exp0', 'exp1', 'exp2', 'exp3', 'exp4'] as const;
 
 export const STATS_VALUES = [
   { id: 'projects', value: '5+' },

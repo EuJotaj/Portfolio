@@ -4,7 +4,7 @@ export const pt: Translations = {
   meta: {
     title: 'JOTA | Janildo Júnior - Desenvolvedor Front-End',
     description:
-      'Portfólio de Janildo Júnior — Desenvolvedor Front-End com React, Angular e JavaScript.',
+      'Portfólio de Janildo Júnior — experiência front-end com JavaScript e jQuery e projetos com React, Angular, Java e Spring Boot.',
   },
   nav: {
     experience: 'Experiência',
@@ -28,10 +28,10 @@ export const pt: Translations = {
     titleLine1: 'TRANSFORMANDO',
     titleLine2: 'DESIGNS',
     description:
-      'Transformando designs complexos em interfaces funcionais. Especialista em criar ecossistemas digitais de alta performance com React, Angular e JavaScript.',
+      'Sou desenvolvedor com experiência profissional em JavaScript e jQuery e prática em projetos com React, Angular, TypeScript, Java e Spring Boot. Contribuí para a evolução de mais de 40 módulos de um ERP B2B, conectando interfaces, APIs REST e geração de documentos. Atualmente, atuo como estagiário em Suporte MAKER na Prefeitura do Paulista, apoiando softwares educacionais, programação e testes. Curso Sistemas de Informação e continuo minha formação em computação em nuvem com AWS.',
     quote:
       'Minha abordagem combina rigor técnico e disciplina, garantindo que cada linha de código contribua para uma experiência de usuário impecável.',
-    tags: ['#FrontendDevelopment', '#ReactJS', '#SystemArchitecture'],
+    tags: ['#FrontendDevelopment', '#FullStackProjects', '#ContinuousLearning'],
     stats: {
       projects: 'Projetos em destaque',
       experience: 'Anos de experiência',
@@ -159,6 +159,11 @@ export const pt: Translations = {
   },
   cvModal: {
     title: 'Currículo',
+    description: 'Escolha a área de atuação e o idioma do PDF.',
+    profile: 'Área de atuação',
+    language: 'Idioma do PDF',
+    profiles: { frontend: 'Front-end', fullstack: 'Full-stack' },
+    languages: { pt: 'Português', en: 'Inglês' },
     download: 'Baixar PDF',
     close: 'Fechar',
     openInNewTab: 'Abrir em nova aba',
@@ -200,9 +205,9 @@ export const pt: Translations = {
     omsys: {
       title: 'ERP B2B PROFISSIONAL',
       description:
-        'ERP B2B profissional de alta complexidade para comércio internacional, controllership e logística aduaneira. Fui responsável pela arquitetura front-end, evolução e manutenção da plataforma, com foco em fluxos operacionais críticos e conformidade documental em processos de importação e exportação. Padronizei interfaces dinâmicas com Angular e React, integração de APIs REST via Services e Dependency Injection, tipagem forte e dashboards de gestão. Implementei módulos de fluxo de caixa e automação de faturamento, incluindo integração de propostas comerciais com geração de CT-es, manipulação de XML e PDFs dinâmicos. Traduzi regras de negócio complexas em interfaces responsivas com jQuery e JavaScript moderno, priorizando performance de carregamento e UX. Entreguei mais de 40 módulos funcionais que sustentam operações logísticas, jurídicas e de controle financeiro.',
+        'ERP B2B para comércio exterior e logística, desenvolvido no contexto da minha atuação na Ômega Comércio Exterior & Logística. Contribuí para o desenvolvimento e a evolução de mais de 40 módulos voltados a processos financeiros, jurídicos e de controladoria. Desenvolvi interfaces, dashboards e componentes reutilizáveis com JavaScript e jQuery para padronizar os módulos. Integrei as interfaces com APIs REST e dados JSON e trabalhei em fluxos de propostas comerciais, faturamento e geração de documentos XML e PDF.',
       shortDescription:
-        'ERP B2B para comércio exterior: dashboards, automação fiscal e mais de 40 módulos operacionais.',
+        'ERP B2B para comércio exterior: JavaScript, jQuery, APIs REST e mais de 40 módulos operacionais.',
       aviso:
         'Os dados exibidos nas imagens após o login foram alterados por questões de segurança.',
     },
@@ -214,15 +219,61 @@ export const pt: Translations = {
         'Plataforma gamificada para alfabetização infantil no hospital, com React, Flask e MySQL.',
     },
   },
+  trajectory: {
+    details: 'Ver detalhes',
+    hideDetails: 'Fechar detalhes',
+    title: 'Trajetória profissional',
+    description: 'Selecione uma etapa para explorar minha atuação e minha formação.',
+    work: 'Experiência',
+    learning: 'Formação',
+    current: 'Em atuação',
+    ongoing: 'Em formação',
+    completed: 'Experiência concluída',
+    previous: 'Etapa anterior',
+    next: 'Próxima etapa',
+    stages: 'Etapas da trajetória',
+    skills: 'Tecnologias e competências',
+  },
   experience: {
+    exp0: {
+      shortCompany: 'Prefeitura do Paulista',
+      periodShort: 'SET 2026 — ATUAL',
+      highlights: [
+        'Apoio ao desenvolvimento de softwares educacionais, programação e testes.',
+        'Suporte aos usuários, manutenção e configuração de equipamentos.',
+        'Apoio à infraestrutura de redes e cabeamento.',
+      ],
+      skills: ['Software educacional', 'Programação', 'Testes', 'Suporte técnico', 'Redes'],
+      period: 'SETEMBRO 2026 — ATUAL',
+      company: 'Prefeitura da Cidade do Paulista',
+      role: 'Estagiário em Suporte MAKER',
+      description:
+        'Apoio o desenvolvimento de softwares educacionais, a programação e os testes na Gerência de Espaços Ampliados de Aprendizagem. Presto suporte técnico aos usuários, mantenho e configuro equipamentos e apoio a infraestrutura de redes e cabeamento em Paulista, PE.',
+    },
     exp1: {
-      period: 'JULHO 2025 — MAIO 2026',
-      company: 'Ômega Comércio Exterior',
+      shortCompany: 'Ômega',
+      periodShort: '2025 — 2026',
+      highlights: [
+        'Contribuição para mais de 40 módulos de um ERP B2B financeiro, jurídico e de controladoria.',
+        'Interfaces, dashboards e componentes reutilizáveis com JavaScript e jQuery.',
+        'Integrações REST e JSON, propostas comerciais, faturamento e documentos XML/PDF.',
+      ],
+      skills: ['JavaScript', 'jQuery', 'APIs REST', 'JSON', 'XML / PDF'],
+      period: 'JULHO 2025 — JUNHO 2026',
+      company: 'Ômega Comércio Exterior & Logística',
       role: 'Desenvolvedor Front-End',
       description:
-        'Desenvolvimento de interfaces modernas para sistemas logísticos robustos, integração de APIs e automação de documentos críticos como PDFs e XMLs.',
+        'Contribuí para o desenvolvimento e a evolução de mais de 40 módulos de um ERP B2B para processos financeiros, jurídicos e de controladoria. Desenvolvi interfaces, dashboards e componentes reutilizáveis com JavaScript e jQuery, integrações com APIs REST e JSON e fluxos de propostas comerciais, faturamento e geração de documentos XML e PDF em Recife, PE.',
     },
     exp2: {
+      shortCompany: 'Exército Brasileiro',
+      periodShort: '2024 — 2025',
+      highlights: [
+        'Manutenção de redes e suporte em ambientes de comunicação crítica.',
+        'Atuação técnica em operações de comunicações e suporte.',
+        'Reconhecimento com Honra ao Mérito por desempenho técnico e disciplina.',
+      ],
+      skills: ['Redes', 'Suporte técnico', 'Comunicações'],
       period: '2024 — 2025',
       company: 'Exército Brasileiro',
       role: 'Soldado de Comunicações & Redes',
@@ -230,11 +281,34 @@ export const pt: Translations = {
         'Atuação técnica em manutenção de redes e suporte em ambientes de comunicação crítica. Reconhecido com Honra ao Mérito por disciplina e desempenho técnico.',
     },
     exp3: {
-      period: 'FORMAÇÃO',
+      shortCompany: 'UNINASSAU',
+      periodShort: 'CONCLUSÃO: 2028',
+      highlights: [
+        'Bacharelado em Sistemas de Informação em andamento.',
+        'Prática em aplicações web, integração de interfaces e APIs e persistência de dados.',
+        'Conclusão prevista para novembro de 2028.',
+      ],
+      skills: ['Sistemas de Informação', 'Aplicações web', 'APIs', 'Persistência de dados'],
+      period: 'EM ANDAMENTO — CONCLUSÃO PREVISTA: NOVEMBRO 2028',
       company: 'UNINASSAU',
-      role: 'Sistemas de Informação',
+      role: 'Bacharelado em Sistemas de Informação',
       description:
-        'Graduando focado em evolução contínua para engenharia de software e performance web.',
+        'Graduação em andamento, com prática em desenvolvimento de aplicações web, integração de interfaces e APIs e persistência de dados. Conclusão prevista para novembro de 2028.',
     },
+    exp4: {
+      shortCompany: 'Projeto Start',
+      periodShort: '2026 — 2027',
+      highlights: [
+        'Formação em computação em nuvem com AWS pelo Projeto Start / Rede Cidadã.',
+        'Curso em andamento, com conclusão prevista para janeiro de 2027.',
+      ],
+      skills: ['Cloud Computing', 'AWS', 'Python'],
+      period: 'AGOSTO 2026 — JANEIRO 2027 (PREVISÃO)',
+      company: 'Projeto Start · Rede Cidadã',
+      role: 'Cloud Computing com AWS',
+      description:
+        'Formação em Cloud Computing com AWS pelo Projeto Start / Rede Cidadã. O curso está em andamento, com conclusão prevista para janeiro de 2027.',
+    },
+
   },
 };

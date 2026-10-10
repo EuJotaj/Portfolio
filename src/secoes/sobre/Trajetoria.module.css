@@ -1,0 +1,430 @@
+.trajetoria {
+  position: relative;
+  isolation: isolate;
+  max-width: 1140px;
+  margin: 2rem auto var(--space-2xl);
+  padding: 2rem 0;
+  scroll-margin-top: 100px;
+  color: #f4f5fa;
+}
+
+.ambiente {
+  position: absolute;
+  inset: -50px -5%;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  border-radius: 80px;
+  background: rgba(14, 16, 24, 0.42);
+}
+
+.ambiente > span {
+  position: absolute;
+  pointer-events: none;
+}
+.luzVioleta {
+  width: 70%;
+  height: 720px;
+  top: 4%;
+  left: 16%;
+  background: radial-gradient(ellipse, rgba(162, 134, 223, 0.44), transparent 67%);
+}
+.luzAzul {
+  width: 80%;
+  height: 700px;
+  top: 36%;
+  right: -25%;
+  background: radial-gradient(ellipse, rgba(131, 202, 221, 0.35), transparent 66%);
+}
+.arco {
+  width: 115%;
+  height: 700px;
+  top: 6%;
+  left: -20%;
+  border: 1px solid rgba(231, 233, 255, 0.27);
+  border-radius: 50%;
+  transform: rotate(-27deg);
+  box-shadow:
+    0 0 45px rgba(186, 170, 232, 0.13),
+    inset 0 0 30px rgba(236, 239, 255, 0.035);
+}
+
+.cabecalho {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+.titulo {
+  max-width: 600px;
+  font-family: var(--font-label);
+  font-size: clamp(2rem, 4.2vw, 3.75rem);
+  line-height: 1.05;
+  font-weight: 500;
+  letter-spacing: -0.055em;
+  text-wrap: balance;
+}
+.atalhos {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+.atalhos a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  min-height: 46px;
+  padding: 0.75rem 1rem;
+  color: #edf0fa;
+  font-size: 0.8125rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+.atalhos a:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+.grupo {
+  scroll-margin-top: 100px;
+}
+.grupo + .grupo {
+  margin-top: 5rem;
+}
+.tituloGrupo {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+.tituloGrupo h3 {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: #d5d7e2;
+}
+.tituloGrupo > span {
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.22), transparent);
+}
+.sequencia {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.sequencia::before {
+  content: '';
+  position: absolute;
+  top: 85px;
+  bottom: 45px;
+  left: 65px;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(245, 246, 255, 0.25), rgba(230, 232, 255, 0.08));
+}
+.etapa {
+  position: relative;
+  display: grid;
+  grid-template-columns: 130px minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+}
+.data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 1.625rem;
+}
+.ano {
+  font-family: var(--font-label);
+  font-size: clamp(2.5rem, 4.5vw, 4rem);
+  line-height: 1;
+  font-weight: 400;
+  letter-spacing: -0.07em;
+  color: rgba(239, 240, 248, 0.82);
+  font-variant-numeric: tabular-nums;
+}
+.ponto {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #c9c6df;
+  box-shadow: 0 0 16px rgba(229, 222, 255, 0.5);
+}
+.etapaAberta .ponto {
+  background: #efffff;
+}
+.trajetoria .vidro {
+  --career-glass-blur: 8px;
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  box-shadow:
+    inset 0 1.5px 1px rgba(255, 255, 255, 0.48),
+    inset 1px 0 1px rgba(255, 255, 255, 0.13),
+    inset 0 -1px 1px rgba(206, 219, 255, 0.12),
+    0 12px 28px rgba(0, 0, 0, 0.22);
+  background: linear-gradient(
+    125deg,
+    rgba(255, 255, 255, 0.12),
+    rgba(255, 255, 255, 0.025) 45%,
+    rgba(196, 219, 237, 0.055)
+  );
+}
+.vidro::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 0% 0%, rgba(255, 255, 255, 0.14), transparent 55%);
+}
+.etapa:nth-child(even) .vidro {
+  max-width: calc(100% - 2rem);
+  margin-left: 2rem;
+}
+.etapaAberta .vidro {
+  border-color: rgba(255, 255, 255, 0.38);
+  box-shadow:
+    inset 0 1.5px 1px rgba(255, 255, 255, 0.62),
+    inset 0 -1px 1px rgba(202, 224, 255, 0.2),
+    0 14px 32px rgba(0, 0, 0, 0.28);
+}
+.ficha {
+  position: relative;
+  z-index: 1;
+  padding: clamp(1.25rem, 3vw, 2.25rem);
+  background: rgba(17, 20, 31, 0.36);
+}
+.topo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+.identidade {
+  min-width: 0;
+}
+.periodo {
+  font-size: 0.6875rem;
+  line-height: 1.6;
+  letter-spacing: 0.09em;
+  color: #e0dfec;
+  font-weight: 500;
+}
+.empresa {
+  font-family: var(--font-label);
+  font-size: clamp(1.25rem, 2.8vw, 2rem);
+  line-height: 1.15;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  margin-top: 0.625rem;
+  text-wrap: balance;
+}
+.cargo {
+  font-size: 0.9375rem;
+  color: #d6d9e5;
+  line-height: 1.6;
+  margin-top: 0.625rem;
+}
+.abrir {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  color: #fafaff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  cursor: pointer;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.24),
+    0 4px 10px rgba(0, 0, 0, 0.12);
+}
+.abrir svg {
+  width: 20px;
+  height: 20px;
+  transition: transform 250ms ease;
+}
+.abrir[aria-expanded='true'] svg {
+  transform: rotate(45deg);
+}
+.abrir:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+.metadados {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+.status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #e4e8ef;
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+.status > span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(229, 236, 248, 0.75);
+}
+.resumoTecnologias {
+  color: #c8cddc;
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+.etapaAberta .resumoTecnologias {
+  display: none;
+}
+.detalhes {
+  overflow: hidden;
+}
+.texto {
+  padding-top: 1.5rem;
+  margin-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+.texto > p {
+  font-size: 1rem;
+  line-height: 1.85;
+  color: #eff0f7;
+}
+.texto .tecnologias {
+  margin-top: 1.5rem;
+  font-size: 0.8125rem;
+  line-height: 1.8;
+  color: #d2d8e5;
+}
+.tecnologias > span {
+  display: block;
+  color: #f5f5fa;
+  margin-bottom: 0.25rem;
+}
+.trajetoria :is(button, a):focus-visible {
+  outline: 2px solid #e5eeff;
+  outline-offset: 5px;
+}
+
+@media (max-width: 850px) {
+  .cabecalho {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  .etapa {
+    grid-template-columns: 100px minmax(0, 1fr);
+    gap: 1rem;
+  }
+  .sequencia::before {
+    left: 50px;
+  }
+  .etapa:nth-child(even) .vidro {
+    max-width: 100%;
+    margin-left: 0;
+  }
+}
+@media (max-width: 600px) {
+  .trajetoria .vidro {
+    --career-glass-blur: 6px;
+  }
+  .trajetoria {
+    padding-block: 1rem;
+    margin-top: 0;
+  }
+  .titulo {
+    max-width: 300px;
+    font-size: 2.5rem;
+  }
+  .ambiente {
+    inset: -20px -12px;
+    border-radius: 36px;
+  }
+  .atalhos {
+    width: 100%;
+  }
+  .atalhos a {
+    flex: 1;
+  }
+  .grupo + .grupo {
+    margin-top: 3.5rem;
+  }
+  .sequencia {
+    gap: 1.75rem;
+  }
+  .sequencia::before {
+    display: none;
+  }
+  .etapa {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.875rem;
+  }
+  .data {
+    flex-direction: row;
+    padding: 0 0.5rem;
+    gap: 1rem;
+  }
+  .ano {
+    font-size: 2rem;
+  }
+  .ponto {
+    height: 1px;
+    flex: 1;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.3), transparent);
+    box-shadow: none;
+    border-radius: 0;
+  }
+  .topo {
+    gap: 0.75rem;
+  }
+  .ficha {
+    position: relative;
+    z-index: 1;
+    padding: 1.25rem;
+  }
+  .empresa {
+    font-size: 1.375rem;
+  }
+  .abrir {
+    width: 44px;
+    height: 44px;
+  }
+  .metadados {
+    margin-top: 1rem;
+  }
+  .texto > p {
+    font-size: 0.9375rem;
+    line-height: 1.85;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .trajetoria * {
+    transition: none !important;
+    scroll-behavior: auto;
+  }
+}
+@supports not (backdrop-filter: blur(1px)) {
+  .trajetoria .vidro {
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+    border-radius: 30px;
+    background: rgba(30, 33, 46, 0.97);
+  }
+}
