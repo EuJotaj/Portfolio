@@ -1,8 +1,8 @@
 export const ASSETS = {
   logo: '/assets/img/Jota.png',
   cv: {
-    frontend: { pt: '/CVJota.pdf', en: '/CVJota-en.pdf' },
-    fullstack: { pt: '/CVJota-fullstack.pdf', en: '/CVJota-fullstack-en.pdf' },
+    frontend: { pt: '/CVJota.pdf?v=20261013', en: '/CVJota-en.pdf?v=54c6bfd59074' },
+    fullstack: { pt: '/CVJota-fullstack.pdf?v=20261013', en: '/CVJota-fullstack-en.pdf?v=4a9821b87468' },
   },
 } as const;
 

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { FiDownload, FiFileText, FiX } from 'react-icons/fi';
 import { useModalCurriculo } from '@/aplicativo/provedores/ProvedorModalCurriculo';
 import { useIdioma } from '@/aplicativo/provedores/ProvedorIdioma';
 import { useConsultaMidia } from '@/ganchos/useConsultaMidia';
@@ -14,6 +15,7 @@ export function ModalCurriculo() {
   const [idiomaPdf, setIdiomaPdf] = useState<Locale>(locale);
   const modalRef = useRef<HTMLDivElement>(null);
   const fecharRef = useRef<HTMLButtonElement>(null);
+  const reduzirMovimento = useReducedMotion();
   const isMobile = useConsultaMidia('(max-width: 600px)');
 
   useEffect(() => {
@@ -29,7 +31,7 @@ export function ModalCurriculo() {
       if (e.key === 'Escape') fecharCurriculo();
       if (e.key !== 'Tab') return;
       const controles = modalRef.current?.querySelectorAll<HTMLElement>(
-        'button, a[href], select, iframe'
+        'button, a[href], input:checked, iframe'
       );
       if (!controles?.length) return;
       const primeiro = controles[0];
@@ -69,6 +71,7 @@ export function ModalCurriculo() {
             initial={{ opacity: 0, y: 30, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.98 }}
+            transition={{ duration: reduzirMovimento ? 0 : 0.22 }}
             onClick={e => e.stopPropagation()}
             role="dialog"
             aria-modal="true"
@@ -79,7 +82,7 @@ export function ModalCurriculo() {
               <div className={styles.acoesCabecalho}>
                 {!isMobile && (
                   <a href={cvPath} download={downloadName} className={styles.botaoDownload}>
-                    {t.cvModal.download}
+                    <FiDownload aria-hidden="true" /> {t.cvModal.download}
                   </a>
                 )}
                 <button
@@ -89,7 +92,7 @@ export function ModalCurriculo() {
                   onClick={fecharCurriculo}
                   aria-label={t.cvModal.close}
                 >
-                  ×
+                  <FiX aria-hidden="true" />
                 </button>
               </div>
             </header>
@@ -97,34 +100,51 @@ export function ModalCurriculo() {
             <div className={styles.selecao}>
               <p className={styles.descricao}>{t.cvModal.description}</p>
               <div className={styles.campos}>
-                <label className={styles.campo}>
-                  <span>{t.cvModal.profile}</span>
-                  <select
-                    value={perfil}
-                    onChange={e => setPerfil(e.target.value as keyof typeof ASSETS.cv)}
-                  >
-                    <option value="frontend">{t.cvModal.profiles.frontend}</option>
-                    <option value="fullstack">{t.cvModal.profiles.fullstack}</option>
-                  </select>
-                </label>
-                <label className={styles.campo}>
-                  <span>{t.cvModal.language}</span>
-                  <select value={idiomaPdf} onChange={e => setIdiomaPdf(e.target.value as Locale)}>
-                    <option value="pt">{t.cvModal.languages.pt}</option>
-                    <option value="en">{t.cvModal.languages.en}</option>
-                  </select>
-                </label>
+                <fieldset className={styles.campo}>
+                  <legend>{t.cvModal.profile}</legend>
+                  <div className={styles.segmentos}>
+                    {(['frontend', 'fullstack'] as const).map(value => (
+                      <label key={value} className={styles.segmento}>
+                        <input
+                          type="radio"
+                          name="cv-profile"
+                          value={value}
+                          checked={perfil === value}
+                          onChange={() => setPerfil(value)}
+                        />
+                        <span>{t.cvModal.profiles[value]}</span>
+                      </label>
+                    ))}
+                  </div>
+                </fieldset>
+                <fieldset className={styles.campo}>
+                  <legend>{t.cvModal.language}</legend>
+                  <div className={styles.segmentos}>
+                    {(['pt', 'en'] as const).map(value => (
+                      <label key={value} className={styles.segmento}>
+                        <input
+                          type="radio"
+                          name="cv-language"
+                          value={value}
+                          checked={idiomaPdf === value}
+                          onChange={() => setIdiomaPdf(value)}
+                        />
+                        <span>{t.cvModal.languages[value]}</span>
+                      </label>
+                    ))}
+                  </div>
+                </fieldset>
               </div>
             </div>
 
             {isMobile ? (
               <div className={styles.fallbackMobile}>
                 <div className={styles.iconeMobile} aria-hidden="true">
-                  ⤓
+                  <FiFileText aria-hidden="true" />
                 </div>
                 <p className={styles.textoMobile}>{tituloPdf}</p>
                 <a href={cvPath} download={downloadName} className={styles.botaoMobile}>
-                  ⤓ {t.cvModal.download}
+                  <FiDownload aria-hidden="true" /> {t.cvModal.download}
                 </a>
                 <a
                   href={cvPath}

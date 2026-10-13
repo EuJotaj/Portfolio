@@ -46,14 +46,14 @@ npm run preview
 
 ## Currículos
 
-O painel aberto pelos botões de currículo permite escolher Front-end ou Full-stack e o idioma do PDF, independentemente do idioma do site. Em telas grandes, o documento é exibido no painel; no celular, ficam disponíveis as opções de baixar ou abrir em nova aba.
+O painel aberto pelos botões de currículo usa controles segmentados para escolher Front-end ou Full-stack e o idioma do PDF, independentemente do idioma do site. As opções também podem ser alteradas com as setas do teclado. Os PDFs em português e inglês foram atualizados em 13/10/2026 com os arquivos fornecidos pelo autor. Em telas grandes, o documento é exibido no painel; no celular, ficam disponíveis as opções de baixar ou abrir em nova aba.
 
-| Perfil | Português (original fornecido) | Inglês (tradução) |
+| Perfil | Português (original fornecido) | Inglês (original fornecido) |
 |--------|-------------------------------|------------------|
 | Front-end | `public/CVJota.pdf` | `public/CVJota-en.pdf` |
 | Full-stack | `public/CVJota-fullstack.pdf` | `public/CVJota-fullstack-en.pdf` |
 
-Os PDFs em inglês preservam o conteúdo dos originais, incluindo o estágio iniciado em setembro de 2026, a graduação prevista para novembro de 2028 e a formação AWS em andamento com conclusão prevista para janeiro de 2027.
+Os PDFs em inglês fornecidos pelo autor incluem o estágio iniciado em setembro de 2026, a graduação prevista para novembro de 2028 e a formação AWS em andamento com conclusão prevista para janeiro de 2027.
 
 ## Carregamento e cache
 
